@@ -3,3 +3,9 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
+
+# Composer Vendor Files
+vendor
+
+# Local Config Files
+local.json
