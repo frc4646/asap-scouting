@@ -9,3 +9,7 @@ vendor
 
 # Local Config Files
 local.json
+host.json
+
+# Account Specific Service Account Details
+ASAP Scouting App PHP-722b21dfb35c.json
