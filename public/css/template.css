@@ -55,6 +55,7 @@ th, td {
     font-weight: bold;
     font-size: 24pt;
     color: black;
+    background-color: red;
 }
 #match-blue {
     border-right: 1px solid #000;
@@ -62,4 +63,5 @@ th, td {
     font-weight: bold;
     font-size: 24pt;
     color: white;
+    background-color: white;
 }

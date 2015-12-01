@@ -14,21 +14,21 @@
 <div class="col-lg-6 container-hold" style="display: none;" id="replaceDiv"></div>
 <div class="col-lg-6 container-hold" style="display: none; background-color: red;" id="manager">
     <div class="elem1" id="">
-        <div class="col-lg-4" id="match-id">
+        <div class="col-lg-4 col-sm-4 col-md-4" id="match-id">
             <p>Match Number</p>
         </div>
-        <div class="col-lg-8" id="match-num">
+        <div class="col-lg-8 col-md-8 col-sm-8" id="match-num">
             <p>Select Match on the left</p>
         </div>
     </div>
     <div class="elem2" id="">
-        <div class="col-lg-4" id="match-scores">
+        <div class="col-lg-4 col-sm-4 col-md-4" id="match-scores">
             <p>Alliance Scores</p>
         </div>
-        <div class="col-lg-4" id="match-red" style="background-color: red;">
+        <div class="col-lg-4 col-sm-4 col-md-4" id="match-red">
             <p>Red</p>
         </div>
-        <div class="col-lg-4" id="match-blue" style="background-color: blue;">
+        <div class="col-lg-4 col-sm-4 col-md-4" id="match-blue">
             <p>Blue</p>
         </div>
     </div>
@@ -40,6 +40,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/jquery.tablesorter.widgets.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/widgets/widget-filter.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+function detectMobile () {
+    var uagent = navigator.userAgent.toLowerCase();
+
+    alert(uagent);
+       if (uagent.search("mobile") > -1) {
+           // true
+           alert("This is moblie");
+       } else {
+           // false
+       }
+}
 function success (e) {
     $("div#body-container").removeClass("container");
     $("div#body-container").addClass("container-fluid");
@@ -57,6 +68,7 @@ function success (e) {
     });
 }
     $(document).ready(function () {
+        detectMobile();
         $.ajax({
             url: $("div.container-main").attr("data-content-url"),
             type: "GET",
