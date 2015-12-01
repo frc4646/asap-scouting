@@ -1,0 +1,41 @@
+{% if entries is not empty %}
+<div class="table-responsive limit-height table-holder">
+<table class="table table-striped limit-height tablesorter" id="match-table">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Matchtime</th>
+      <th>Red1</th>
+      <th>Red2</th>
+      <th>Red3</th>
+      <th>Blue1</th>
+      <th>Blue2</th>
+      <th>Blue3</th>
+      <th>Blue Score</th>
+      <th>Red Score</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for key, i in entries %}
+      <tr data-row-number="{{ loop.index0 }}">
+          <td>{{ i.match }}</td>
+          <td>{{ i.matchtime }}</td>
+          <td>{{ i.red1 }}</td>
+          <td>{{ i.red2 }}</td>
+          <td>{{ i.red3 }}</td>
+          <td>{{ i.blue1 }}</td>
+          <td>{{ i.blue2 }}</td>
+          <td>{{ i.blue3 }}</td>
+          <td>{{ i.bluescore }}</td>
+          <td>{{ i.redscore }}</td>
+      </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
+    {#{% for key, i in entries %}
+        {{ key }}: <br> {{ i.matchtime }}
+    {% endfor %}#}
+{% else %}
+<div class="data-failed">Connection to the spreadsheet failed</div>
+{% endif %}

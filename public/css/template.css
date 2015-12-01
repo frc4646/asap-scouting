@@ -1,0 +1,65 @@
+body {
+    padding-top: 50px;
+}
+.container-main {
+    padding: 40px 15px;
+    text-align: center;
+}
+.progress-bar-info {
+    color: black;
+}
+.container-hold {
+    padding: 20px 0px 0px 0px;
+    text-align: center;
+}
+th, td {
+    text-align: center;
+    white-space: nowrap;
+}
+#replaceDiv, .limit-height {
+    max-width: 100%;
+    max-height: 100%;
+    height: 600px;
+}
+#manager {
+    float: right;
+    padding-left: 30px;
+    height: 600px;
+}
+.table-holder {
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+#match-id {
+    border: 1px solid #000;
+    font-weight: bold;
+    font-size: 24pt;
+}
+#match-scores {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+    font-weight: bold;
+    font-size: 24pt;
+}
+#match-num {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+    font-weight: bold;
+    font-size: 24pt;
+}
+#match-red {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+    font-size: 24pt;
+    color: black;
+}
+#match-blue {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+    font-size: 24pt;
+    color: white;
+}
