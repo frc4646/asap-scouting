@@ -13,25 +13,190 @@
 </div>
 <div class="col-lg-6 container-hold" style="display: none;" id="replaceDiv"></div>
 <div class="col-lg-6 container-hold" style="display: none; background-color: red;" id="manager">
-    <div class="elem1" id="">
-        <div class="col-lg-4 col-sm-4 col-md-4" id="match-id">
-            <p>Match Number</p>
+    <div class="elem1">
+        <div class="col-lg-4" id="match-id">
+            <p>Match</p>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-8" id="match-num">
+        <div class="col-lg-8" id="match-num">
             <p>Select Match on the left</p>
         </div>
     </div>
-    <div class="elem2" id="">
-        <div class="col-lg-4 col-sm-4 col-md-4" id="match-scores">
+    <div class="elem2">
+        <div class="col-lg-4" id="match-scores">
             <p>Alliance Scores</p>
         </div>
-        <div class="col-lg-4 col-sm-4 col-md-4" id="match-red">
+        <div class="col-lg-4" id="match-red">
             <p>Red</p>
         </div>
-        <div class="col-lg-4 col-sm-4 col-md-4" id="match-blue">
+        <div class="col-lg-4" id="match-blue">
             <p>Blue</p>
         </div>
     </div>
+    <div class="elem3">
+        <div class="col-lg-4" id="match-scores" data="match-teams">
+            <p>Teams</p>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-red" id="team-red-1">
+                <p>4646</p>
+            </div>
+            <div class="col-lg-4 team-red" id="team-red-2">
+                <p>254</p>
+            </div>
+            <div class="col-lg-4 team-red" id="team-red-3">
+                <p>1114</p>
+            </div>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-blue" id="team-blue-1">
+                <p>4646</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="team-blue-2">
+                <p>254</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="team-blue-3">
+                <p>1114</p>
+            </div>
+        </div>
+    </div>
+    <div class="elem4">
+        <div class="col-lg-4" id="match-scores" data="match-teams">
+            <p>Score A</p>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-red" id="score-red-a-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="score-red-a-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="score-red-a-3">
+                <p>---</p>
+            </div>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-blue" id="score-blue-a-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="score-blue-a-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="score-blue-a-3">
+                <p>---</p>
+            </div>
+        </div>
+    </div>
+    <div class="elem5">
+        <div class="col-lg-4" id="match-scores" data="match-teams">
+            <p>Score B</p>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-red" id="score-red-b-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="score-red-b-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="score-red-b-3">
+                <p>---</p>
+            </div>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-blue" id="score-blue-b-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="score-blue-b-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="score-blue-b-3">
+                <p>---</p>
+            </div>
+        </div>
+    </div>
+    <div class="elem6">
+        <div class="col-lg-4" id="match-scores" data="match-teams">
+            <p>Score C</p>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-red" id="score-red-c-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="score-red-c-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="score-red-c-3">
+                <p>---</p>
+            </div>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-blue" id="score-blue-c-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="score-blue-c-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="score-blue-c-3">
+                <p>---</p>
+            </div>
+        </div>
+    </div>
+    <div class="elem7">
+        <div class="col-lg-4" id="match-scores" data="match-teams">
+            <p>Penalty 1</p>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-red" id="penalty-red-a-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="penalty-red-a-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="penalty-red-a-3">
+                <p>---</p>
+            </div>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-blue" id="penalty-blue-a-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="penalty-blue-a-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="penalty-blue-a-3">
+                <p>---</p>
+            </div>
+        </div>
+    </div>
+    <div class="elem8">
+        <div class="col-lg-4" id="match-scores" data="match-teams">
+            <p>Penalty 2</p>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-red" id="penalty-red-b-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="penalty-red-b-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-red" id="penalty-red-b-3">
+                <p>---</p>
+            </div>
+        </div>
+        <div class="col-lg-4 score-container">
+            <div class="col-lg-4 team-blue" id="penalty-blue-b-1">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="penalty-blue-b-2">
+                <p>---</p>
+            </div>
+            <div class="col-lg-4 team-blue" id="penalty-blue-b-3">
+                <p>---</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader">
+    <img class="loader-img" src="{{ url.base }}/img/loader.gif">
 </div>
 {% endblock %}
 
@@ -39,58 +204,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/jquery.tablesorter.widgets.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/widgets/widget-filter.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-function detectMobile () {
-    var uagent = navigator.userAgent.toLowerCase();
-
-    alert(uagent);
-       if (uagent.search("mobile") > -1) {
-           // true
-           alert("This is moblie");
-       } else {
-           // false
-       }
-}
-function success (e) {
-    $("div#body-container").removeClass("container");
-    $("div#body-container").addClass("container-fluid");
-    $(".container-main").remove();
-    $("div#replaceDiv").append(e);
-    $("div.container-hold").fadeIn({
-        start: function () {
-            $("div.container-hold").removeAttr("style");
-        }
-    }, 500);
-    $('#match-table').tablesorter({
-        theme: 'bootstrap',
-        headerTemplate: '{content} {icon}',
-        widgets: ['filter']
-    });
-}
-    $(document).ready(function () {
-        detectMobile();
-        $.ajax({
-            url: $("div.container-main").attr("data-content-url"),
-            type: "GET",
-            dataType: "html",
-            beforeSend: function () {
-                var x = {
-                    main: $("h1.main-header").attr("data-response-url"),
-                    success: $("h1.main-header").attr("data-success-url")
-                };
-                $("h1.main-header").remove();
-                $("div.container-main").prepend('<img class="response-img" src="' + x.main + '" height="50px" width="50px" data-success-url="' + x.success + '">');
-                $("p.lead").text("Crunching the latest data...");
-            },
-            success: function (e) {
-                $("img.response-img").prop("src", $("img.response-img").attr("data-success-url"));
-                setTimeout(function () {
-                    $(".container-main").fadeOut("slow", function () {
-                        success(e);
-                    });
-                }, 500);
-            }
-        });
-    });
-</script>
+<script src="{{ url.base }}/js/jquery.alterclass.js" type="text/javascript"></script>
+<script src="{{ url.base }}/js/app/main.js" type="text/javascript"></script>
 {% endblock %}

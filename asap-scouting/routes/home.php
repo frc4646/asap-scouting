@@ -26,3 +26,24 @@ $app->get("/app", function () use ($app) {
         "entries" => $table,
     ]);
 })->name("app.datatable");
+
+$app->post("/app/get", function () use ($app) {
+    $listEntries = $app->GoogleAPI->getSheet()->getListFeed()->getEntries();
+
+    $v = $app->validation;
+
+    $v->validate([
+        "id" => [$app->request->post()["data_id"], "required|int"]
+    ]);
+
+    $app->response->headers->set("Content-Type", "application/json");
+
+    if ($v->passes()) {
+        echo json_encode($listEntries[$app->request->post()["data_id"] - 1]->getValues());
+    } else {
+        echo json_encode([
+            "success" => false,
+            "errors" => $v->errors()
+        ]);
+    }
+})->name("app.data.get");

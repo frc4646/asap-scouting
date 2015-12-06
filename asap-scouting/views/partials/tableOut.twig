@@ -1,6 +1,6 @@
 {% if entries is not empty %}
 <div class="table-responsive limit-height table-holder">
-<table class="table table-striped limit-height tablesorter" id="match-table">
+<table class="table table-striped limit-height tablesorter" id="match-table" data-response-url="{{ urlFor('app.data.get') }}">
   <thead>
     <tr>
       <th>Match</th>
@@ -16,8 +16,8 @@
     </tr>
   </thead>
   <tbody>
-{% for key, i in entries %}
-      <tr data-row-number="{{ loop.index0 }}">
+{% for i in entries %}
+      <tr data-row-number="{{ loop.index }}">
           <td>{{ i.match }}</td>
           <td>{{ i.matchtime }}</td>
           <td>{{ i.red1 }}</td>
@@ -32,10 +32,8 @@
 {% endfor %}
   </tbody>
 </table>
+<span hidden="hidden" style="display: none;" id="{{ csrf_token }}" class="csrf_token"></span>
 </div>
-    {#{% for key, i in entries %}
-        {{ key }}: <br> {{ i.matchtime }}
-    {% endfor %}#}
 {% else %}
 <div class="data-failed">Connection to the spreadsheet failed</div>
 {% endif %}
