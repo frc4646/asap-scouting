@@ -68,9 +68,15 @@ th, td {
 .score-container {
     padding: 0px;
 }
-
 .loader {
     padding-top: 15px;
     float: right;
     display: none;
+}
+.inputData {
+    height: 10%;
+    width: 50%;
+    font-size: 16pt;
+    font-weight: 400;
+    text-align: center;
 }

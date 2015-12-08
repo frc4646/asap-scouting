@@ -32,7 +32,7 @@
 {% endfor %}
   </tbody>
 </table>
-<span hidden="hidden" style="display: none;" id="{{ csrf_token }}" class="csrf_token"></span>
+<span hidden="hidden" style="display: none;" id="{{ csrf_token }}" data-name="{{ csrf_key }}" class="csrf_token"></span>
 </div>
 {% else %}
 <div class="data-failed">Connection to the spreadsheet failed</div>

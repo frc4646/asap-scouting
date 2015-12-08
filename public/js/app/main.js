@@ -1,27 +1,3 @@
-function ajax (/*options*/) {
-    "use strict";
-    var options = {};
-        options.callback = function (e) {
-            $("img.response-img").prop("src", $("img.response-img").attr("data-success-url"));
-            setTimeout(function () {
-                $(".container-main").fadeOut("slow", function () {
-                    success(e);
-                });
-            }, 500);
-        },
-        options.success = function () {
-            var x = {
-                main: $("h1.main-header").attr("data-response-url"),
-                success: $("h1.main-header").attr("data-success-url")
-            };
-            $("h1.main-header").remove();
-            $("div.container-main").prepend('<img class="response-img" src="' + x.main + '" height="50px" width="50px" data-success-url="' + x.success + '">');
-            $("p.lead").text("Crunching the latest data...");
-        }
-    doPost($("div.container-main").attr("data-content-url"), null, "GET", "html", options.callback, options.success);
-}
-
-
 function detectMobile () {
     "use strict";
     var uagent = navigator.userAgent.toLowerCase();
@@ -31,6 +7,26 @@ function detectMobile () {
    } else {
        return false;
    }
+}
+
+function getTable () {
+    "use strict";
+    var options = {
+        callback: function (e) {
+            $("img.response-img").prop("src", $("img.response-img").attr("data-success-url"));
+            setTimeout(function () {
+                $(".container-main").fadeOut("slow", function () {
+                    success(e);
+                });
+            }, 500);
+        },
+        beforeSend: function () {
+            $("div.container-main").prepend('<img class="response-img" src="' + $("h1.main-header").attr("data-response-url") + '" height="50px" width="50px" data-success-url="' + $("h1.main-header").attr("data-success-url") + '">');
+            $("h1.main-header").remove();
+            $("p.lead").text("Crunching the latest data...");
+        }
+    };
+    doPost($("div.container-main").attr("data-content-url"), null, "GET", "html", options.callback, options.beforeSend);
 }
 
 function success (e) {
@@ -48,9 +44,13 @@ function success (e) {
         theme: 'bootstrap',
         headerTemplate: '{content} {icon}',
         widgets: ['filter'],
-        /*widgetOptions: {
-            //filter_external : '.tablesorter-filter',
-            filter_columnFilters: false,
+        /*sortAppend: {
+          3 : [[ 4,'s' ], [ 5,'s' ]], // group columns 3-5
+          4 : [[ 3,'s' ], [ 5,'s' ]], // ('s'ame direction)
+          5 : [[ 3,'s' ], [ 4,'s' ]],
+
+          6 : [[ 7,'o' ]], // group columns 6-7
+          7 : [[ 6,'o' ]]  // ('o'pposite direction)
         }*/
     });
     doClick();
@@ -60,13 +60,11 @@ function main () {
     "use strict";
     var isMobile = detectMobile();
 
-    console.log(isMobile);
-
     if (isMobile) {
         $("div#replaceDiv").alterClass("col-lg-6", "col-sm-12");
-        ajax();
+        getTable();
     } else {
-        ajax();
+        getTable();
     }
 }
 function doSet(e) {
@@ -77,10 +75,8 @@ function doSet(e) {
 
     if (!e["match"]) {
         $("div#match-num > p").text("---");
-        console.log(e["match"]);
     } else if (e["match"]) {
         $("div#match-num > p").text(e["match"]);
-        console.log(e["match"]);
     }
 
     if (!e["redscore"]) {
@@ -121,9 +117,6 @@ function doSet(e) {
                 z = 1;
             }
             letter = String.fromCharCode(96 + z);
-            /*console.log(e[color + n + type + letter]);
-            console.log(color + n + type + letter + "###" + x + "###" + v + "###" + z);
-            console.log("div#" + type + "-" + color + "-" + letter + "-" + n + " > p");*/
             if (!e[color + n + type + letter]) {
                 $("div#" + type + "-" + color + "-" + letter + "-" + n + " > p").text("---");
             } else {
@@ -133,48 +126,42 @@ function doSet(e) {
         }
         n++;
     }
-    /*
-    if (v <= 3) {
-            var color = "red";
-        } else if (v > 3 && v <= 6) {
-            var color = "blue";
-        }
-        if (n > 3){
-            n = 1;
-        }
-        console.log(e[color + n + "score" + String.fromCharCode(96 + n)]);
-        console.log(color + n + "score" + String.fromCharCode(96 + n));
-        console.log("div#score-" + color + "-" + String.fromCharCode(96 + n) + "-" + n);
-        $("div#score-" + color + "-" + String.fromCharCode(96 + n) + "-" + n).children("p").text(e[color + n + "score" + String.fromCharCode(96 + n)]);
-        n++;*/
+}
+function doDBLClick() {
+    $("p.dblclick").dblclick(function (e) {
+        e.stopImmediatePropagation();
+        var value = $(this).text() || "";
+        $(this).text("");
+        $(this).append('<input type="text" class="inputData" value="' + value + '">');
+        $("input.inputData").focusout(function (e) {
+            e.stopPropagation();
+            var val = $(this).val() || "---";
+            $(this).parent("p.dblclick").text(val);
+            $(this).remove();
+        });
+    });
 }
 function doClick() {
-    $("table#match-table tr").bind("click", function (e) {
-        console.log(e);
+    $("table#match-table tr").click(function (e) {
         e.stopPropagation();
-        console.info(e.currentTarget.getAttribute("data-row-number"));
 
-        var row = e.currentTarget.getAttribute("data-row-number");
+        var row = e.currentTarget.getAttribute("data-row-number"),
+            data = {},
+            options = {};
 
-        console.log($("table#match-table").attr("data-response-url"));
+        data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+        data["data_id"] = row;
+        options["callback"] = function (e) {
+            $(".loader").fadeOut(500);
+            doSet(e);
+        };
+        options["beforeSend"] = function () {
+            $(".loader").fadeIn(500);
+        };
 
-        $.ajax({
-            url: $("table#match-table").attr("data-response-url"),
-            type: "POST",
-            dataType: "json",
-            beforeSend: function () {
-                $(".loader").fadeIn(500);
-            },
-            data: {
-                data_id: row,
-                csrf_token: $("span.csrf_token").prop("id")
-            },
-            success: function (e) {
-                $(".loader").fadeOut(500);
-                console.log(e);
-                doSet(e);
-            }
-        })
+        doPost($("table#match-table").attr("data-response-url"), data, "POST", "json", options["callback"], options["beforeSend"])
+
+        doDBLClick();
     });
 }
 $(document).ready(function () {
