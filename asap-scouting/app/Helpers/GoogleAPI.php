@@ -60,12 +60,33 @@ class GoogleAPI
         $this->spreadsheet = $spreadsheetService->getSpreadsheets();
     }
 
-    public function getSheet()
+    public function getSheet($name = "Quals")
     {
-        $worksheetFeed = $this->spreadsheet->getById("https://spreadsheets.google.com/feeds/spreadsheets/private/full/1uUMuvUWHpvNYUTWJIc4RdqXg-iGY-ijfpYvhgC3gX9I")->getWorksheets();
-        $worksheet = $worksheetFeed->getByTitle('Quals');
+        $worksheetFeed = $this->spreadsheet->getById("https://spreadsheets.google.com/feeds/spreadsheets/private/full/{$this->sheetID}")->getWorksheets();
+        $worksheet = $worksheetFeed->getByTitle($name);
 
         return $worksheet;
     }
 
+    public function setValue($match = 5, $column = "redscore", $value = 12)
+    {
+        $cellFeed = $this->getSheet("Quals")->getCellFeed();
+        $entries = $this->getSheet("Quals")->getListFeed()->getEntries();
+
+        $values = [];
+        $new = [];
+        $i = 0;
+        $z = 0;
+        foreach ($entries as $entry) {
+            $values = $entry->getValues();
+            if ($values["match"] == $match) {
+                $values[$column] = $value;
+                $new = $values;
+                $z = $i;
+            }
+            $i++;
+        }
+
+        return (bool) is_null($entries[$z]->update($new));
+    }
 }

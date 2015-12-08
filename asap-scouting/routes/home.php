@@ -28,7 +28,7 @@ $app->get("/app", function () use ($app) {
 })->name("app.datatable");
 
 $app->post("/app/get", function () use ($app) {
-    $listEntries = $app->GoogleAPI->getSheet()->getListFeed()->getEntries();
+    $listEntries = $app->GoogleAPI->getSheet("Quals")->getListFeed()->getEntries();
 
     $v = $app->validation;
 
@@ -47,3 +47,44 @@ $app->post("/app/get", function () use ($app) {
         ]);
     }
 })->name("app.data.get");
+
+$app->post("/app/set", function () use ($app) {
+    $v = $app->validation;
+
+    $v->validate([
+       "newValue" => [$app->request->post()["newValue"], "required|int"],
+       "rowID" => [$app->request->post()["rowID"], "required|int"],
+       "column" => [$app->request->post()["column"], "required|alnum"],
+    ]);
+
+    if ($v->passes()) {
+        if ($app->GoogleAPI->setValue($app->request->post()["rowID"], $app->request->post()["column"], $app->request->post()["newValue"])) {
+            echo json_encode([
+                "success" => true,
+                "item" => $app->GoogleAPI->setValue($app->request->post()["rowID"], $app->request->post()["column"], $app->request->post()["newValue"]),
+                "orginal" => [
+                    "newValue" => $app->request->post()["newValue"],
+                    "rowID" => $app->request->post()["rowID"],
+                    "column" => $app->request->post()["column"],
+                ],
+            ]);
+            return;
+        } else {
+            echo json_encode([
+                "success" => false,
+                "item" => $app->GoogleAPI->setValue($app->request->post()["rowID"], $app->request->post()["column"], $app->request->post()["newValue"]),
+                "orginal" => [
+                    "newValue" => $app->request->post()["newValue"],
+                    "rowID" => $app->request->post()["rowID"],
+                    "column" => $app->request->post()["column"],
+                ],
+            ]);
+            return;
+        }
+    } else {
+        echo json_encode([
+            "success" => false,
+            "errors" => $v->errors(),
+        ]);
+    }
+})->name("app.data.set");

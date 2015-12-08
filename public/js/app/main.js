@@ -127,7 +127,7 @@ function doSet(e) {
         n++;
     }
 }
-function doDBLClick() {
+function doDBLClick(x) {
     $("p.dblclick").dblclick(function (e) {
         e.stopImmediatePropagation();
         var value = $(this).text() || "";
@@ -135,9 +135,25 @@ function doDBLClick() {
         $(this).append('<input type="text" class="inputData" value="' + value + '">');
         $("input.inputData").focusout(function (e) {
             e.stopPropagation();
-            var val = $(this).val() || "---";
+            var val = $(this).val() || "---",
+                $is = $(this).parent("p.dblclick").parent("div");
             $(this).parent("p.dblclick").text(val);
             $(this).remove();
+            var data = {},
+                options = {
+                callback: function (e) {
+                    $(".loader").fadeOut(500);
+                },
+                beforeSend: function () {
+                    $(".loader").fadeIn(500);
+                }
+            };
+            data["rowID"] = x.match;
+            data["newValue"] = $(this).val() || 0;
+            //console.log($(this));
+            data["column"] = $is.prop("id").split("-")[1] + $is.prop("id").split("-")[3] + $is.prop("id").split("-")[0] + $is.prop("id").split("-")[2];
+            data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+            doPost($("div#manager").attr("data-set-action"), data, "POST", "json", options.callback, options.beforeSend);
         });
     });
 }
@@ -147,21 +163,21 @@ function doClick() {
 
         var row = e.currentTarget.getAttribute("data-row-number"),
             data = {},
-            options = {};
+            options = {
+                callback: function (e) {
+                    $(".loader").fadeOut(500);
+                    doSet(e);
+                    doDBLClick(e);
+                },
+                beforeSend: function () {
+                    $(".loader").fadeIn(500);
+                }
+            };
 
         data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
         data["data_id"] = row;
-        options["callback"] = function (e) {
-            $(".loader").fadeOut(500);
-            doSet(e);
-        };
-        options["beforeSend"] = function () {
-            $(".loader").fadeIn(500);
-        };
 
-        doPost($("table#match-table").attr("data-response-url"), data, "POST", "json", options["callback"], options["beforeSend"])
-
-        doDBLClick();
+        doPost($("table#match-table").attr("data-response-url"), data, "POST", "json", options.callback, options.beforeSend);
     });
 }
 $(document).ready(function () {
