@@ -122,7 +122,6 @@ function doDBLClick(x) {
         if (value == "---") {
             value = 0;
         }
-        console.log(value);
         $(this).text("");
         $(this).append('<input type="text" class="inputData" value="' + value + '">');
         $('input.inputData').keypress(function (e) {
@@ -191,7 +190,6 @@ function doClick() {
     $("tr.body-row").click(function (e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
-        console.log("Clicked")
         clickHandler(e);
     });
 }
