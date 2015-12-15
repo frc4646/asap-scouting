@@ -57,12 +57,12 @@ class GoogleAPI
         ServiceRequestFactory::setInstance($serviceRequest);
 
         $spreadsheetService = new SpreadsheetService();
-        $this->spreadsheet = $spreadsheetService->getSpreadsheets();
+        $this->spreadsheet = $spreadsheetService->getSpreadsheetById($this->sheetID);
     }
 
     public function getSheet($name = "Quals")
     {
-        $worksheetFeed = $this->spreadsheet->getById("https://spreadsheets.google.com/feeds/spreadsheets/private/full/{$this->sheetID}")->getWorksheets();
+        $worksheetFeed = $this->spreadsheet->getWorksheets();
         $worksheet = $worksheetFeed->getByTitle($name);
 
         return $worksheet;
