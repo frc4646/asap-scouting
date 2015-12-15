@@ -4,6 +4,13 @@
 
 {% block styles %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/css/theme.bootstrap.min.css" type="text/css">
+
+{% if isMobile %}
+    <link href="{{ url.base }}/css/mobile.css" rel="stylesheet" type="text/css">
+{% else %}
+    <link href="{{ url.base }}/css/desktop.css" rel="stylesheet" type="text/css">
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
@@ -11,186 +18,186 @@
     <h1 data-response-url="{{ url.base }}/img/beforeSend.svg" data-success-url="{{ url.base }}/img/success.svg" class="main-header">Hello</h1>
     <p class="lead">This page is starting page for the ASAP Scouting App</p>
 </div>
-<div class="col-lg-6 container-hold" style="display: none;" id="replaceDiv"></div>
-<div class="col-lg-6 container-hold" style="display: none; background-color: red;" id="manager" data-set-action="{{ urlFor('app.data.set') }}">
-    <div class="elem1">
-        <div class="col-lg-4" id="match-id">
-            <p>Match</p>
+<div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="replaceDiv"></div>
+<div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="manager" data-set-action="{{ urlFor('app.data.set') }}" data-match-id="false">
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-id">
+            <p class="row-header">Match</p>
         </div>
-        <div class="col-lg-8" id="match-num">
-            <p>Select Match on the left</p>
-        </div>
-    </div>
-    <div class="elem2">
-        <div class="col-lg-4" id="match-scores">
-            <p>Alliance Scores</p>
-        </div>
-        <div class="col-lg-4" id="match-red">
-            <p>Red</p>
-        </div>
-        <div class="col-lg-4" id="match-blue">
-            <p>Blue</p>
+        <div class="col-lg-8 col-sm-10 col-xs-10 column" id="match-num">
+            <span>Select Match on the left</span>
         </div>
     </div>
-    <div class="elem3">
-        <div class="col-lg-4" id="match-scores" data="match-teams">
-            <p>Teams</p>
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-scores">
+            <p class="row-header">Scores</p>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-red" id="team-red-1">
-                <p>4646</p>
-            </div>
-            <div class="col-lg-4 team-red" id="team-red-2">
-                <p>254</p>
-            </div>
-            <div class="col-lg-4 team-red" id="team-red-3">
-                <p>1114</p>
-            </div>
+        <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-red">
+            <span>Red</span>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-blue" id="team-blue-1">
-                <p>4646</p>
-            </div>
-            <div class="col-lg-4 team-blue" id="team-blue-2">
-                <p>254</p>
-            </div>
-            <div class="col-lg-4 team-blue" id="team-blue-3">
-                <p>1114</p>
-            </div>
+        <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-blue">
+            <span>Blue</span>
         </div>
     </div>
-    <div class="elem4">
-        <div class="col-lg-4" id="match-scores" data="match-teams">
-            <p>Score A</p>
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-teams">
+            <p class="row-header">Teams</p>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-red" id="score-red-a-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="team-red-1">
+                <span>4646</span>
             </div>
-            <div class="col-lg-4 team-red" id="score-red-a-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="team-red-2">
+                <span>254</span>
             </div>
-            <div class="col-lg-4 team-red" id="score-red-a-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="team-red-3">
+                <span>1114</span>
             </div>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-blue" id="score-blue-a-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="team-blue-1">
+                <span>4646</span>
             </div>
-            <div class="col-lg-4 team-blue" id="score-blue-a-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="team-blue-2">
+                <span>254</span>
             </div>
-            <div class="col-lg-4 team-blue" id="score-blue-a-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="team-blue-3">
+                <span>1114</span>
             </div>
         </div>
     </div>
-    <div class="elem5">
-        <div class="col-lg-4" id="match-scores" data="match-teams">
-            <p>Score B</p>
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-a">
+            <p class="row-header">Score A</p>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-red" id="score-red-b-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-1">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="score-red-b-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-2">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="score-red-b-3">
-                <p class="dblclick">---</p>
-            </div>
-        </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-blue" id="score-blue-b-1">
-                <p class="dblclick">---</p>
-            </div>
-            <div class="col-lg-4 team-blue" id="score-blue-b-2">
-                <p class="dblclick">---</p>
-            </div>
-            <div class="col-lg-4 team-blue" id="score-blue-b-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-3">
+                <span class="dblclick">---</span>
             </div>
         </div>
-    </div>
-    <div class="elem6">
-        <div class="col-lg-4" id="match-scores" data="match-teams">
-            <p>Score C</p>
-        </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-red" id="score-red-c-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-1">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="score-red-c-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-2">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="score-red-c-3">
-                <p class="dblclick">---</p>
-            </div>
-        </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-blue" id="score-blue-c-1">
-                <p class="dblclick">---</p>
-            </div>
-            <div class="col-lg-4 team-blue" id="score-blue-c-2">
-                <p class="dblclick">---</p>
-            </div>
-            <div class="col-lg-4 team-blue" id="score-blue-c-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-3">
+                <span class="dblclick">---</span>
             </div>
         </div>
     </div>
-    <div class="elem7">
-        <div class="col-lg-4" id="match-scores" data="match-teams">
-            <p>Penalty 1</p>
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-b">
+            <p class="row-header">Score B</p>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-red" id="penalty-red-a-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-1">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="penalty-red-a-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-2">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="penalty-red-a-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-3">
+                <span class="dblclick">---</span>
             </div>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-blue" id="penalty-blue-a-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-1">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-blue" id="penalty-blue-a-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-2">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-blue" id="penalty-blue-a-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-3">
+                <span class="dblclick">---</span>
             </div>
         </div>
     </div>
-    <div class="elem8">
-        <div class="col-lg-4" id="match-scores" data="match-teams">
-            <p>Penalty 2</p>
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-c">
+            <p class="row-header">Score C</p>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-red" id="penalty-red-b-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-1">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="penalty-red-b-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-2">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-red" id="penalty-red-b-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-3">
+                <span class="dblclick">---</span>
             </div>
         </div>
-        <div class="col-lg-4 score-container">
-            <div class="col-lg-4 team-blue" id="penalty-blue-b-1">
-                <p class="dblclick">---</p>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-1">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-blue" id="penalty-blue-b-2">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-2">
+                <span class="dblclick">---</span>
             </div>
-            <div class="col-lg-4 team-blue" id="penalty-blue-b-3">
-                <p class="dblclick">---</p>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-3">
+                <span class="dblclick">---</span>
+            </div>
+        </div>
+    </div>
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-1">
+            <p class="row-header">Penalty 1</p>
+        </div>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-1">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-2">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-3">
+                <span class="dblclick">---</span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-1">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-2">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-3">
+                <span class="dblclick">---</span>
+            </div>
+        </div>
+    </div>
+    <div class="holder">
+        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-2">
+            <p class="row-header">Penalty 2</p>
+        </div>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-1">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-2">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-3">
+                <span class="dblclick">---</span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-1">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-2">
+                <span class="dblclick">---</span>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-3">
+                <span class="dblclick">---</span>
             </div>
         </div>
     </div>

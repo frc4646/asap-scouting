@@ -15,10 +15,12 @@
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      {% if not isMobile %}
       <ul class="nav navbar-nav navbar-right">
           <li><a href="{{ urlFor('auth.login') }}">Login</a></li>
           <li><a href="{{ urlFor('auth.register') }}">Register</a></li>
       </ul>
+      {% endif %}
     </div><!--/.nav-collapse -->
   </div>
 </nav>

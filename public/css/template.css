@@ -1,67 +1,40 @@
-body {
-    padding-top: 50px;
-}
 .container-main {
     padding: 40px 15px;
-    text-align: center;
-}
-.progress-bar-info {
-    color: black;
-}
-.container-hold {
-    padding: 20px 0px 0px 0px;
     text-align: center;
 }
 th, td {
     text-align: center;
     white-space: nowrap;
 }
+.progress-bar-info {
+    color: black;
+}
 #replaceDiv, .limit-height {
     max-width: 100%;
     max-height: 100%;
-    height: 600px;
+    height: 100%;
 }
 #manager {
     float: right;
     padding-left: 30px;
     height: 600px;
 }
+p.row-header {
+     margin-bottom: 0;
+}
+.column {
+    border: 1px solid #000;
+    margin-bottom: 0;
+}
 .table-holder {
     border-left: 1px solid #eee;
     border-bottom: 1px solid #eee;
 }
-#match-id {
-    border: 1px solid #000;
-    font-weight: bold;
-    font-size: 24pt;
-}
-#match-scores {
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    border-left: 1px solid #000;
-    font-weight: bold;
-    font-size: 24pt;
-}
-#match-num {
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    border-top: 1px solid #000;
-    font-weight: bold;
-    font-size: 24pt;
-}
 #match-red, .team-red {
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    font-weight: bold;
-    font-size: 24pt;
     color: black;
     background-color: red;
 }
 #match-blue, .team-blue {
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    font-weight: bold;
-    font-size: 24pt;
     color: white;
     background-color: blue;
 }
@@ -73,10 +46,15 @@ th, td {
     float: right;
     display: none;
 }
-.inputData {
-    height: 10%;
-    width: 50%;
-    font-size: 16pt;
+input.inputData {
+    height: 1.25em;
+    width: 100%;
+    font-size: 1em;
     font-weight: 400;
     text-align: center;
+    color: black;
+}
+.holder {
+    width: auto;
+    height: auto;
 }

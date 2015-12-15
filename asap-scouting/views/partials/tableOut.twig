@@ -3,31 +3,31 @@
 <table class="table table-striped limit-height tablesorter" id="match-table" data-response-url="{{ urlFor('app.data.get') }}">
   <thead>
     <tr>
-      <th>Match</th>
-      <th>Matchtime</th>
-      <th>Red1</th>
-      <th>Red2</th>
-      <th>Red3</th>
-      <th>Blue1</th>
-      <th>Blue2</th>
-      <th>Blue3</th>
-      <th>Blue Score</th>
-      <th>Red Score</th>
+      <th id="match-header">Match</th>
+      <th id="matchtime-header">Matchtime</th>
+      <th id="red1-header">Red1</th>
+      <th id="red2-header">Red2</th>
+      <th id="red3-header">Red3</th>
+      <th id="blue1-header">Blue1</th>
+      <th id="blue2-header">Blue2</th>
+      <th id="blue3-header">Blue3</th>
+      <th id="bluescore-header">Blue Score</th>
+      <th id="redscore-header">Red Score</th>
     </tr>
   </thead>
   <tbody>
 {% for i in entries %}
-      <tr data-row-number="{{ loop.index }}">
-          <td>{{ i.match }}</td>
-          <td>{{ i.matchtime }}</td>
-          <td>{{ i.red1 }}</td>
-          <td>{{ i.red2 }}</td>
-          <td>{{ i.red3 }}</td>
-          <td>{{ i.blue1 }}</td>
-          <td>{{ i.blue2 }}</td>
-          <td>{{ i.blue3 }}</td>
-          <td>{{ i.bluescore }}</td>
-          <td>{{ i.redscore }}</td>
+      <tr data-row-number="{{ loop.index }}" class="body-row">
+          <td id="match">{{ i.match }}</td>
+          <td id="matchtime">{{ i.matchtime }}</td>
+          <td id="red1">{{ i.red1 }}</td>
+          <td id="red2">{{ i.red2 }}</td>
+          <td id="red3">{{ i.red3 }}</td>
+          <td id="blue1">{{ i.blue1 }}</td>
+          <td id="blue2">{{ i.blue2 }}</td>
+          <td id="blue3">{{ i.blue3 }}</td>
+          <td id="bluescore">{{ i.bluescore }}</td>
+          <td id="redscore">{{ i.redscore }}</td>
       </tr>
 {% endfor %}
   </tbody>

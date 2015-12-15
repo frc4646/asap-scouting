@@ -1,0 +1,49 @@
+#body-container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.nav-body-close {
+    margin-top: 0;
+    padding-top: 0;
+    transition: all 300ms ease-in-out;
+}
+body {
+    padding-top: 30px;
+}
+tr.body-row > td {
+    height: 1.5em;
+    line-height: 75px;
+    vertical-align: middle !important;
+    font-size: 18pt;
+}
+th#red3-header, td#red3, th#match-header, td#match, th#blue3-header, td#blue3, th#bluescore-header, td#bluescore {
+    border-right: 1px solid #DDDDDD;
+}
+.column {
+    font-weight: 600;
+    font-size: 1.25em;
+    height: 1.75em;
+}
+.container-hold {
+    padding: 20px 0px 0px 0px;
+    text-align: center;
+}
+nav.nav-close .container-hold {
+    padding-top: 0px;
+    transition: padding 300ms ease-in-out;
+}
+nav.nav-close {
+    margin-top: -55px;
+    margin-bottom: 0;
+    transition: margin 300ms ease-in-out;
+}
+#manager {
+	text-align: center;
+    padding-right: 0px;
+    padding-top: 0px;
+    height: 100%;
+    width: 100%;
+}
+div.col-sm-2, div.col-xs-2 {
+    padding: 0;
+}
