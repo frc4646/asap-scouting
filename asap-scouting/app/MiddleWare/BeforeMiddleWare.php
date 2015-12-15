@@ -42,6 +42,7 @@ class BeforeMiddleWare extends Middleware
                 'base'      => $this->app->config->get('app.url'),
                 'current'   => $this->app->request->getPathInfo(),
             ],
+            "isMobile" => (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "mobile") !== false) ? true : false,
         ]);
     }
 
