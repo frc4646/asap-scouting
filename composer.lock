@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bd442f5e01f44898cf934206dabe4362",
+    "hash": "b11fb5e3a408ce27b40bad81e4068289",
     "content-hash": "34072858a2bb13bc638512657c23df75",
     "packages": [
         {
@@ -54,16 +54,16 @@
         },
         {
             "name": "asimlqt/php-google-spreadsheet-client",
-            "version": "2.3.6",
+            "version": "2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/asimlqt/php-google-spreadsheet-client.git",
-                "reference": "c845bd88a5fcc19695acab5c39548f42f51c8d9f"
+                "reference": "05527b328b2cf08c4b1992bdb531116305c1b711"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/asimlqt/php-google-spreadsheet-client/zipball/c845bd88a5fcc19695acab5c39548f42f51c8d9f",
-                "reference": "c845bd88a5fcc19695acab5c39548f42f51c8d9f",
+                "url": "https://api.github.com/repos/asimlqt/php-google-spreadsheet-client/zipball/05527b328b2cf08c4b1992bdb531116305c1b711",
+                "reference": "05527b328b2cf08c4b1992bdb531116305c1b711",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "google",
                 "spreadsheet"
             ],
-            "time": "2015-11-24 22:10:40"
+            "time": "2015-12-13 15:13:17"
         },
         {
             "name": "danielstjules/stringy",
