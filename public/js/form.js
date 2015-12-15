@@ -15,6 +15,7 @@ function doPost(action, data, type, dataType, callback, beforeSend) {
 }
 
 function showPWDIndicator(id, visibility) {
+    "use strict";
     switch (visibility) {
         case "show":
             $("#" + id).popover({
