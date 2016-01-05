@@ -7,42 +7,42 @@
  * @copyright   2015 Alexander Young
  * @link        https://github.com/meun5/asap-scouting
  * @license     https://github.com/meun5/asap-scouting/blob/master/LICENSE
- * @version     0.1.0
+ * @version     0.3.0
  */
 
 use Carbon\Carbon;
 
-$app->get('/login', $guest(), function () use ($app) {
-    $app->render('auth/login.twig');
-})->name('auth.login');
+$app->get("/login", $guest(), function () use ($app) {
+    $app->render("auth/login.twig");
+})->name("auth.login");
 
-$app->post('/login', $guest(), function () use ($app) {
+$app->post("/login", $guest(), function () use ($app) {
     $request = $app->request;
 
-    $user = $request->post('user');
-    $password = $request->post('password');
-    $remember = $request->post('remember');
+    $user = $request->post("user");
+    $password = $request->post("password");
+    $remember = $request->post("remember");
 
     $v = $app->validation;
 
     $v->validate([
-        'user' => [$user, 'required|alnumDashSpc'],
-        'password' => [$password, 'required|alnumDashSpc'],
+        "user" => [$user, "required|alnumDashSpc"],
+        "password" => [$password, "required|alnumDashSpc"],
     ]);
 
     if ($v->passes()) {
         $user = $app->user
-            ->where('active', true)
+            ->where("active", true)
             ->where(function ($query) use ($user) {
-                    return $query->where('email', $user)
-                                 ->orWhere('username', $user);
-                })
+                    return $query->where("email", $user)
+                                 ->orWhere("username", $user);
+            })
             ->first();
 
         if ($user && $app->hash->passwordCheck($password, $user->password)) {
-            $_SESSION[$app->config->get('auth.session')] = $user->id;
+            $_SESSION[$app->config->get("auth.session")] = $user->id;
 
-            if ($remember === 'on') {
+            if ($remember === "on") {
                 $rememberIdentifier = $app->randomlib->generateString(128);
                 $rememberToken = $app->randomlib->generateString(128);
 
@@ -52,9 +52,9 @@ $app->post('/login', $guest(), function () use ($app) {
                 );
 
                 $create = $app->setCookie(
-                    $app->config->get('auth.remember'),
+                    $app->config->get("auth.remember"),
                     "{$rememberIdentifier}___{$rememberToken}",
-                    Carbon::parse('+1 month')->timestamp,
+                    Carbon::parse("+1 month")->timestamp,
                     null,
                     null,
                     true,
@@ -64,28 +64,28 @@ $app->post('/login', $guest(), function () use ($app) {
 
             if ($app->request->isAjax()) {
                 echo json_encode([
-                    'success' => true,
-                    'url' => $app->urlFor('home'),
+                    "success" => true,
+                    "url" => $app->urlFor("home"),
                 ]);
                 return;
             }
-            return $app->response->redirect($app->urlFor('home'));
+            return $app->response->redirect($app->urlFor("home"));
 
         } else {
             if ($app->request->isAjax()) {
                 echo json_encode([
-                    'success'   => false,
-                    'errors'    => $v->errors(),
-                    'url'       => $app->urlFor('auth.login'),
+                    "success"   => false,
+                    "errors"    => $v->errors(),
+                    "url"       => $app->urlFor("auth.login"),
                 ]);
                 return;
             }
-            return $app->response->redirect($app->urlFor('auth.login'));
+            return $app->response->redirect($app->urlFor("auth.login"));
         }
     }
 
-    $app->render('auth/login.twig', [
-        'errors' => $v->errors(),
-        'request' => $request,
+    $app->render("auth/login.twig", [
+        "errors" => $v->errors(),
+        "request" => $request,
     ]);
-})->name('auth.login.post');
+})->name("auth.login.post");

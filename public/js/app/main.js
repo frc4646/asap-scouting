@@ -1,21 +1,23 @@
-function hideTable () {
+function hideTable() {
+    "use strict";
     $("div#replaceDiv").css("display", "none");
     $("div#manager").removeAttr("style");
+    $("div.back-button").removeAttr("style");
     $("div#manager").css("padding-left", "0px");
 }
 
-function detectMobile () {
+function detectMobile() {
     "use strict";
     var uagent = navigator.userAgent.toLowerCase();
 
-   if (uagent.search("mobile") > -1) {
-       return true
-   } else {
-       return false;
-   }
+    if (uagent.search("mobile") > -1) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-function getTable (callNext = true) {
+function getTable() {
     "use strict";
     var options = {
         callback: function (e) {
@@ -35,7 +37,7 @@ function getTable (callNext = true) {
     doPost($("div.container-main").attr("data-content-url"), null, "GET", "html", options.callback, options.beforeSend);
 }
 
-function success (e) {
+function success(e) {
     "use strict";
     $("div#body-container").removeClass("container");
     $("div#body-container").addClass("container-fluid");
@@ -44,17 +46,18 @@ function success (e) {
     $("div#replaceDiv").fadeIn(500);
     if (!detectMobile()) { // Not Yet Available on mobile
         $("div#manager").fadeIn(500);
-        $('#match-table').tablesorter({
-            theme: 'bootstrap',
-            headerTemplate: '{content} {icon}',
-            widgets: ['filter'],
+        $("#match-table").tablesorter({
+            theme: "bootstrap",
+            headerTemplate: "{content} {icon}",
+            widgets: ["filter"]
         });
     }
     doClick();
 }
 
 function doSet(e) {
-    $("div#manager").attr("data-match-id", e["match"]);
+    "use strict";
+    $("div#manager").attr("data-match-id", e.match);
     for (var i = 0; i <= 3; i++) {
         $("div#team-red-" + i).children("span").text(e["red" + i]);
         $("div#team-blue-" + i).children("span").text(e["blue" + i]);
@@ -115,7 +118,80 @@ function doSet(e) {
         n++;
     }
 }
+function doExplodedSet(e, color, num) {
+    $("p.exploded-match-text").text(e.match);
+
+    $("div.exploded-team").addClass("team-" + color);
+    //blue1scorea
+    $("p.exploded-score-a-val").text(e[color + num + "scorea"]);
+    $("p.exploded-score-b-val").text(e[color + num + "scorea"]);
+    $("p.exploded-score-c-val").text(e[color + num + "scorec"]);
+}
 function doDBLClick(x) {
+    $("div.team-num").click(function (e) {
+        var color = $(this).prop("id").split("-")[1],
+            num = $(this).prop("id").split("-")[2];
+
+        $("div#manager").css("display", "none");
+
+        var data = {},
+            options = {
+                callback: function (e) {
+                    $(".loader").fadeOut(500);
+                    doExplodedSet(e, color, num)
+                    console.log(e);
+                    console.log(color);
+                },
+                beforeSend: function () {
+                    $(".loader").fadeIn(500);
+                }
+            };
+
+        data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+        data["data_id"] = $("div#manager").attr("data-match-id");
+
+        doPost($("table#match-table").attr("data-response-url"), data, "POST", "json", options.callback, options.beforeSend);
+
+        $("div.explode").css("display", "block");
+
+        $("p.var-carrier").dblclick(function (e) {
+            e.stopImmediatePropagation();
+            var value = $(this).text() || "";
+            if (value == "---") {
+                value = 0;
+            }
+            $(this).text("");
+            $(this).append('<input type="text" class="inputData" value="' + value + '">');
+            $("input.inputData").focus();
+            $("input.inputData").keypress(function (e) {
+                if (e.which == 13) {
+                    $(this).focusout();
+                }
+            });
+            $("input.inputData").focusout(function (e) {
+                e.stopPropagation();
+                var val = $(this).val() || "---";
+                $(this).parent("p.var-carrier").text(val);
+                //$(this).remove();
+                var data = {},
+                    options = {
+                    callback: function (e) {
+                        $(".loader").fadeOut(500);
+                    },
+                    beforeSend: function () {
+                        $(".loader").fadeIn(500);
+                    }
+                };
+
+                console.log($(this));
+                data["rowID"] = $("div#manager").attr("data-match-id");
+                data["newValue"] = $(this).val() || 0;
+                data["column"] = color + num + $(this).parent("p.var-carrier").prop("class").split("-")[1] + $(this).parent("p.var-carrier").prop("class").split("-")[2];
+                data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+                doPost($("div#manager").attr("data-set-action"), data, "POST", "json", options.callback, options.beforeSend);
+            });
+        });
+    });
     $("span.dblclick").dblclick(function (e) {
         e.stopImmediatePropagation();
         var value = $(this).text() || "";
@@ -124,7 +200,8 @@ function doDBLClick(x) {
         }
         $(this).text("");
         $(this).append('<input type="text" class="inputData" value="' + value + '">');
-        $('input.inputData').keypress(function (e) {
+        $("input.inputData").focus();
+        $("input.inputData").keypress(function (e) {
             if (e.which == 13) {
                 $(this).focusout();
             }
@@ -163,18 +240,14 @@ function clickHandler (e, doOptions = false) {
         options = {
             callback: function (e) {
                 $(".loader").fadeOut(500);
-                if (detectMobile()) {
+                $("span.dblclick").off("dblclick");
                     doSet(e);
                     doDBLClick(e);
-                    if (!doOptions) {
+                    if (detectMobile()) {
                         $("nav.navbar").addClass("nav-close");
                         $("body#body-frame").addClass("nav-body-close");
                         hideTable();
                     }
-                } else {
-                    doDBLClick(e);
-                    doSet(e);
-                }
             },
             beforeSend: function () {
                 $(".loader").fadeIn(500);

@@ -2,7 +2,7 @@ if("undefined"==typeof jQuery)throw new Error("form.js requires jQuery");
 +function(a){"use strict";var b=a.fn.jquery.split(" ")[0].split(".");if(b[0]<2&&b[1]<9||1==b[0]&&9==b[1]&&b[2]<1)throw new Error("form.js requires jQuery version 1.9.1 or higher")}(jQuery)
 
 function doPost(action, data, type, dataType, callback, beforeSend) {
-    'use strict';
+    "use strict";
 
     $.ajax({
         url: action,
@@ -37,19 +37,19 @@ function showPWDIndicator(id, visibility) {
 
 }
 $(document).ready(function () {
-    $("input[name='password'].metre").focusin(function (e) {
+    $("input[name="password"].metre").focusin(function (e) {
         console.info("focusIn");
         e = e.target;
         showPWDIndicator(e.id, "show");
     });
 
-    $("input[name='password'].metre").focusout(function (e) {
+    $("input[name="password"].metre").focusout(function (e) {
         console.info("focusOut");
         e = e.target;
         $("#" + e.id).popover("destroy");
         //showPWDIndicator(e.id, "destroy");
     });
-    /*$("input[name='password'].metre").blur(function (e) {
+    /*$("input[name="password"].metre").blur(function (e) {
         showPWDIndicator(e.target.id, "destroy");
     }).focusout(function (e) {
         showPWDIndicator(e.target.id, "destroy");
@@ -58,7 +58,7 @@ $(document).ready(function () {
     }).focus(function (e) {
         showPWDIndicator(e.target.id, "show");
     });*/
-    $("input[name='password'].metre").keyup(function (e) {
+    $("input[name="password"].metre").keyup(function (e) {
         e = e.target;
         console.log(zxcvbn(e.value));
 
@@ -126,7 +126,7 @@ $(document).ready(function () {
         if (!$.isEmptyObject(sendOut)) {
             defaults.data = sendOut;
         } else {
-            throw new Error('No fields found!');
+            throw new Error("No fields found!");
         }
 
         if ($.isFunction(override.callback)) {
@@ -137,7 +137,7 @@ $(document).ready(function () {
             defaults.beforeSend = override.beforeSend;
         }
 
-        if (typeof override.returnType !== 'undefined') {
+        if (typeof override.returnType !== "undefined") {
             switch (override.returnType) {
                 case "url":
                     defaults.dataType = "text";

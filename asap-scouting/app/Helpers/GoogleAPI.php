@@ -7,7 +7,7 @@
  * @copyright   2015 Alexander Young
  * @link        https://github.com/meun5/asap-scouting
  * @license     https://github.com/meun5/asap-scouting/blob/master/LICENSE
- * @version     0.1.0
+ * @version     0.3.0
  */
 
 namespace app\Helpers;
@@ -18,6 +18,8 @@ use Exception;
 use Google\Spreadsheet\DefaultServiceRequest;
 use Google\Spreadsheet\ServiceRequestFactory;
 use Google\Spreadsheet\SpreadsheetService;
+
+use Slim\Slim;
 
 class GoogleAPI
 {
@@ -33,7 +35,12 @@ class GoogleAPI
 
     protected $spreadsheet;
 
-    public function __construct($app)
+    /**
+     * Get values from application
+     *
+     * @param object $app Slim Application Variable
+     */
+    public function __construct(Slim $app)
     {
         $this->app = $app;
         $this->config = $this->app->config;
@@ -49,7 +56,7 @@ class GoogleAPI
         }
 
         $this->client->setApplicationName("Sheets API Testing");
-        $this->client->setScopes(['https://www.googleapis.com/auth/drive', 'https://spreadsheets.google.com/feeds']);
+        $this->client->setScopes(["https://www.googleapis.com/auth/drive", "https://spreadsheets.google.com/feeds"]);
 
         $this->client->fetchAccessTokenWithAssertion($this->client->getHttpClient());
 
@@ -60,6 +67,13 @@ class GoogleAPI
         $this->spreadsheet = $spreadsheetService->getSpreadsheetById($this->sheetID);
     }
 
+    /**
+     * Gets the sheet by a name
+     *
+     * @param  string $name Sheet Name
+     *
+     * @return object The worksheet with that name
+     */
     public function getSheet($name = "Quals")
     {
         $worksheetFeed = $this->spreadsheet->getWorksheets();
@@ -68,6 +82,15 @@ class GoogleAPI
         return $worksheet;
     }
 
+    /**
+     * Sets a new value on the spreadsheet
+     *
+     * @param  integer $match   What match is it
+     * @param  string  $column  The Column name
+     * @param  integer $value   The new value to set
+     *
+     * @return boolean Return if the update was successful
+     */
     public function setValue($match = 5, $column = "redscore", $value = 12)
     {
         $cellFeed = $this->getSheet("Quals")->getCellFeed();

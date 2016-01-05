@@ -1,5 +1,5 @@
 function onLoad() {
-    'use strict';
+    "use strict";
     var override = {
         callback: function (e) {
             if (e.success !== true) {

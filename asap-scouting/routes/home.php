@@ -7,12 +7,12 @@
  * @copyright   2015 Alexander Young
  * @link        https://github.com/meun5/asap-scouting
  * @license     https://github.com/meun5/asap-scouting/blob/master/LICENSE
- * @version     0.1.0
+ * @version     0.3.0
  */
 
-$app->get('/', function () use ($app) {
-    $app->render('home.twig');
-})->name('home');
+$app->get("/", function () use ($app) {
+    $app->render("home.twig");
+})->name("home");
 
 $app->get("/app", function () use ($app) {
     $listFeed = $app->GoogleAPI->getSheet()->getListFeed();
@@ -31,15 +31,16 @@ $app->post("/app/get", function () use ($app) {
     $listEntries = $app->GoogleAPI->getSheet("Quals")->getListFeed()->getEntries();
 
     $v = $app->validation;
+    $data_id = $app->request->post()["data_id"]
 
     $v->validate([
-        "id" => [$app->request->post()["data_id"], "required|int"]
+        "id" => [$data_id, "required|int"]
     ]);
 
     $app->response->headers->set("Content-Type", "application/json");
 
     if ($v->passes()) {
-        echo json_encode($listEntries[$app->request->post()["data_id"] - 1]->getValues());
+        echo json_encode($listEntries[$data_id - 1]->getValues());
     } else {
         echo json_encode([
             "success" => false,

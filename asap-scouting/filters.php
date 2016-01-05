@@ -7,13 +7,13 @@
  * @copyright   2015 Alexander Young
  * @link        https://github.com/meun5/asap-scouting
  * @license     https://github.com/meun5/asap-scouting/blob/master/LICENSE
- * @version     0.1.0
+ * @version     0.3.0
  */
 
 $authenticationCheck = function ($required) use ($app) {
     return function () use ($required, $app) {
         if ((!$app->auth && $required) || ($app->auth && !$required)) {
-            $app->redirect($app->urlFor('home'));
+            $app->redirect($app->urlFor("home"));
         }
     };
 };

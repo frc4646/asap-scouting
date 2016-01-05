@@ -7,13 +7,13 @@
  * @copyright   2015 Alexander Young
  * @link        https://github.com/meun5/asap-scouting
  * @license     https://github.com/meun5/asap-scouting/blob/master/LICENSE
- * @version     0.1.0
+ * @version     0.3.0
  */
 
 //Home Route
-require INC_ROOT . '/asap-scouting/routes/home.php';
+require INC_ROOT . "/asap-scouting/routes/home.php";
 
 //Authentication Routes
-require INC_ROOT . '/asap-scouting/routes/auth/login.php';
-require INC_ROOT . '/asap-scouting/routes/auth/logout.php';
-require INC_ROOT . '/asap-scouting/routes/auth/register.php';
+require INC_ROOT . "/asap-scouting/routes/auth/login.php";
+require INC_ROOT . "/asap-scouting/routes/auth/logout.php";
+require INC_ROOT . "/asap-scouting/routes/auth/register.php";

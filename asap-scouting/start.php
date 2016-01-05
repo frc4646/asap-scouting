@@ -7,7 +7,7 @@
  * @copyright   2015 Alexander Young
  * @link        https://github.com/meun5/asap-scouting
  * @license     https://github.com/meun5/asap-scouting/blob/master/LICENSE
- * @version     0.1.0
+ * @version     0.3.0
  */
 
 use Slim\Slim;
@@ -59,7 +59,7 @@ require("database.php");
 require("filters.php");
 require("routes.php");
 
-$app->container->set('user', function () {
+$app->container->set("user", function () {
     return new User;
 });
 
@@ -93,7 +93,7 @@ $app->container->singleton("mail", function () use ($app) {
     return new Mailer($app->view, $mailer);
 });
 
-$app->container->singleton('randomlib', function () {
+$app->container->singleton("randomlib", function () {
     $factory = new RandomLib;
     return $factory->getMediumStrengthGenerator();
 });
@@ -101,7 +101,7 @@ $app->container->singleton('randomlib', function () {
 $view = $app->view();
 
 $view->parserOptions = [
-    'debug' => $app->config->get('twig.debug')
+    "debug" => $app->config->get("twig.debug")
 ];
 
 $view->parserExtensions = [
