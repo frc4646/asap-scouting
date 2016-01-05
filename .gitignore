@@ -8,7 +8,7 @@
 vendor
 
 # Local Config Files
-config/*.json
+asap-scouting/config/*.json
 
 # Account Specific Service Account Details
 ASAP Scouting App PHP-722b21dfb35c.json
