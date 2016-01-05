@@ -51,32 +51,37 @@ $app->post("/app/get", function () use ($app) {
 $app->post("/app/set", function () use ($app) {
     $v = $app->validation;
 
+    $rowID = $app->request->post()["rowID"];
+    $column = $app->request->post()["column"];
+    $newValue = $app->request->post()["newValue"];
+
     $v->validate([
-       "newValue" => [$app->request->post()["newValue"], "required|int"],
-       "rowID" => [$app->request->post()["rowID"], "required|int"],
-       "column" => [$app->request->post()["column"], "required|alnum"],
+       "newValue" => [$newValue, "required|int"],
+       "rowID" => [$rowID, "required|int"],
+       "column" => [$column, "required|alnum"],
     ]);
 
     if ($v->passes()) {
-        if ($app->GoogleAPI->setValue($app->request->post()["rowID"], $app->request->post()["column"], $app->request->post()["newValue"])) {
+        $set = $app->GoogleAPI->setValue($rowID, $column, $newValue)
+        if ($set) {
             echo json_encode([
                 "success" => true,
-                "item" => $app->GoogleAPI->setValue($app->request->post()["rowID"], $app->request->post()["column"], $app->request->post()["newValue"]),
+                "item" => $set,
                 "orginal" => [
-                    "newValue" => $app->request->post()["newValue"],
-                    "rowID" => $app->request->post()["rowID"],
-                    "column" => $app->request->post()["column"],
+                    "newValue" => $newValue,
+                    "rowID" => $rowID,
+                    "column" => $column,
                 ],
             ]);
             return;
         } else {
             echo json_encode([
                 "success" => false,
-                "item" => $app->GoogleAPI->setValue($app->request->post()["rowID"], $app->request->post()["column"], $app->request->post()["newValue"]),
+                "item" => $set,
                 "orginal" => [
-                    "newValue" => $app->request->post()["newValue"],
-                    "rowID" => $app->request->post()["rowID"],
-                    "column" => $app->request->post()["column"],
+                    "newValue" => $newValue,
+                    "rowID" => $rowID,
+                    "column" => $column,
                 ],
             ]);
             return;
