@@ -16,13 +16,10 @@ tr.body-row > td {
     vertical-align: middle !important;
     font-size: 18pt;
 }
-th#red3-header, td#red3, th#match-header, td#match, th#blue3-header, td#blue3, th#bluescore-header, td#bluescore {
-    border-right: 1px solid #DDDDDD;
-}
 .column {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.25em;
-    height: 1.75em;
+    height: 12% !important;
 }
 .container-hold {
     padding: 20px 0px 0px 0px;
@@ -41,9 +38,35 @@ nav.nav-close {
 	text-align: center;
     padding-right: 0px;
     padding-top: 0px;
-    height: 100%;
+    height: 90%;
+    top: 0;
+    bottom: 15px;
+    right: 0;
+    left: 0;
     width: 100%;
 }
 div.col-sm-2, div.col-xs-2 {
     padding: 0;
+}
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.back-arrow {
+    font-size: 1.25em;
+    padding-right: 5px;
+}
+.button-back {
+    height: 100%;
+}
+.back-button {
+    height: 10%;
+    position: absolute;
+    bottom: 0;
+}
+.row {
+    height: 100%;
 }

@@ -54,7 +54,19 @@ input.inputData {
     text-align: center;
     color: black;
 }
-.holder {
+.row {
     width: auto;
     height: auto;
+}
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    height: 100%;
+}
+div.explode {
+    display: none;
+    height: 90%;
+    width: 100%;
 }
