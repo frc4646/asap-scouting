@@ -12,9 +12,6 @@ body {
     height: 100%;
 }
 .container-hold {
-    padding: 20px 0px 0px 0px;
+    padding-top: 20px;
     text-align: center;
-}
-.container-main {
-    padding: 40px 15px;
 }
