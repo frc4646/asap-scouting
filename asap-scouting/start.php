@@ -22,6 +22,8 @@ use app\User\User;
 
 use app\Helpers\Hash;
 use app\Helpers\GoogleAPI;
+use app\BlueAlliance\API;
+use app\Teams\Team;
 use app\Validation\Validator;
 
 use app\Mail\Mailer;
@@ -73,6 +75,14 @@ $app->container->singleton("GoogleAPI", function () use ($app) {
 
 $app->container->singleton("validation", function () use ($app) {
     return new Validator($app->user, $app->hash, $app->auth);
+});
+
+$app->container->singleton("tba", function () use ($app) {
+    return new API;
+});
+
+$app->container->singleton("teams", function () use ($app) {
+    return new Team;
 });
 
 $app->container->singleton("mail", function () use ($app) {

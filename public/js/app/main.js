@@ -60,7 +60,9 @@ function doSet(e) {
     $("div#manager").attr("data-match-id", e.match);
     for (var i = 0; i <= 3; i++) {
         $("div#team-red-" + i).children("span").text(e["red" + i]);
+        $("div#team-red-" + i).attr("data-team-num", e["red" + i]);
         $("div#team-blue-" + i).children("span").text(e["blue" + i]);
+        $("div#team-blue-" + i).attr("data-team-num", e["blue" + i]);
     }
 
     if (!e["match"]) {
@@ -128,70 +130,138 @@ function doExplodedSet(e, color, num) {
     $("p.exploded-score-c-val").text(e[color + num + "scorec"]);
 }
 function doDBLClick(x) {
-    $("div.team-num").click(function (e) {
-        var color = $(this).prop("id").split("-")[1],
-            num = $(this).prop("id").split("-")[2];
+        $("div.team-num").click(function (e) {
+            console.log("clicked");
+            var color = $(this).prop("id").split("-")[1],
+                num = $(this).prop("id").split("-")[2];
 
-        $("div#manager").css("display", "none");
+            if (!detectMobile()) {
+                $("button.toggle-defense").off("click");
+                var number = $(this).attr("data-team-num"),
+                    dart = {};
+                $("span.team-id").text("Team " + number);
+                $("div#team-options").fadeIn(500);
+                dart[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+                doPost(
+                    $("div.team-details").attr("data-call-url").split(":team").join(number),
+                    null,
+                    "GET",
+                    "json",
+                    function (x) {
+                        if (x.success) {
+                            doPost(
+                                $("div.team-details").attr("data-get-url").split(":team").join(number),
+                                null,
+                                "GET",
+                                "json",
+                                function (x) {
+                                    if (!x.runOnce) {
+                                        $("button.toggle-defense").each(function () {
+                                             if (x["defences"][$(this).prop("id").split("-")[1]]) {
+                                                 $(this).alterClass("btn-*", "btn-success");
+                                             } else {
+                                                 $(this).alterClass("btn-*", "btn-danger");
+                                             }
+                                        });
+                                    } else {
+                                        $("button.toggle-defense").each(function () {
+                                            $(this).alterClass("btn-*", "btn-info");
+                                        });
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
 
-        var data = {},
-            options = {
-                callback: function (e) {
-                    $(".loader").fadeOut(500);
-                    doExplodedSet(e, color, num)
-                    console.log(e);
-                    console.log(color);
-                },
-                beforeSend: function () {
-                    $(".loader").fadeIn(500);
-                }
-            };
+                $("button.toggle-defense").click(function () {
+                    dart["item"] = $(this).prop("id").split("-")[1]
+                    if ($(this).hasClass("btn-info")) {
+                        dart["val"] = true
+                        $(this).alterClass("btn-*", "btn-success");
+                    } else if ($(this).hasClass("btn-success")) {
+                        dart["val"] = false
+                        $(this).alterClass("btn-*", "btn-danger");
+                    } else if ($(this).hasClass("btn-danger")) {
+                        dart["val"] = true
+                        $(this).alterClass("btn-*", "btn-success");
+                    }
+                    doPost(
+                        $("div.team-details").attr("data-set-url").split(":team").join(number).split(":item").join("defences"),
+                        dart,
+                        "POST",
+                        "json",
+                        function (v) {
+                            $(".loader").fadeOut(500);
+                            console.log(v);
+                        },
+                        function () {
+                            $(".loader").fadeIn(500);
+                        }
+                    );
+                });
+            } else if (detectMobile()) {
+                $("div#manager").css("display", "none");
 
-        data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
-        data["data_id"] = $("div#manager").attr("data-match-id");
-
-        doPost($("table#match-table").attr("data-response-url"), data, "POST", "json", options.callback, options.beforeSend);
-
-        $("div.explode").css("display", "block");
-
-        $("p.var-carrier").dblclick(function (e) {
-            e.stopImmediatePropagation();
-            var value = $(this).text() || "";
-            if (value == "---") {
-                value = 0;
-            }
-            $(this).text("");
-            $(this).append('<input type="text" class="inputData" value="' + value + '">');
-            $("input.inputData").focus();
-            $("input.inputData").keypress(function (e) {
-                if (e.which == 13) {
-                    $(this).focusout();
-                }
-            });
-            $("input.inputData").focusout(function (e) {
-                e.stopPropagation();
-                var val = $(this).val() || "---";
-                $(this).parent("p.var-carrier").text(val);
-                //$(this).remove();
                 var data = {},
                     options = {
-                    callback: function (e) {
-                        $(".loader").fadeOut(500);
-                    },
-                    beforeSend: function () {
-                        $(".loader").fadeIn(500);
-                    }
-                };
+                        callback: function (e) {
+                            $(".loader").fadeOut(500);
+                            doExplodedSet(e, color, num)
+                            console.log(e);
+                            console.log(color);
+                        },
+                        beforeSend: function () {
+                            $(".loader").fadeIn(500);
+                        }
+                    };
 
-                console.log($(this));
-                data["rowID"] = $("div#manager").attr("data-match-id");
-                data["newValue"] = $(this).val() || 0;
-                data["column"] = color + num + $(this).parent("p.var-carrier").prop("class").split("-")[1] + $(this).parent("p.var-carrier").prop("class").split("-")[2];
                 data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
-                doPost($("div#manager").attr("data-set-action"), data, "POST", "json", options.callback, options.beforeSend);
-            });
+                data["data_id"] = $("div#manager").attr("data-match-id");
+
+                doPost($("table#match-table").attr("data-response-url"), data, "POST", "json", options.callback, options.beforeSend);
+
+                $("div.explode").css("display", "block");
+
+                $("p.var-carrier").dblclick(function (e) {
+                    e.stopImmediatePropagation();
+                    var value = $(this).text() || "";
+                    if (value == "---") {
+                        value = 0;
+                    }
+                    $(this).text("");
+                    $(this).append('<input type="text" class="inputData" value="' + value + '">');
+                    $("input.inputData").focus();
+                    $("input.inputData").keypress(function (e) {
+                        if (e.which == 13) {
+                            $(this).focusout();
+                        }
+                    });
+                    $("input.inputData").focusout(function (e) {
+                        e.stopPropagation();
+                        var val = $(this).val() || "---";
+                        $(this).parent("p.var-carrier").text(val);
+                        //$(this).remove();
+                        var data = {},
+                            options = {
+                            callback: function (e) {
+                                $(".loader").fadeOut(500);
+                            },
+                            beforeSend: function () {
+                                $(".loader").fadeIn(500);
+                            }
+                        };
+
+                        console.log($(this));
+                        data["rowID"] = $("div#manager").attr("data-match-id");
+                        data["newValue"] = $(this).val() || 0;
+                        data["column"] = color + num + $(this).parent("p.var-carrier").prop("class").split("-")[1] + $(this).parent("p.var-carrier").prop("class").split("-")[2];
+                        data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+                        doPost($("div#manager").attr("data-set-action"), data, "POST", "json", options.callback, options.beforeSend);
+                    });
+                });
+            }
         });
-    });
     $("span.dblclick").dblclick(function (e) {
         e.stopImmediatePropagation();
         var value = $(this).text() || "";

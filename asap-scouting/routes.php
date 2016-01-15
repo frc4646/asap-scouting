@@ -13,6 +13,9 @@
 //Home Route
 require INC_ROOT . "/asap-scouting/routes/home.php";
 
+//Team Route
+require INC_ROOT . "/asap-scouting/routes/team.php";
+
 //Authentication Routes
 require INC_ROOT . "/asap-scouting/routes/auth/login.php";
 require INC_ROOT . "/asap-scouting/routes/auth/logout.php";

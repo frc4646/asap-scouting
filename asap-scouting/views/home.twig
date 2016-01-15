@@ -4,6 +4,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/css/theme.bootstrap.min.css" type="text/css">
+{#<link rel="stylesheet" href="js/vendor/bootstrap/bootstrap.min.css" type="text/css">#}
 
 {% if isMobile %}
     <link href="css/mobile.css" rel="stylesheet" type="text/css">
@@ -14,229 +15,247 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-main" data-content-url="{{ urlFor('app.datatable') }}">
-    <h1 data-response-url="img/beforeSend.svg" data-success-url="img/success.svg" class="main-header">Hello</h1>
-    <p class="lead">This page is starting page for the ASAP Scouting App</p>
-</div>
-<div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="replaceDiv"></div>
-<div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="manager" data-set-action="{{ urlFor('app.data.set') }}" data-match-id="false">
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-id">
-            <p class="row-header">Match</p>
+<div class="row" id="body-holder">
+    <div class="container-main" data-content-url="{{ urlFor('app.datatable') }}">
+        <h1 data-response-url="img/beforeSend.svg" data-success-url="img/success.svg" class="main-header">Hello</h1>
+        <p class="lead">This page is starting page for the ASAP Scouting App</p>
+    </div>
+    <div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="replaceDiv"></div>
+    <div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="manager" data-set-action="{{ urlFor('app.data.set') }}" data-match-id="false">
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-id">
+                <p class="row-header">Match</p>
+            </div>
+            <div class="col-lg-8 col-sm-10 col-xs-10 column" id="match-num">
+                <span>Select Match on the left</span>
+            </div>
         </div>
-        <div class="col-lg-8 col-sm-10 col-xs-10 column" id="match-num">
-            <span>Select Match on the left</span>
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-scores">
+                <p class="row-header">Scores</p>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-red">
+                <span>Red</span>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-blue">
+                <span>Blue</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-teams">
+                <p class="row-header">Teams</p>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column team-num" id="team-red-1">
+                    <span>4646</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column team-num" id="team-red-2">
+                    <span>254</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column team-num" id="team-red-3">
+                    <span>1114</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column team-num" id="team-blue-1">
+                    <span>4646</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column team-num" id="team-blue-2">
+                    <span>254</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column team-num" id="team-blue-3">
+                    <span>1114</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-a">
+                <p class="row-header">Score A</p>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-b">
+                <p class="row-header">Score B</p>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-c">
+                <p class="row-header">Score C</p>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-1">
+                <p class="row-header">Penalty 1</p>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-2">
+                <p class="row-header">Penalty 2</p>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-1">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-2">
+                    <span class="dblclick">---</span>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-3">
+                    <span class="dblclick">---</span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-scores">
-            <p class="row-header">Scores</p>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-red">
-            <span>Red</span>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-blue">
-            <span>Blue</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-teams">
-            <p class="row-header">Teams</p>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column team-num" id="team-red-1">
-                <span>4646</span>
+    <div class="col-lg-4 col-sm-6 col-xs-6 explode" style="text-align: center;" id="">
+        <div class="row">
+            <div class="exploded-match col-sm-6 col-xs-6" style="border: 1px solid black;">
+                <p>Match Number</p>
+                <p class="exploded-match-text">5</p>
             </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column team-num" id="team-red-2">
-                <span>254</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column team-num" id="team-red-3">
-                <span>1114</span>
+            <div class="exploded-team col-sm-6 col-xs-6" style="border: 1px solid black;">
+                <p>Team Number</p>
+                <p class="exploded-team-num">4646</p>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column team-num" id="team-blue-1">
-                <span>4646</span>
+        <div class="row">
+            <div class="exploded-score-a col-sm-4 col-xs-4" style="border: 1px solid black;">
+                <p>Score A</p>
+                <p class="exploded-score-a-val var-carrier">15</p>
             </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column team-num" id="team-blue-2">
-                <span>254</span>
+            <div class="exploded-score-b col-sm-4 col-xs-4" style="border: 1px solid black;">
+                <p>Score B</p>
+                <p class="exploded-score-b-val var-carrier">15</p>
             </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column team-num" id="team-blue-3">
-                <span>1114</span>
+            <div class="exploded-score-c col-sm-4 col-xs-4" style="border: 1px solid black;">
+                <p>Score C</p>
+                <p class="exploded-score-c-val var-carrier">15</p>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-a">
-            <p class="row-header">Score A</p>
+    <div class="team-details col-sm-12 col-lg-6 col-xs-12" id="team-options" data-set-url="{{ urlFor('team.set') }}" data-get-url="{{ urlFor('team.get') }}" data-call-url="{{ urlFor('team.create') }}">
+        <div class="team-row">
+            <span style="border: 1px solid #000;" class="team-id">Team 4646</span>
         </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
+        <button class="btn btn-info toggle-defense" id="team-portcullis">Porticulls</button>
+        <button class="btn btn-info toggle-defense" id="team-cheval_de_frise">Cheval de Frise</button>
+        <button class="btn btn-info toggle-defense" id="team-moat">Moat</button>
+        <button class="btn btn-info toggle-defense" id="team-ramparts">Ramparts</button>
+        <button class="btn btn-info toggle-defense" id="team-drawbridge">Drawbridge</button>
+        <button class="btn btn-info toggle-defense" id="team-sally_port">Sally Port</button>
+        <button class="btn btn-info toggle-defense" id="team-rock_wall">Rock Wall</button>
+        <button class="btn btn-info toggle-defense" id="team-rough_terrain">Rought Terrain</button>
+        <button class="btn btn-info toggle-defense" id="team-low_bar">Low Bar</button>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-b">
-            <p class="row-header">Score B</p>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
+    <div class="loader">
+        <img class="loader-img" src="img/loader.gif">
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-c">
-            <p class="row-header">Score C</p>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-1">
-            <p class="row-header">Penalty 1</p>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-2">
-            <p class="row-header">Penalty 2</p>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-1">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-2">
-                <span class="dblclick">---</span>
-            </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-3">
-                <span class="dblclick">---</span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="loader">
-    <img class="loader-img" src="img/loader.gif">
-</div>
-<div class="back-button" style="display: none;">
-    <button type="button" class="btn btn-info btn-sm button-back"><span class="back-arrow">&#8617;</span>Back</button>
-</div>
-<div class="col-lg-4 col-sm-6 col-xs-6 explode" style="text-align: center;" id="">
-    <div class="row">
-        <div class="exploded-match col-sm-6 col-xs-6" style="border: 1px solid black;">
-            <p>Match Number</p>
-            <p class="exploded-match-text">5</p>
-        </div>
-        <div class="exploded-team col-sm-6 col-xs-6" style="border: 1px solid black;">
-            <p>Team Number</p>
-            <p class="exploded-team-num">4646</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="exploded-score-a col-sm-4 col-xs-4" style="border: 1px solid black;">
-            <p>Score A</p>
-            <p class="exploded-score-a-val var-carrier">15</p>
-        </div>
-        <div class="exploded-score-b col-sm-4 col-xs-4" style="border: 1px solid black;">
-            <p>Score B</p>
-            <p class="exploded-score-b-val var-carrier">15</p>
-        </div>
-        <div class="exploded-score-c col-sm-4 col-xs-4" style="border: 1px solid black;">
-            <p>Score C</p>
-            <p class="exploded-score-c-val var-carrier">15</p>
-        </div>
+    <div class="back-button" style="display: none;">
+        <button type="button" class="btn btn-info btn-sm button-back"><span class="back-arrow">&#8617;</span>Back</button>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
+{#<script src="js/vendor/bootstrap/bootstrap.min.css" type="text/javascript"></script>
+<script src="js/vendor/jquery-2.1.4.min.js" type="text/javascript"></script>#}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/jquery.tablesorter.widgets.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.6/js/widgets/widget-filter.min.js" type="text/javascript"></script>
