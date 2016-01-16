@@ -157,11 +157,12 @@ function doDBLClick(x) {
                                 function (x) {
                                     if (!x.runOnce) {
                                         $("button.toggle-defense").each(function () {
-                                             if (x["defences"][$(this).prop("id").split("-")[1]]) {
-                                                 $(this).alterClass("btn-*", "btn-success");
-                                             } else {
-                                                 $(this).alterClass("btn-*", "btn-danger");
-                                             }
+                                            var tf = x["defences"][$(this).prop("id").split("-")[1]];
+                                            if (tf == "true") {
+                                                $(this).alterClass("btn-*", "btn-success");
+                                            } else if (tf == "false") {
+                                                $(this).alterClass("btn-*", "btn-danger");
+                                            }
                                         });
                                     } else {
                                         $("button.toggle-defense").each(function () {
@@ -191,9 +192,22 @@ function doDBLClick(x) {
                         dart,
                         "POST",
                         "json",
-                        function (v) {
+                        function (x) {
                             $(".loader").fadeOut(500);
-                            console.log(v);
+                            if (!x.runOnce) {
+                                $("button.toggle-defense").each(function () {
+                                    var tf = x["defences"][$(this).prop("id").split("-")[1]];
+                                    if (tf == "true") {
+                                        $(this).alterClass("btn-*", "btn-success");
+                                    } else if (tf == "false") {
+                                        $(this).alterClass("btn-*", "btn-danger");
+                                    }
+                                });
+                            } else {
+                                $("button.toggle-defense").each(function () {
+                                    $(this).alterClass("btn-*", "btn-info");
+                                });
+                            }
                         },
                         function () {
                             $(".loader").fadeIn(500);
