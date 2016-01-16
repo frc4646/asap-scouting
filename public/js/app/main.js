@@ -131,7 +131,8 @@ function doExplodedSet(e, color, num) {
 }
 function doDBLClick(x) {
         $("div.team-num").click(function (e) {
-            console.log("clicked");
+            e.stopImmediatePropagation();
+            e.stopPropagation();
             var color = $(this).prop("id").split("-")[1],
                 num = $(this).prop("id").split("-")[2];
 
