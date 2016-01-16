@@ -26,6 +26,7 @@ class Team extends Eloquent
             "low_bar" => false,
         ],
         "images" => [],
+        "comments" => [],
         "runOnce" => true,
     ];
 }
