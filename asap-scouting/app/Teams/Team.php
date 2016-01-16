@@ -25,6 +25,7 @@ class Team extends Eloquent
             "rough_terrain" => false,
             "low_bar" => false,
         ],
+        "images" => [],
         "runOnce" => true,
     ];
 }
