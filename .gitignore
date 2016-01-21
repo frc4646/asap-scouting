@@ -18,5 +18,8 @@ jenkins-cli.jar
 # Local Config Files
 asap-scouting/config/*.json
 
+# Test Data
+public/img/*
+
 # Account Specific Service Account Details
 ASAP Scouting App PHP-722b21dfb35c.json
