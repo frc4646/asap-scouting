@@ -7,6 +7,14 @@
 # Composer Vendor Files
 vendor
 
+# Build Files
+tests
+generatedJUnitFiles
+build
+build.xml
+cache.properties
+jenkins-cli.jar
+
 # Local Config Files
 asap-scouting/config/*.json
 
