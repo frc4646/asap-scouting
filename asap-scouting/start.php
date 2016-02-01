@@ -34,7 +34,7 @@ use app\MiddleWare\CsrfMiddleWare;
 session_cache_limiter("public");
 session_start();
 
-define("INC_ROOT", dirname(__DIR__));
+require_once("defines.php");
 
 require_once(INC_ROOT . "/vendor/autoload.php");
 

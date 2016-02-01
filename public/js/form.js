@@ -37,13 +37,13 @@ function showPWDIndicator(id, visibility) {
 
 }
 $(document).ready(function () {
-    $("input[name="password"].metre").focusin(function (e) {
+    $("input[name=\"password\"].metre").focusin(function (e) {
         console.info("focusIn");
         e = e.target;
         showPWDIndicator(e.id, "show");
     });
 
-    $("input[name="password"].metre").focusout(function (e) {
+    $("input[name=\"password\"].metre").focusout(function (e) {
         console.info("focusOut");
         e = e.target;
         $("#" + e.id).popover("destroy");
@@ -58,7 +58,7 @@ $(document).ready(function () {
     }).focus(function (e) {
         showPWDIndicator(e.target.id, "show");
     });*/
-    $("input[name="password"].metre").keyup(function (e) {
+    $("input[name=\"password\"].metre").keyup(function (e) {
         e = e.target;
         console.log(zxcvbn(e.value));
 

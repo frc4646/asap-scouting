@@ -20,9 +20,9 @@ class API
             "track_redirects" => false,
         ],
         "headers" => [
-            "User-Agent" => "PHP GuzzleHttp/Curl (" /*. curl_version()["version_number"]*/ . "/" . /*curl_version()["host"] . */") Mozzila",
-            "Accept"     => "application/json",
-            "X-TBA-App-Id" => "frc4646:scouting-system:v01"
+            "User-Agent" => "PHP GuzzleHttp/Curl Mozzila",
+            "Accept" => "application/json",
+            "X-TBA-App-Id" => "frc4646:scouting-system:v01",
         ]
     ];
 

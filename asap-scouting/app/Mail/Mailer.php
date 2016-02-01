@@ -12,7 +12,7 @@
 
 namespace app\Mail;
 
-use PHPMailer
+use PHPMailer;
 
 class Mailer
 {

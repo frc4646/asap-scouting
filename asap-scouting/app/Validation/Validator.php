@@ -43,12 +43,12 @@ class Validator extends Violin
             ],
         ]);
 
-        $this->addRuleMessages([
+        /*$this->addRuleMessages([
             "alnumDashSpc" => "{field} must be alphanumeric with dashes underscores, and spaces permitted."
-        ]);
+        ]);*/
     }
 
-    public function validate_uniqueEmail($value, $input, $args)
+    public function validateUniqueEmail($value, $input, $args)
     {
         $user = $this->user->where("email", $value);
 
@@ -59,13 +59,13 @@ class Validator extends Violin
         return ! (bool) $user->count();
     }
 
-    public function validate_uniqueUsername($value, $input, $args)
+    public function validateUniqueUsername($value, $input, $args)
     {
         return ! (bool) $this->user->where("username", $value)->count();
     }
 
-    public function validate_alnumDashSpc($value, $input, $args)
+    /*public function validate_alnumDashSpc($value, $input, $args)
     {
         return (bool) preg_match("/^[\s\pL\pM\pN_-]+$/u", $value);
-    }
+    }*/
 }

@@ -15,6 +15,12 @@ $app->get("/", function () use ($app) {
 })->name("home");
 
 $app->get("/app", function () use ($app) {
+    $app->response->headers->set("Content-Type", "application/json");
+    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+    $app->response->headers->set("Pragma", "no-cache");
+    $app->expires("-1 week");
+    $app->lastModified(strtotime("-1 week"));
     $listFeed = $app->GoogleAPI->getSheet()->getListFeed();
     $table = [];
 
@@ -28,10 +34,16 @@ $app->get("/app", function () use ($app) {
 })->name("app.datatable");
 
 $app->post("/app/get", function () use ($app) {
+    $app->response->headers->set("Content-Type", "application/json");
+    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+    $app->response->headers->set("Pragma", "no-cache");
+    $app->expires("-1 week");
+    $app->lastModified(strtotime("-1 week"));
     $listEntries = $app->GoogleAPI->getSheet("Quals")->getListFeed()->getEntries();
 
     $v = $app->validation;
-    $data_id = $app->request->post()["data_id"]
+    $data_id = $app->request->post()["data_id"];
 
     $v->validate([
         "id" => [$data_id, "required|int"]
@@ -50,20 +62,33 @@ $app->post("/app/get", function () use ($app) {
 })->name("app.data.get");
 
 $app->post("/app/set", function () use ($app) {
+    $app->response->headers->set("Content-Type", "application/json");
+    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+    $app->response->headers->set("Pragma", "no-cache");
+    $app->expires("-1 week");
+    $app->lastModified(strtotime("-1 week"));
     $v = $app->validation;
 
     $rowID = $app->request->post()["rowID"];
     $column = $app->request->post()["column"];
     $newValue = $app->request->post()["newValue"];
-
+    
+    if (!isset($newValue)) {
+        return $app->response->write(json_encode([
+            "success" => false,
+            "errors" => "newValue is required",
+        ]));
+    }
+    
     $v->validate([
-       "newValue" => [$newValue, "required|int"],
+       "newValue" => [$newValue, "int"],
        "rowID" => [$rowID, "required|int"],
        "column" => [$column, "required|alnum"],
     ]);
 
     if ($v->passes()) {
-        $set = $app->GoogleAPI->setValue($rowID, $column, $newValue)
+        $set = $app->GoogleAPI->setValue($rowID, $column, $newValue);
         if ($set) {
             echo json_encode([
                 "success" => true,
@@ -94,3 +119,9 @@ $app->post("/app/set", function () use ($app) {
         ]);
     }
 })->name("app.data.set");
+
+$app->get("/dev", function () use ($app) {
+   $app->render("dev.twig", [
+       "rebase" => "/js/dev/built/main.js",
+   ]);
+});

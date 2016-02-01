@@ -33,7 +33,9 @@ class BeforeMiddleWare extends Middleware
     public function run()
     {
         if (isset($_SESSION[$this->app->config->get("auth.session")])) {
-            $this->app->auth = $this->app->user->where("id", $_SESSION[$this->app->config->get("auth.session")])->first();
+            $this->app->auth = $this->app->user
+                                         ->where("id", $_SESSION[$this->app->config->get("auth.session")])
+                                            ->first();
         }
 
         if ($this->app->config->get("app.hash.cost") < 10) {

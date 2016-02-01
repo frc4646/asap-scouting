@@ -8,9 +8,11 @@
 vendor
 
 # Build Files
+.metadata
 tests
 generatedJUnitFiles
 build
+build.sh
 build.xml
 cache.properties
 jenkins-cli.jar
@@ -20,6 +22,10 @@ asap-scouting/config/*.json
 
 # Test Data
 public/img/*
+
+# Dev Files
+newjs/
+public/dev
 
 # Account Specific Service Account Details
 ASAP Scouting App PHP-722b21dfb35c.json

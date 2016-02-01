@@ -32,11 +32,19 @@ class Media
 
     public function getImages()
     {
-        return (array) [$this, (string) $this->client->get("team/frc{$this->team}/{$this->year}/media", $this->api->headers)->getBody()];
+        return (array) [
+                        $this,
+                        $this->client
+                          ->get(
+                              "team/frc{$this->team}/{$this->year}/media",
+                              $this->api->headers
+                          )->getBody()->getContents()
+                       ];
     }
 
     public function getYoutube()
     {
+        //die(var_dump($this->client->get("team/frc{$this->team}/{$this->year}/media", $this->api->headers)->getBody()->getContents()));
         return new Images\Youtube($this->getImages()[1]);
     }
 }

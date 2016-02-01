@@ -27,6 +27,7 @@ class Team extends Eloquent
         ],
         "images" => [],
         "comments" => [],
+        "bot_type" => "offense",
         "runOnce" => true,
     ];
 }
