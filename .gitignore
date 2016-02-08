@@ -16,6 +16,7 @@ build.sh
 build.xml
 cache.properties
 jenkins-cli.jar
+dist
 
 # Local Config Files
 asap-scouting/config/*.json

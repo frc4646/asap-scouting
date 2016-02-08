@@ -1,3 +1,13 @@
+/**
+ * FRC Scouting Application (Written for FRC Team 4646 ASAP)
+ *
+ * @author      Alexander Young <meun5@team4646.org>
+ * @copyright   2016 Alexander Young
+ * @link        https://github.com/meun5/asap-scouting
+ * @license     https://github.com/meun5/asap-scouting/blob/master/LICENSE
+ * @version     v1-beta
+ */
+
 if("undefined"==typeof jQuery)throw new Error("form.js requires jQuery");
 +function(a){"use strict";var b=a.fn.jquery.split(" ")[0].split(".");if(b[0]<2&&b[1]<9||1==b[0]&&9==b[1]&&b[2]<1)throw new Error("form.js requires jQuery version 1.9.1 or higher")}(jQuery)
 
