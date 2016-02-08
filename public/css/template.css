@@ -94,6 +94,10 @@ div.explode {
     display: none;
 }
 
+ul#team-comments {
+    padding-left: 15px;
+}
+
 /*-------------------------
     Simple reset
 --------------------------*/
@@ -262,13 +266,25 @@ button.match-buttons {
 .btn-sc {
     margin-top: 5%;
 }
-/*.row {
-    display: table;
-    height: 100%;
-    position: absolute;
-    width: 100%;
+.col-lg-3.column {
+    width: 20%;
 }
-.team-red, .team-blue {
-    display: table-cell; 
-    vertical-align: middle;
-}*/
+.col-lg-5.column, .col-lg-5.score-container {
+    width: 40%;
+}
+.col-lg-10.column {
+    width: 80%;
+}
+.team-img {
+    position: relative;
+    display: inline-block;
+}
+.team-img:hover .img-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+}

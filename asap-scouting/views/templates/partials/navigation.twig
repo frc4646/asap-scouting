@@ -11,16 +11,16 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Pre Scouting</a></li>
-        <li><a href="#">Pit Scouting</a></li>
-        <li><a href="#">Alliance Selections</a></li>
-        <li><a href="#">Event Data</a></li>
+        <li class="active"><a href="{{ urlFor('home') }}">Home</a></li>
+        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Pre Scouting</a></li>
+        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Pit Scouting</a></li>
+        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Alliance Selections</a></li>
+        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Event Data</a></li>
       </ul>
       {% if not isMobile %}
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{ urlFor('auth.login') }}">Login</a></li>
-          <li><a href="{{ urlFor('auth.register') }}">Register</a></li>
+          <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Login</a></li>
+          <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Register</a></li>
       </ul>
       {% endif %}
     </div><!--/.nav-collapse -->

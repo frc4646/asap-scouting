@@ -21,42 +21,67 @@
         <p class="lead">This page is starting page for the ASAP Scouting App</p>
     </div>
     <div class="col-sm-12 col-lg-12 col-xs-12 container-hold" style="display: none;" id="replaceDiv"></div>
-    <div class="col-lg-1 nodisplay container-hold" id="match-buttons">
-        <div class="form-group">
-            <button id="blue-breach" type="button" class="btn btn-info btn-sm match-buttons">Defenses Breached</button>
-            <button id="blue-etc" type="button" class="btn btn-info btn-sm match-buttons">Etc. Breached</button>
+    {% if not isMobile %}
+    <div class="col-lg-3 nodisplay container-hold" id="match-buttons">
+        <div class="form-group col-lg-6">
+            <h6>Auto</h6>
+            <button id="blue-auto-reach" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="2">Defense Reached</button>
+            <button id="blue-auto-crs-und" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="10">Crossed Undamaged</button>
+            <button id="blue-auto-low" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="5">Boulder Low</button>
+            <button id="blue-auto-high" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="10">Boulder High</button>
         </div>
-        <div class="form-group">
-            <button id="red-breach" type="button" class="btn btn-danger btn-sm match-buttons">Defenses Breached</button>
-            <button id="red-etc" type="button" class="btn btn-danger btn-sm match-buttons">Etc. Breached</button>
+        <div class="form-group col-lg-6">
+            <h6>TeleOP</h6>
+            <button id="blue-tele-scal" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="15">Scale Tower</button>
+            <button id="blue-tele-chal" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="5">Challenge Tower</button>
+            <button id="blue-tele-low" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="2">Boulder Low</button>
+            <button id="blue-tele-high" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="5">Boulder High</button>
         </div>
+        <div class="form-group col-lg-6">
+            <h6>Auto</h6>
+            <button id="red-auto-reach" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="2">Defense Reached</button>
+            <button id="red-auto-crs-und" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="10">Crossed Undamaged</button>
+            <button id="red-auto-low" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="5">Boulder Low</button>
+            <button id="red-auto-high" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="10">Boulder High</button>
+            
+        </div>
+        <div class="form-group col-lg-6">
+            <h6>TeleOP</h6>
+            <button id="red-tele-scal" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="15">Scale Tower</button>
+            <button id="red-tele-chal" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="5">Challenge Tower</button>
+            <button id="red-tele-low" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="2">Boulder Low</button>
+            <button id="red-tele-high" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="5">Boulder High</button>
+        </div>
+        <button id="blue-tele-foul" type="button" class="btn btn-info btn-sm match-buttons pull-left" aria-point-val="5">Foul</button>
         <button type="button" id="reshow-table" class="btn btn-sm btn-default">Show Matchs</button>
+        <button id="red-tele-foul" type="button" class="btn btn-danger btn-sm match-buttons pull-right" aria-point-val="5">Foul</button>
     </div>
+    {% endif %}
     <div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="manager" data-set-action="{{ urlFor('app.data.set') }}" data-match-id="false">
         <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-id">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="match-id">
                 <p class="row-header">Match</p>
             </div>
-            <div class="col-lg-8 col-sm-10 col-xs-10 column" id="match-num">
+            <div class="col-lg-10 col-sm-10 col-xs-10 column" id="match-num">
                 <span>Select Match on the left</span>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-scores">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="match-scores">
                 <p class="row-header">Scores</p>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-red">
-                <span>Red</span>
+            <div class="col-lg-5 col-sm-5 col-xs-5 column" id="match-red">
+                <span aria-extra-score="0">Red</span>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 column" id="match-blue">
-                <span>Blue</span>
+            <div class="col-lg-5 col-sm-5 col-xs-5 column" id="match-blue">
+                <span aria-extra-score="0">Blue</span>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="match-teams">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="match-teams">
                 <p class="row-header">Teams</p>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-red column team-num" id="team-red-1">
                     <span>4646</span>
                 </div>
@@ -67,7 +92,7 @@
                     <span>1114</span>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column team-num" id="team-blue-1">
                     <span>4646</span>
                 </div>
@@ -80,10 +105,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-a">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="score-a">
                 <p class="row-header">Score A</p>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-a-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -100,7 +125,7 @@
                     <button class="btn btn-info btn-sm btn-dec btn-sc nodisplay">-</button>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-a-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -119,10 +144,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-b">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="score-b">
                 <p class="row-header">Score B</p>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-b-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -139,7 +164,7 @@
                     <button class="btn btn-info btn-sm btn-dec btn-sc nodisplay">-</button>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-b-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -158,10 +183,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="score-c">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="score-c">
                 <p class="row-header">Score C</p>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="score-red-c-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -178,7 +203,7 @@
                     <button class="btn btn-info btn-sm btn-dec btn-sc nodisplay">-</button>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="score-blue-c-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -196,11 +221,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-1">
-                <p class="row-header">Penalty 1</p>
+        <!--<div class="row">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="penalty-1">
+                <p class="row-header">Fouls</p>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-a-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -217,7 +242,7 @@
                     <button class="btn btn-info btn-sm btn-dec btn-sc nodisplay">-</button>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-a-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -236,10 +261,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-2 col-xs-2 column" id="penalty-2">
+            <div class="col-lg-3 col-sm-2 col-xs-2 column" id="penalty-2">
                 <p class="row-header">Penalty 2</p>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-red column" id="penalty-red-b-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -256,7 +281,7 @@
                     <button class="btn btn-info btn-sm btn-dec btn-sc nodisplay">-</button>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-5 col-xs-5 score-container">
+            <div class="col-lg-5 col-sm-5 col-xs-5 score-container">
                 <div class="col-lg-4 col-sm-4 col-xs-4 team-blue column" id="penalty-blue-b-1">
                     <button class="btn btn-info btn-sm btn-inc btn-sc nodisplay">+</button>
                     <span class="dblclick">---</span>
@@ -273,83 +298,69 @@
                     <button class="btn btn-info btn-sm btn-dec btn-sc nodisplay">-</button>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
-    <div class="col-lg-4 col-sm-6 col-xs-6 explode" style="text-align: center;" id="">
-        <div class="row">
-            <div class="exploded-match col-sm-6 col-xs-6" style="border: 1px solid black;">
-                <p>Match Number</p>
-                <p class="exploded-match-text">5</p>
-            </div>
-            <div class="exploded-team col-sm-6 col-xs-6" style="border: 1px solid black;">
-                <p>Team Number</p>
-                <p class="exploded-team-num">4646</p>
-            </div>
+    {% if isMobile %}
+    <div class="col-sm-12 col-md-12 col-xs-12 nodisplay container-hold" id="match-buttons">
+        <div class="form-group col-sm-2 col-md-2 col-xs-2">
+            <button id="blue-breach" type="button" class="btn btn-info btn-sm match-buttons">Defenses Breached</button>
+            <button id="blue-etc" type="button" class="btn btn-info btn-sm match-buttons">Etc. Breached</button>
         </div>
-        <div class="row">
-            <div class="exploded-score-a col-sm-4 col-xs-4" style="border: 1px solid black;">
-                <p>Score A</p>
-                <p class="exploded-score-a-val var-carrier">15</p>
-            </div>
-            <div class="exploded-score-b col-sm-4 col-xs-4" style="border: 1px solid black;">
-                <p>Score B</p>
-                <p class="exploded-score-b-val var-carrier">15</p>
-            </div>
-            <div class="exploded-score-c col-sm-4 col-xs-4" style="border: 1px solid black;">
-                <p>Score C</p>
-                <p class="exploded-score-c-val var-carrier">15</p>
-            </div>
+        <div class="form-group col-sm-2 col-md-2 col-xs-2">
+            <button id="red-breach" type="button" class="btn btn-danger btn-sm match-buttons">Defenses Breached</button>
+            <button id="red-etc" type="button" class="btn btn-danger btn-sm match-buttons">Etc. Breached</button>
         </div>
+        <button type="button" id="reshow-table" class="btn btn-sm btn-default">Show Matchs</button>
     </div>
+    {% endif %}
     <div class="bottom-values">
         <div class="team-details col-sm-12 col-lg-6 col-xs-12 pull-right" id="team-options" data-set-url="{{ urlFor('team.set') }}" data-get-url="{{ urlFor('team.get') }}" data-call-url="{{ urlFor('team.create') }}">
-        <div class="team-row">
-            <span class="team-id">Team 4646</span>
+            <div class="team-row">
+                <span class="team-id">Team 4646</span>
+            </div>
+            <div id="defense-types">
+                <button class="btn btn-info toggle-defense button-pad-bottom" id="team-portcullis">Porticulls</button>
+                <button class="btn btn-info toggle-defense button-pad-bottom" id="team-cheval_de_frise">Cheval de Frise</button>
+                <button class="btn btn-info toggle-defense button-pad-bottom" id="team-moat">Moat</button>
+                <button class="btn btn-info toggle-defense button-pad-bottom" id="team-ramparts">Ramparts</button>
+                <button class="btn btn-info toggle-defense button-pad-bottom" id="team-drawbridge">Drawbridge</button>
+                <button class="btn btn-info toggle-defense" id="team-sally_port">Sally Port</button>
+                <button class="btn btn-info toggle-defense" id="team-rock_wall">Rock Wall</button>
+                <button class="btn btn-info toggle-defense" id="team-rough_terrain">Rought Terrain</button>
+                <button class="btn btn-info toggle-defense" id="team-low_bar">Low Bar</button>
+            </div>
+            <div class="team-comments">
+                <h3>Comments</h3>
+                <ul id="team-comments">
+                </ul>
+                <form role="form" action="{{ urlFor('submit.comment') }}" method="post" id="comment-post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter comment" name="comment">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info" type="submit">Submit</button>
+                    </div>
+                    <input type="hidden" hidden="hidden" value="{{ csrf_token }}" name="{{ csrf_key }}">
+                </form>
+            </div>
+            <div id="team-photo" class="col-lg-12">
+                <button type="button" class="btn btn-info btn-sm" id="view-photo">View Photos</button>
+                <button type="button" class="btn btn-info btn-sm" id="hide-photo">Hide Photos</button>
+                <button type="button" class="btn btn-info btn-sm" id="photo-button">Submit Photos</button>
+            </div>
         </div>
-        <div id="defense-types">
-            <button class="btn btn-info toggle-defense" id="team-portcullis">Porticulls</button>
-            <button class="btn btn-info toggle-defense" id="team-cheval_de_frise">Cheval de Frise</button>
-            <button class="btn btn-info toggle-defense" id="team-moat">Moat</button>
-            <button class="btn btn-info toggle-defense" id="team-ramparts">Ramparts</button>
-            <button class="btn btn-info toggle-defense" id="team-drawbridge">Drawbridge</button>
-            <button class="btn btn-info toggle-defense" id="team-sally_port">Sally Port</button>
-            <button class="btn btn-info toggle-defense" id="team-rock_wall">Rock Wall</button>
-            <button class="btn btn-info toggle-defense" id="team-rough_terrain">Rought Terrain</button>
-            <button class="btn btn-info toggle-defense" id="team-low_bar">Low Bar</button>
+        <div class="col-sm-12 col-lg-6 col-xs-12 pull-left nodisplay" id="photo-gallery">
+            <div class="col-lg-6" id="view-team-photos" data-run="0">
+                <h3>Team Photos</h3>
+                <!--<span class="glyphicon glyphicon-remove nodisplay img-overlay"></span>-->
+            </div>
+            <div class="col-lg-6" id="view-blue-photos">
+                <h3>Blue Alliance Photos</h3>
+            </div>
         </div>
-        <div class="team-comments">
-            <h3>Comments</h3>
-            <ul id="team-comments">
-            </ul>
-            <form role="form" action="{{ urlFor('submit.comment') }}" method="post" id="comment-post">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Enter comment" name="comment">
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-info" type="submit">Submit</button>
-                </div>
-                <input type="hidden" hidden="hidden" value="{{ csrf_token }}" name="{{ csrf_key }}">
-            </form>
+        <div class="loader">
+            <img class="loader-img" src="img/loader.gif">
         </div>
-        <div id="team-photo" class="col-lg-12">
-            <button type="button" class="btn btn-info btn-sm" id="view-photo">View Photos</button>
-            <button type="button" class="btn btn-info btn-sm" id="photo-button">Submit Photos</button>
-        </div>
-    </div>
-    <div class="col-sm-12 col-lg-6 col-xs-12 pull-left" id="photo-gallery" style="display: none;">
-        <div class="col-lg-6" id="view-team-photos">
-            <h3>Team Photos</h3>
-        </div>
-        <div class="col-lg-6" id="view-blue-photos">
-            <h3>Blue Alliance Photos</h3>
-        </div>
-    </div>
-    <div class="loader">
-        <img class="loader-img" src="img/loader.gif">
-    </div>
-    <div class="back-button" style="display: none;">
-        <button type="button" class="btn btn-info btn-sm button-back"><span class="back-arrow">&#8617;</span>Back</button>
-    </div>
     </div>
 </div>
 <div class="modal fade" role="dialog">

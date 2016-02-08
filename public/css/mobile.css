@@ -1,4 +1,4 @@
-#body-container {
+#body-container, #body-holder {
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -54,6 +54,7 @@ div.col-sm-2, div.col-xs-2 {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    z-index: 1000;
 }
 .back-arrow {
     font-size: 1.25em;
@@ -69,4 +70,8 @@ div.col-sm-2, div.col-xs-2 {
 }
 .row {
     height: 100%;
+    margin: auto 0px;
+}
+.button-pad-bottom {
+    margin-bottom: 5px;
 }
