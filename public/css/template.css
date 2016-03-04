@@ -285,16 +285,18 @@ button.match-buttons {
 .col-lg-10.column {
     width: 80%;
 }
-.team-img {
-    position: relative;
-    display: inline-block;
+.nopadri {
+    padding-right: 0px;
 }
-.team-img:hover .img-overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,.5);
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: inline-block;
+.nopadlt {
+    padding-left: 0px;
+}
+.norpadtop {
+    margin-top: 10px;
+}
+.auto-width {
+    width: auto;
+}
+.nomar {
+    margin: 0px;
 }

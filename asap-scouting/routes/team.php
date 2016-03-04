@@ -11,6 +11,7 @@
  */
 
 use app\Teams\Team;
+use app\Helpers\GoogleAPI;
 
 $app->group("/teams", function () use ($app) {
     $app->get("/:team/create", function ($team) use ($app) {
@@ -31,6 +32,7 @@ $app->group("/teams", function () use ($app) {
                 $newTeam = $app->teams->create([
                     "team_id" => $team,
                     "details" => json_encode(Team::$defaults),
+                    "nonce" => base64_encode($app->randomlib->generateString(32)),
                 ]);
 
                 echo json_encode(["success" => true, "result" => $newTeam]);
@@ -59,9 +61,9 @@ $app->group("/teams", function () use ($app) {
     
         if ($v->passes()) {
             if ($app->teams->where("team_id", $team)->exists()) {
-                echo json_encode((array) json_decode($app->teams->where("team_id", $team)->first()->details));
-                //echo json_encode($app->reponse->finalize());
-                return;
+                $details = json_decode($app->teams->where("team_id", $team)->first()->details, true);
+                $details["nonce"] = $app->teams->where("team_id", $team)->first()->nonce;
+                return $app->response->write(json_encode($details));
             } else {
                 echo json_encode(["success" => false, "errorMessage" => "Team with id $team does not exist!"]);
                 return;
@@ -72,12 +74,6 @@ $app->group("/teams", function () use ($app) {
     })->name("team.get");
 
     $app->post("/:team/set/:item", function ($team, $item) use ($app) {
-        $app->response->headers->set("Content-Type", "application/json");
-        header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
-        $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
-        $app->response->headers->set("Pragma", "no-cache");
-        $app->expires("-1 week");
-        $app->lastModified(strtotime("-1 week"));
         $v = $app->validation;
         $post = $app->request->post();
 
@@ -96,7 +92,7 @@ $app->group("/teams", function () use ($app) {
                 $currDetails["runOnce"] = false;
 
                 if (isset($currDetails[$item])) {
-                    $currDetails[$item][$post["item"]] = $post["val"];
+                    $currDetails[$item][$post["item"]] = htmlentities($post["val"], ENT_QUOTES | ENT_HTML5 | ENT_SUBSTITUTE, "UTF-8");
 
                     $curr->update([
                         "details" => json_encode($currDetails),
@@ -140,5 +136,121 @@ $app->group("/teams", function () use ($app) {
             return $app->response->write(json_encode($array));
         }
         return $app->response->write(json_encode($v->errors()));
-    });
+    })->name("team.get.chphotos");
+
+    $app->get("/:team/remove", function ($team) use ($app) {
+        $app->response->headers->set("Content-Type", "application/json");
+        header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+        $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+        $app->response->headers->set("Pragma", "no-cache");
+        $app->expires("-1 week");
+        $app->lastModified(strtotime("-1 week"));
+        $v = $app->validation;
+        
+        $v->validate([
+            "team" => [$team, "required|int"],
+        ]);
+
+        if ($v->passes()) {
+            $teaminf = $app->teams->where("team_id", "=", $team)->first();
+            $teaminf->delete();
+            return $app->response->write(json_encode(["success" => true, "orgin" => $teaminf]));
+        }
+        return $app->response->write(json_encode(["errors" => $v->errors()->all()]));
+    })->name("team.remove");
+
+    $app->get("/:team/matches", function ($team) use ($app) {
+        $app->response->headers->set("Content-Type", "application/json");
+        header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+        $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+        $app->response->headers->set("Pragma", "no-cache");
+        $app->expires("-1 week");
+        $app->lastModified(strtotime("-1 week"));
+        $v = $app->validation;
+        $listEntries = $app->GoogleAPI->getSheet("Quals")->getListFeed()->getEntries();
+        $list = [];
+        $out = [];
+        $scores = [
+            "scores" => [0],
+            "min" => 0,
+            "max" => 0,
+        ];
+        
+        $v->validate([
+            "team" => [$team, "required|int"],
+        ]);
+
+        if ($v->passes()) {
+            foreach ($listEntries as $key) {
+                $list[] = $key->getValues();
+            }
+
+            foreach ($list as $match) {
+                $allowed = ["red1", "red2", "red3", "blue1", "blue2", "blue3"];
+                $searchString = array_filter(
+                    $match,
+                    function ($key) use ($allowed) {
+                        return in_array($key, $allowed);
+                    },
+                    ARRAY_FILTER_USE_KEY
+                );
+                $search = array_search($team, $searchString);
+                if ($search) {
+                    $out[] = [$match, $search];
+                    $val = 0;
+
+                    for ($i = 0; $i <= 2; $i++) { 
+                        $char = chr($i + 97);
+                        $val += $match[$search . "score" . $char];
+                    }
+
+                    $scores["scores"][] = $val;
+                }
+            }
+
+            $scores["min"] = min($scores["scores"]);
+            $scores["max"] = max($scores["scores"]);
+            $scores["avg"] = array_sum($scores["scores"]) / count($scores["scores"]);
+
+            return $app->response->write(json_encode(["matches" => $out, "scores" => $scores]));
+        }
+        return $app->response->write(json_encode($v->errors()->all()));
+    })->name("team.matches");
+
+    $app->get("/:team/pre", function ($team) use ($app) {
+        $app->response->headers->set("Content-Type", "application/json");
+        header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+        $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+        $app->response->headers->set("Pragma", "no-cache");
+        $app->expires("-1 week");
+        $app->lastModified(strtotime("-1 week"));
+        $listEntries = $app->GoogleAPI->getSheet("PreScouting")->getListFeed()->getEntries();
+        $v = $app->validation;
+
+        $v->validate([
+            "team_id" => [$team, "required|int|max(5)"],
+        ]);
+
+        if ($v->passes()) {
+            $pointer = false;
+            $i = 0;
+            $out = [];
+            foreach ($listEntries as $entry) {
+                $out[] = $entry->getValues();
+                if ($entry->getValues()["teamnumbers"] == intval($team)) {
+                    $pointer = $i;
+                    break;
+                }
+                $i++;
+            }
+            /*if ($out[0]["teamnumbers"] == intval($team)) {
+                return $app->response->write(json_encode("what"));
+            }*/
+            if ($pointer !== false) {
+                return $app->response->write(json_encode($listEntries[$pointer]->getValues()));
+            }
+            return $app->response->write(json_encode([false, $out, $team]));
+        }
+        return $app->response->write(json_encode(["error" => $v->errors()->all()]));
+    })->name("team.pre");
 });

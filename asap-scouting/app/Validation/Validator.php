@@ -43,9 +43,9 @@ class Validator extends Violin
             ],
         ]);
 
-        /*$this->addRuleMessages([
-            "alnumDashSpc" => "{field} must be alphanumeric with dashes underscores, and spaces permitted."
-        ]);*/
+        $this->addRuleMessages([
+            "alnumDashSpc" => "{field} must be alphanumeric with dashes, underscores, and spaces permitted."
+        ]);
     }
 
     public function validateUniqueEmail($value, $input, $args)
@@ -64,8 +64,8 @@ class Validator extends Violin
         return ! (bool) $this->user->where("username", $value)->count();
     }
 
-    /*public function validate_alnumDashSpc($value, $input, $args)
+    public function validateAlnumDashSpc($value, $input, $args)
     {
-        return (bool) preg_match("/^[\s\pL\pM\pN_-]+$/u", $value);
-    }*/
+        return (bool) preg_match('/^[a-zA-Z ]+$/u', $value); 
+    }
 }

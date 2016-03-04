@@ -1,0 +1,16 @@
+.row {
+	margin: 0px;
+}
+li.select {
+	padding-bottom: 3px;
+}
+button.toggle-defense[disabled] {
+	cursor: default;
+	opacity: 1;
+}
+h4.border {
+	border-bottom: 1px solid gray;
+}
+#min_score, #max_score, #avg_score {
+	font-weight: 600;
+}

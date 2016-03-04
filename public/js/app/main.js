@@ -308,14 +308,14 @@ function doDBLClick(x) {
                                     $("button.toggle-defense").each(function () {
                                         var tf = x["defences"][$(this).prop("id").split("-")[1]];
                                         if (tf == "true") {
-                                            $(this).alterClass("btn-*", "btn-success");
+                                            $(this).alterClass("btn-info btn-success btn-danger", "btn-success");
                                         } else if (tf == "false") {
-                                            $(this).alterClass("btn-*", "btn-danger");
+                                            $(this).alterClass("btn-info btn-success btn-danger", "btn-danger");
                                         }
                                     });
                                 } else {
                                     $("button.toggle-defense").each(function () {
-                                        $(this).alterClass("btn-*", "btn-info");
+                                        $(this).alterClass("btn-info btn-success btn-danger", "btn-info");
                                     });
                                 }
                                 if (x.hasOwnProperty("comments")) {
@@ -333,13 +333,13 @@ function doDBLClick(x) {
                 dart["item"] = $(this).prop("id").split("-")[1]
                 if ($(this).hasClass("btn-info")) {
                     dart["val"] = true
-                    $(this).alterClass("btn-*", "btn-success");
+                    $(this).alterClass("btn-info btn-success btn-danger", "btn-success");
                 } else if ($(this).hasClass("btn-success")) {
                     dart["val"] = false
-                    $(this).alterClass("btn-*", "btn-danger");
+                    $(this).alterClass("btn-info btn-success btn-danger", "btn-danger");
                 } else if ($(this).hasClass("btn-danger")) {
                     dart["val"] = true
-                    $(this).alterClass("btn-*", "btn-success");
+                    $(this).alterClass("btn-info btn-success btn-danger", "btn-success");
                 }
                 doPost(
                     $("div.team-details").attr("data-set-url").split(":team").join(number).split(":item").join("defences"),
@@ -352,14 +352,14 @@ function doDBLClick(x) {
                             $("button.toggle-defense").each(function () {
                                 var tf = x["defences"][$(this).prop("id").split("-")[1]];
                                 if (tf == "true") {
-                                    $(this).alterClass("btn-*", "btn-success");
+                                    $(this).alterClass("btn-info btn-success btn-danger", "btn-success");
                                 } else if (tf == "false") {
-                                    $(this).alterClass("btn-*", "btn-danger");
+                                    $(this).alterClass("btn-info btn-success btn-danger", "btn-danger");
                                 }
                             });
                         } else {
                             $("button.toggle-defense").each(function () {
-                                $(this).alterClass("btn-*", "btn-info");
+                                $(this).alterClass("btn-info btn-success btn-danger", "btn-info");
                             });
                         }
                     },
@@ -368,15 +368,34 @@ function doDBLClick(x) {
                     }
                 );
             });
+            $("select[name='hprank']").change(function () {
+                //console.log($(this).find("option:selected").val());
+                var data = {};
+
+                data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+                data["team_id"] = number;
+                data["hprank"] = $(this).find("option:selected").val();
+
+                doPost(
+                    $(this).parents("form").attr("action"),
+                    data,
+                    "POST",
+                    "json"
+                );
+            });
             $("form#comment-post").submit(function (e) {
                 e.preventDefault();
+
+                if ($(this).find("textarea[name=\"comment\"]").val() == "") {
+                    return false;
+                }
 
                 var data = {},
                     self = $(this);
 
                 data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
                 data["team_id"] = number;
-                data["comment"] = self.find("input[name=\"comment\"]").val();
+                data["comment"] = self.find("textarea[name=\"comment\"]").val();
 
                 doPost(
                     $(this).attr("action"),
@@ -385,14 +404,13 @@ function doDBLClick(x) {
                     "json",
                     function (e) {
                         $(".loader").fadeOut(500);
-                        console.log(e);
+                        //console.log(e);
+                        $("ul#team-comments > li").remove();
                         $.each(e.comments, function (x) {
-                            if (!$("ul#team-comments").find("li#")) {
-                                $("div.team-comments > ul#team-comments").append("<li id=\"" +  + "\">" + e.comments[x] + "</li>");
-                            }
-                            console.log(x);
+                            $("div.team-comments > ul#team-comments").append("<li id=\"" + x + "\">" + e.comments[x] + "</li>");
+                            //console.log(x);
                         });
-                        self.find("input[name=\"comment\"]").val("");
+                        self.find("textarea[name=\"comment\"]").val("");
                     },
                     function () {
                         $(".loader").fadeIn(500);
@@ -402,6 +420,35 @@ function doDBLClick(x) {
 
             $("button#view-photo").click(function () {
                 $("div#photo-gallery").removeClass("nodisplay");
+                var y = new Date();
+                doPost(
+                    $("div#photo-gallery").attr("data-blue-photos").split(":team").join(number).split(":year").join(y.getFullYear()),
+                    null,
+                    "GET",
+                    "json",
+                    function (e) {
+                        if (!$.isEmptyObject(e.base_uri)) {
+                            if ($("div#view-blue-photos").children("h4#image-not-found").length > 0) {
+                                $("div#view-blue-photos").children("h4#image-not-found").remove();
+                                return;
+                            }
+                            if ("cdphotothread" in e) {
+                                $.each(e.cdphotothread, function (v) {
+                                    var name = e.cdphotothread[v];
+                                    if ($("div#view-blue-photos").children("img[src=\"" + e.base_uri.cdphotothread + name + "\"]").lenght <= 0) {
+                                        $("div#view-blue-photos").append("<img class=\"img-responsive\" src=\"" + name + "\"/>");
+                                    }
+                                });
+                                return;
+                            } else {
+                                $("div#view-blue-photos").children("h4#image-not-found").remove();
+                                return;
+                            }
+                        } else if ($("div#view-blue-photos").children("h4#image-not-found").length <= 0) {
+                            $("div#view-blue-photos").append("<h4 id=\"image-not-found\">No Images Found</h4>");
+                        }
+                    }
+                );
                 if ($("div#view-team-photos").attr("data-run") == 1) {
                     doPost(
                         $("div.team-details").attr("data-get-url").split(":team").join(number),
@@ -417,7 +464,7 @@ function doDBLClick(x) {
                                 $("img.team-img").remove();
                                 $.each(x.images, function (i) {
                                     var name = x.images[i].split(".")[0].split("/").last();
-                                    if ($("img[data-photo-id=\"" + name + "\"]").length == 0) {
+                                    if ($("img[data-photo-id=\"" + name + "\"].team-img").length == 0) {
                                         $.ajax({
                                             url: x.images[i],
                                             type: "HEAD",
@@ -550,13 +597,14 @@ function doDBLClick(x) {
             data["newValue"] = $(this).val() || 0;
             data["column"] = $is.prop("id").split("-")[1] + $is.prop("id").split("-")[3] + $is.prop("id").split("-")[0] + $is.prop("id").split("-")[2];
             data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
-            calculateTopScore($(this).parents("div").prop("id").split("-")[1])
+            calculateTopScore($is.prop("id").split("-")[1]);
             doPost($("div#manager").attr("data-set-action"), data, "POST", "json", options.callback, options.beforeSend);
         });
     });
 }
 
-function clickHandler (e, doOptions = false) {
+function clickHandler (e, doOptions) {
+    doOptions = doOptions || false;
     if (!doOptions) {
         var row = e.currentTarget.getAttribute("data-row-number");
     } else {
@@ -604,7 +652,10 @@ function clickHandler (e, doOptions = false) {
                                     }
                                 });
                                 if (detectMobile()) {
-                                    $("div#manager").trigger("transitionend");
+                                    $("div#manager").trigger("transitionend").addClass("nodisplay");
+                                    $("div.bottom-values").addClass("nodisplay");
+                                    $("nav.navbar").removeClass("nav-close");
+                                    $("body#body-frame").removeClass("nav-body-close");
                                 }
                                 if (!detectMobile()) {
                                     $("#match-table").tablesorter({
@@ -644,6 +695,8 @@ function doClick() {
         $("div#replaceDiv").alterClass("col-lg-12", "col-lg-6").on("transitionend", function () {
             $("div#manager").fadeIn(500);
         });
+        $("div#manager").removeClass("nodisplay");
+        $("div.bottom-values").removeClass("nodisplay");
         e.stopPropagation();
         e.stopImmediatePropagation();
         clickHandler(e);
@@ -653,20 +706,18 @@ function doClick() {
 $(document).ready(function () {
     "use strict";
     
-     $('[data-toggle="tooltip"]').tooltip(); 
-    
-    console.log($(window).width());
-    console.log($(window).height());
+    //console.log($(window).width());
+    //console.log($(window).height());
     
     if ($(window).width() <= 420 && $(window).height() <= 200) {
-        console.log("Show need bigger screen here");
+        //console.log("Show need bigger screen here");
         alert("You may see alignment issues due to the size of your screen. Please try again on a bigger screen for the best experience.")
     } else if ($(window).width() >= 420 && $(window).height() >= 200) {
         getTable();
     
-        $("div#match-scores").off("action-score-change").on("action-score-change", function (e) {
+        /*$("div#match-scores").off("action-score-change").on("action-score-change", function (e) {
             console.log(e);
             console.log($(this).parent(""));
-        }); 
+        });*/
     }
 });

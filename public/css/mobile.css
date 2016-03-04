@@ -85,3 +85,7 @@ div.col-sm-2, div.col-xs-2 {
 .button-pad-bottom {
     margin-bottom: 5px;
 }
+.match-nopad {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}

@@ -7,22 +7,24 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand">ASAP Scounting App</a>
+      <a href="#" class="navbar-brand">ASAP Scouting App</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ urlFor('home') }}">Home</a></li>
-        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Pre Scouting</a></li>
-        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Pit Scouting</a></li>
-        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Alliance Selections</a></li>
-        <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Event Data</a></li>
+        <li {% if "/" == url.current %}class="active"{% endif %}><a href="{{ urlFor('home') }}">Match Scouting</a></li>
+        <li {% if "/pre" == url.current %}class="active"{% endif %}><a href="{{ urlFor('home.pre') }}">Pre Scouting</a></li>
+        <li {% if "/pit" == url.current %}class="active"{% endif %}><a href="{{ urlFor('home.pit') }}">Pit Scouting</a></li>
+        <li><a href="#" style="color: #222222; cursor: default;">Alliance Selections</a></li>
+        <li><a href="#" style="color: #222222; cursor: default;">Event Data</a></li>
+        <li {% if "/data" == url.current %}class="active"{% endif %}><a href="{{ urlFor('home.team.data') }}">Team Review</a></li>
       </ul>
       {% if not isMobile %}
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Login</a></li>
-          <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Sorry, This section is not yet implemented!">Register</a></li>
+          <li><a href="#"><em>Last Updated: 19:45 29/02/2016</em></a></li>
+          <!--<li><a href="#" style="color: #222222; cursor: default;">Login</a></li>
+          <li><a href="#" style="color: #222222; cursor: default;">Register</a></li>-->
       </ul>
       {% endif %}
-    </div><!--/.nav-collapse -->
+    </div>
   </div>
 </nav>

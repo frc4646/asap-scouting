@@ -20,11 +20,31 @@ class Team extends Eloquent
 
     protected $fillable = [
         "team_id",
-        "details"
+        "details",
+        "high_goal", 
+        "low_goal", 
+        "fouls", 
+        "auto_breach", 
+        "auto_cross", 
+        "auto_high", 
+        "auto_low", 
+        "tele_high", 
+        "tele_low", 
+        "tele_porticulls", 
+        "tele_tetertoter", 
+        "tele_moat", 
+        "tele_ramparts", 
+        "tele_drawbridge", 
+        "tele_sally", 
+        "tele_rock", 
+        "tele_terrain", 
+        "tele_lowbar",
+        "nonce",
     ];
 
     public static $defaults = [
-        "defences"  => [
+        "name" => "Untitled Team",
+        "defences" => [
             "portcullis" => false,
             "cheval_de_frise" => false,
             "moat" => false,
@@ -35,9 +55,18 @@ class Team extends Eloquent
             "rough_terrain" => false,
             "low_bar" => false,
         ],
+        "hprank" => "nonexistent",
         "images" => [],
         "comments" => [],
         "bot_type" => "offense",
         "runOnce" => true,
     ];
+
+    public function getSortable()
+    {
+        unset($this->fillable[1]);
+        array_pop($this->fillable);
+        $this->fillable = array_values($this->fillable);
+        return $this->fillable;
+    }
 }

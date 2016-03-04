@@ -35,6 +35,8 @@ class GoogleAPI
 
     protected $spreadsheet;
 
+    protected $worksheet;
+
     /**
      * Get values from application
      *
@@ -91,10 +93,10 @@ class GoogleAPI
      *
      * @return boolean Return if the update was successful
      */
-    public function setValue($match = 5, $column = "redscore", $value = 12)
+    public function setValue($match = 5, $column = "redscore", $value = 12, $sheet = "Quals")
     {
-        $cellFeed = $this->getSheet("Quals")->getCellFeed();
-        $entries = $this->getSheet("Quals")->getListFeed()->getEntries();
+        //$cellFeed = $this->getSheet($sheet)->getCellFeed();
+        $entries = $this->getSheet($sheet)->getListFeed()->getEntries();
 
         $values = [];
         $new = [];

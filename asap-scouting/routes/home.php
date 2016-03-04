@@ -15,7 +15,7 @@ $app->get("/", function () use ($app) {
 })->name("home");
 
 $app->get("/app", function () use ($app) {
-    $app->response->headers->set("Content-Type", "application/json");
+    $app->response->headers->set("Content-Type", "text/html");
     header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
     $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
     $app->response->headers->set("Pragma", "no-cache");
@@ -35,11 +35,6 @@ $app->get("/app", function () use ($app) {
 
 $app->post("/app/get", function () use ($app) {
     $app->response->headers->set("Content-Type", "application/json");
-    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
-    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
-    $app->response->headers->set("Pragma", "no-cache");
-    $app->expires("-1 week");
-    $app->lastModified(strtotime("-1 week"));
     $listEntries = $app->GoogleAPI->getSheet("Quals")->getListFeed()->getEntries();
 
     $v = $app->validation;
@@ -63,11 +58,6 @@ $app->post("/app/get", function () use ($app) {
 
 $app->post("/app/set", function () use ($app) {
     $app->response->headers->set("Content-Type", "application/json");
-    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
-    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
-    $app->response->headers->set("Pragma", "no-cache");
-    $app->expires("-1 week");
-    $app->lastModified(strtotime("-1 week"));
     $v = $app->validation;
 
     $rowID = $app->request->post()["rowID"];
@@ -120,8 +110,78 @@ $app->post("/app/set", function () use ($app) {
     }
 })->name("app.data.set");
 
-$app->get("/dev", function () use ($app) {
-   $app->render("dev.twig", [
-       "rebase" => "/js/dev/built/main.js",
-   ]);
+$app->get("/pit", function () use ($app) {
+    return $app->render("pit.twig");
+})->name("home.pit");
+
+$app->get("/app/pit", function () use ($app) {
+    $app->response->headers->set("Content-Type", "text/html");
+    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+    $app->response->headers->set("Pragma", "no-cache");
+    $app->expires("-1 week");
+    $app->lastModified(strtotime("-1 week"));
+    $teams = $app->teams->all();
+    $out = [];
+
+    foreach ($teams as $team) {
+        $out[] = ["id" => $team->team_id, "details" => json_decode($team->details, true)];
+    }
+
+    $app->render("partials/pitOut.twig", [
+        "teams" => $out,
+    ]);
+})->name("home.pit.html");
+
+$app->get("/data", function () use ($app) {
+    $teams = $app->teams->get();
+    $out = [];
+
+    foreach($teams as $team) {
+        $out[] = ["team_id" => $team->team_id, "details" => json_decode($team->details, true)];
+    }
+
+    return $app->render("teamdata.twig", [
+        "teams" => $out,
+        "fields" => $app->teams->getSortable()
+    ]);
+})->name("home.team.data");
+
+$app->get("/pre", function () use ($app) {
+    return $app->render("pre.twig");
+})->name("home.pre");
+
+$app->get("/app/pre", function () use ($app) {
+    $app->response->headers->set("Content-Type", "text/html");
+    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+    $app->response->headers->set("Pragma", "no-cache");
+    $app->expires("-1 week");
+    $app->lastModified(strtotime("-1 week"));
+    $out = [];
+
+    $teams = $app->GoogleAPI->getSheet("PreScouting")->getListFeed()->getEntries();
+
+    foreach ($teams as $team) {
+        $e = $team->getValues();
+        $out[] = ["id" => $e["teamnumbers"], "details" => ["name" => $e["teamnames"]]];
+    }
+
+    $app->render("partials/pitOut.twig", [
+        "teams" => $out,
+    ]);
+})->name("home.pre.html");
+
+$app->get("/data/sort", function () use ($app) {
+    $app->response->headers->set("Content-Type", "application/json");
+    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+    $app->response->headers->set("Pragma", "no-cache");
+    $app->expires("-1 week");
+    $app->lastModified(strtotime("-1 week"));
+    return $app->response->write(json_encode($app->teams->orderBy("team_id")->get()));
+});
+
+$app->get("/hash", function () use ($app) {
+    return $app->response->write(json_encode(base64_encode($app->randomlib->generateString(32))));
 });

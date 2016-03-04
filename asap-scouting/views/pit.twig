@@ -1,0 +1,63 @@
+{% extends "templates/default.twig" %}
+
+{% block title %}Pit Scouting{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="/css/pitPage.css">
+{% endblock %}
+
+{% block content %}
+<div class="container" id="body-holder" data-team-delete="{{ urlFor('team.remove') }}" data-table-url="{{ urlFor('home.pit.html') }}" data-get-url="{{ urlFor('team.get') }}" data-call-url="{{ urlFor('team.create') }}">
+	<div class="container-main">
+        <h1 data-response-url="img/beforeSend.svg" data-success-url="img/success.svg" class="main-header">Hello</h1>
+        <p class="lead">Default Page Text Here</p>
+    </div>
+	<div class="new-team">
+		<h3>Scout New Team</h3>
+		<form action="{{ urlFor('submit.pit') }}" id="new-team-form" class="col-lg-12 col-sm-12 col-xs-12" role="form" method="post">
+			<div class="form-group col-lg-12 col-sm-12 col-xs-12">
+				<label for="team-name">Team Name</label>
+				<input class="form-control" placeholder="Team Name" name="team-name" id="team-name" type="text" minlength="2" min="2" required="">
+			</div>
+			<div class="col-lg-4 col-sm-4 col-xs-4">
+				<div class="form-group">
+					<label for="team-num">Team Number</label>
+					<input class="form-control" placeholder="Team Number" name="team-num" id="team-num" type="text" maxlength="5" minlength="2" max="5" min="2" required="">
+				</div>
+				<div class="form-group">
+					<label for="bot-type">Bot Type</label>
+					<select class="form-control" name="bot_type">
+						<option id="offense">Offense</option>
+						<option id="defense">Defense</option>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-info btn-sm">Submit</button>
+				<button type="reset" id="clear" class="btn btn-info btn-sm">Clear</button>
+			</div>
+			<div class="form-group col-lg-8 col-sm-8 col-xs-8">
+				<h4 class="comment-label">Comments</h4>
+			    <ul id="team-comments">
+			    </ul>
+			    <label for="team-comment">New Comment</label>
+		        <input type="text" class="form-control comment-target" id="target" placeholder="Enter comment" name="team-comment[]" onkeypress="return noenter()">
+		        <button type="button" class="btn btn-info btn-sm pull-right add-comment norpadtop">Add Comment</button>
+		        <div class="col-lg-12 col-sm-12 col-xs-12 pull-right nopadri norpadtop">
+		        	<button type="button" class="btn btn-info btn-sm pull-right" id="photo-button">Submit Photos</button>
+		        </div>
+			</div>
+			<input type="hidden" hidden="hidden" value="{{ csrf_token }}" name="{{ csrf_key }}">
+			<input type="hidden" hidden="hidden" value="" name="nonce">
+		</form>
+		<div class="col-lg-12 col-sm-12 col-xs-12" id="photo-display"></div>
+	</div>
+</div>
+{% include "photoModal.twig" %}
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="/js/app/pit.js"></script>
+<script type="text/javascript">
+function noenter() {
+  return !(window.event && window.event.keyCode == 13); }
+</script>
+{% endblock %}
