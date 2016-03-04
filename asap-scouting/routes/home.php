@@ -185,3 +185,23 @@ $app->get("/data/sort", function () use ($app) {
 $app->get("/hash", function () use ($app) {
     return $app->response->write(json_encode(base64_encode($app->randomlib->generateString(32))));
 });
+
+$app->post("/rad", function () use ($app) {
+    $app->response->headers->set("Content-Type", "application/json");
+    header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+    $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+    $app->response->headers->set("Pragma", "no-cache");
+    $app->expires("-1 week");
+    $app->lastModified(strtotime("-1 week"));
+
+    $team = $app->teams->where("team_id", "=", $app->request->post()["team_id"])->first();
+    $val = json_decode($team->{"tele_" . $app->request->post()["button_id"]}, true);
+    if (empty($val[intval($app->request->post()["match_id"])])) {
+        $val[intval($app->request->post()["match_id"])] = 0;
+    }
+    $val[intval($app->request->post()["match_id"])]++;
+    $x = $team->update([
+        "tele_" . $app->request->post()["button_id"] => json_encode($val),
+    ]);
+    return $app->response->write(json_encode([$val, "value" => $val[intval($app->request->post()["match_id"])]]));
+})->name("set.button.val");

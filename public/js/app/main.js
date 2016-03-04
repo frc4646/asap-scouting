@@ -133,11 +133,9 @@ function getTable() {
                 $("div#match-" + team + " > span").attr("aria-extra-score", amnt);
                 calculateTopScore(team);
             });
-            setTimeout(function () {
-                $(".container-main").fadeOut("slow", function () {
-                    success(e);
-                });
-            }, 500);
+            $(".container-main").fadeOut("slow", function () {
+                success(e);
+            });
         },
         beforeSend: function () {
             $("div.container-main").prepend('<img class="response-img" src="' + $("h1.main-header").attr("data-response-url") + '" height="50px" width="50px" data-success-url="' + $("h1.main-header").attr("data-success-url") + '">');
@@ -247,6 +245,7 @@ function doDBLClick(x) {
             $("ul#file-list > li.file-list").each(function () {
                 $(this).remove();
             });
+            $("div#manager").hide();
             $("div#view-team-photos").attr("data-run", 0);
             var number = $(this).attr("data-team-num"),
                 dart = {};
@@ -306,6 +305,7 @@ function doDBLClick(x) {
                                 }
                                 if (!x.runOnce) {
                                     $("button.toggle-defense").each(function () {
+                                        $(this).attr("data-count", 0);
                                         var tf = x["defences"][$(this).prop("id").split("-")[1]];
                                         if (tf == "true") {
                                             $(this).alterClass("btn-info btn-success btn-danger", "btn-success");
@@ -330,6 +330,21 @@ function doDBLClick(x) {
             );
 
             $("button.toggle-defense").click(function () {
+                var self = $(this)
+                dart["button_id"] = $(this).attr("id").split("-")[1];
+                dart["team_id"] = number;
+                dart["match_id"] = $("div#manager").attr("data-match-id");
+                doPost(
+                    $("div#body-holder").attr("data-button-url"),
+                    dart,
+                    "POST",
+                    "json",
+                    function (e) {
+                        
+                        self.text(self.attr("aria-display") + " " + e.value)
+                        console.log(e);
+                    }
+                );
                 dart["item"] = $(this).prop("id").split("-")[1]
                 if ($(this).hasClass("btn-info")) {
                     dart["val"] = true

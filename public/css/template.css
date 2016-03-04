@@ -300,3 +300,7 @@ button.match-buttons {
 .nomar {
     margin: 0px;
 }
+.button-pad-bottom {
+    /*margin-bottom: 5px;*/
+    margin: 5px auto;
+}
