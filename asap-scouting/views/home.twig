@@ -15,40 +15,7 @@
     </div>
     <div class="col-sm-12 col-lg-12 col-xs-12 container-hold" style="display: none;" id="replaceDiv"></div>
     {% if not isMobile %}
-    <div class="col-lg-3 nodisplay container-hold" id="match-buttons">
-        <div class="form-group col-lg-6">
-            <h6>Auto</h6>
-            <button id="blue-auto-reach" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="2">Defense Reached</button>
-            <button id="blue-auto-crs-und" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="10">Crossed Undamaged</button>
-            <button id="blue-auto-low" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="5">Boulder Low</button>
-            <button id="blue-auto-high" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="10">Boulder High</button>
-        </div>
-        <div class="form-group col-lg-6">
-            <h6>TeleOP</h6>
-            <button id="blue-tele-scal" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="15">Scale Tower</button>
-            <button id="blue-tele-chal" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="5">Challenge Tower</button>
-            <button id="blue-tele-low" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="2">Boulder Low</button>
-            <button id="blue-tele-high" type="button" class="btn btn-info btn-sm match-buttons" aria-point-val="5">Boulder High</button>
-        </div>
-        <div class="form-group col-lg-6">
-            <h6>Auto</h6>
-            <button id="red-auto-reach" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="2">Defense Reached</button>
-            <button id="red-auto-crs-und" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="10">Crossed Undamaged</button>
-            <button id="red-auto-low" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="5">Boulder Low</button>
-            <button id="red-auto-high" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="10">Boulder High</button>
-            
-        </div>
-        <div class="form-group col-lg-6">
-            <h6>TeleOP</h6>
-            <button id="red-tele-scal" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="15">Scale Tower</button>
-            <button id="red-tele-chal" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="5">Challenge Tower</button>
-            <button id="red-tele-low" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="2">Boulder Low</button>
-            <button id="red-tele-high" type="button" class="btn btn-danger btn-sm match-buttons" aria-point-val="5">Boulder High</button>
-        </div>
-        <button id="blue-tele-foul" type="button" class="btn btn-info btn-sm match-buttons pull-left" aria-point-val="5">Foul</button>
-        <button type="button" id="reshow-table" class="btn btn-sm btn-default">Show Matchs</button>
-        <button id="red-tele-foul" type="button" class="btn btn-danger btn-sm match-buttons pull-right" aria-point-val="5">Foul</button>
-    </div>
+        {% include "matchbuttons.twig" %}
     {% endif %}
     <div class="col-sm-12 col-lg-6 col-xs-12 container-hold" style="display: none;" id="manager" data-set-action="{{ urlFor('app.data.set') }}" data-match-id="false">
         <div class="row">
@@ -294,43 +261,10 @@
         </div>
     </div>
     {% if isMobile %}
-    <div class="nodisplay" id="match-buttons">
-        <div class="col-sm-12 col-xs-12">
-            <h6 class="match-nopad">Blue Auto</h6>
-            <button id="blue-auto-reach" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="2">Defense Reached</button>
-            <button id="blue-auto-crs-und" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="10">Crossed Undamaged</button>
-            <button id="blue-auto-low" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="5">Boulder Low</button>
-            <button id="blue-auto-high" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="10">Boulder High</button>
-        </div>
-        <div class="col-sm-12 col-xs-12">
-            <h6 class="match-nopad">Blue TeleOP</h6>
-            <button id="blue-tele-scal" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="15">Scale Tower</button>
-            <button id="blue-tele-chal" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="5">Challenge Tower</button>
-            <button id="blue-tele-low" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="2">Boulder Low</button>
-            <button id="blue-tele-high" type="button" class="btn btn-info btn-xs match-buttons" aria-point-val="5">Boulder High</button>
-        </div>
-        <div class="col-sm-12 col-xs-12">
-            <h6 class="match-nopad">Red Auto</h6>
-            <button id="red-auto-reach" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="2">Defense Reached</button>
-            <button id="red-auto-crs-und" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="10">Crossed Undamaged</button>
-            <button id="red-auto-low" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="5">Boulder Low</button>
-            <button id="red-auto-high" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="10">Boulder High</button>
-            
-        </div>
-        <div class="col-sm-12 col-xs-12">
-            <h6 class="match-nopad">Red TeleOP</h6>
-            <button id="red-tele-scal" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="15">Scale Tower</button>
-            <button id="red-tele-chal" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="5">Challenge Tower</button>
-            <button id="red-tele-low" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="2">Boulder Low</button>
-            <button id="red-tele-high" type="button" class="btn btn-danger btn-xs match-buttons" aria-point-val="5">Boulder High</button>
-        </div>
-        <button id="blue-tele-foul" type="button" class="btn btn-info btn-xs match-buttons pull-left" aria-point-val="5">Foul</button>
-        <button type="button" id="reshow-table" class="btn btn-xs btn-default">Show Matchs</button>
-        <button id="red-tele-foul" type="button" class="btn btn-danger btn-xs match-buttons pull-right" aria-point-val="5">Foul</button>
-    </div>
+        {% include "matchbuttons.twig" %}
     {% endif %}
     <div class="bottom-values">
-        <div class="team-details col-sm-12 col-lg-6 col-xs-12 pull-right" id="team-options" data-set-url="{{ urlFor('team.set') }}" data-get-url="{{ urlFor('team.get') }}" data-call-url="{{ urlFor('team.create') }}">
+        <div class="team-details col-sm-12 col-lg-6 col-xs-12 pull-right" id="team-options" data-set-url="{{ urlFor('team.set') }}" data-get-url="{{ urlFor('team.get') }}" data-call-url="{{ urlFor('team.create') }}" data-team-id="false" data-button-set-url="{{ urlFor('match.buttons.set') }}">
             <div class="team-row">
                 <span class="team-id">Team 4646</span>
             </div>
@@ -351,17 +285,29 @@
                     <button class="btn btn-info toggle-defense {% if isMobile %}btn-sm{% endif %}" id="team-low_bar" data-count="0" aria-display="Low Bar">Low Bar</button>
                 </div>
             </div>
-            <form role="form" action="{{ urlFor('submit.hprank') }}" method="post" id="hprank">
-                <div class="col-lg-6 col-sm-6 col-xs-6 form-group nopadlt">
-                    <h3>Human Player Rank</h3>
-                    <select name="hprank" class="form-control">
-                        <option value="outstanding">Outstanding - Preforms duties to highest capacity</option>
-                        <option value="mediocre">Mediocre - Preforms duties but could do better</option>
-                        <option value="poor">Poor - Does not preform duties well</option>
-                        <option value="nonexistent">Non Existent - Does not exist or didn't show</option>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <div class="col-lg-12 col-sm-12 col-xs-12 form-group nopadlt">
+                    <h3>Team Rank</h3>
+                    <select name="trank" class="form-control">
+                        <option value="5">Five Stars - Simply Outstanding</option>
+                        <option value="4">Four Stars - Very Well Preformed</option>
+                        <option value="3">Three Stars - Preforms well but could do better</option>
+                        <option value="2">Two Stars - Does not preform well</option>
+                        <option value="1">One Star - Preformed horribly or didn't show</option>
                     </select>
                 </div>
-            </form>
+                <form role="form" action="{{ urlFor('submit.hprank') }}" method="post" id="hprank">
+                    <div class="col-lg-12 col-sm-12 col-xs-12 form-group nopadlt">
+                        <h3 style="margin-top: 10px;">Human Player Rank</h3>
+                        <select name="hprank" class="form-control">
+                            <option value="outstanding">Outstanding - Preforms duties to highest capacity</option>
+                            <option value="mediocre">Mediocre - Preforms duties but could do better</option>
+                            <option value="poor">Poor - Does not preform duties well</option>
+                            <option value="nonexistent">Non Existent - Does not exist or didn't show</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
             <div class="team-comments col-lg-6 col-sm-6 col-xs-6 pull-right nopadri">
                 <h3>Comments</h3>
                 <ul id="team-comments">

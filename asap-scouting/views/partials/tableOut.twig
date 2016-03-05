@@ -1,5 +1,10 @@
 {% if entries is not empty %}
 <div class="table-responsive limit-height table-holder">
+<select id="filter" class="pull-left">
+  <option value="all">All Matches</option>
+  <option value="up">Upcoming Matches</option>
+  <option value="old">Played Matches</option>
+</select>
 <table class="table table-striped limit-height tablesorter" id="match-table" data-response-url="{{ urlFor('app.data.get') }}">
   <thead>
     <tr>

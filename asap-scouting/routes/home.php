@@ -179,20 +179,20 @@ $app->get("/data/sort", function () use ($app) {
     $app->response->headers->set("Pragma", "no-cache");
     $app->expires("-1 week");
     $app->lastModified(strtotime("-1 week"));
-    return $app->response->write(json_encode($app->teams->orderBy("team_id")->get()));
+    return $app->response->write(json_encode($app->teams->orderBy("tele_high")->get()));
 });
 
 $app->get("/hash", function () use ($app) {
     return $app->response->write(json_encode(base64_encode($app->randomlib->generateString(32))));
 });
 
-$app->post("/rad", function () use ($app) {
-    $app->response->headers->set("Content-Type", "application/json");
+$app->post("/xor", function () use ($app) {
+    /*$app->response->headers->set("Content-Type", "application/json");
     header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
     $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
     $app->response->headers->set("Pragma", "no-cache");
     $app->expires("-1 week");
-    $app->lastModified(strtotime("-1 week"));
+    $app->lastModified(strtotime("-1 week"));*/
 
     $team = $app->teams->where("team_id", "=", $app->request->post()["team_id"])->first();
     $val = json_decode($team->{"tele_" . $app->request->post()["button_id"]}, true);
@@ -205,3 +205,44 @@ $app->post("/rad", function () use ($app) {
     ]);
     return $app->response->write(json_encode([$val, "value" => $val[intval($app->request->post()["match_id"])]]));
 })->name("set.button.val");
+
+$app->post("/nan", function () use ($app) {
+    $team = $app->request->post()["team_id"];
+    $thing = $app->request->post()["thing"];
+    $match = $app->request->post()["match"];
+    $locked = ["tele_scale", "tele_chal"];
+
+    $x = $app->teams->where("team_id", "=", $team)->first();
+
+    $v = json_decode($x->{$thing}, true);
+
+    if (empty($v[$match])) {
+        $v[$match] = 0;
+    }
+
+    $v[$match] += 1;
+
+    if (in_array($thing, $locked)) {
+        switch($thing) {
+            case $locked[0]:
+                if (json_decode($x->{$locked[1]}, true)[$match] >= 1) {
+                    $v[$match] = 0;
+                }
+                break;
+            case $locked[1]:
+                if (json_decode($x->{$locked[0]}, true)[$match] >= 1) {
+                    $v[$match] = 0;
+                }
+                break;
+        }
+        if ($v[$match] > 1) {
+            $v[$match] = 1;
+        }
+    }
+
+    $x->{$thing} = json_encode($v);
+
+    $x->save();
+
+    return $app->response->write(json_encode($v[$match]));
+})->name("match.buttons.set");

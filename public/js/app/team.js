@@ -59,7 +59,8 @@ $(document).ready(function () {
 					$("table#matches-played > tbody > tr").not("tr#copy-id").remove();
 					$.each(e.matches, function (v) {
 						var container = $("tr#copy-id").clone(),
-							match = this["match"];
+							match = this["match"],
+							score = 0;
 						container.removeClass("nodisplay");
 						container.removeAttr("id");
 						container.children("td.match").text(this[0]["match"]);
@@ -71,6 +72,8 @@ $(document).ready(function () {
 						container.children("td.blue3").text(this[0]["blue3"]);
 						container.children("td.redscore").text(this[0]["redscore"]);
 						container.children("td.bluescore").text(this[0]["bluescore"]);
+
+						container.children("td.teamscore").text(this[0][this[1]]);
 
 						container.children("td." + this[1]).css({"text-decoration": "underline", "font-weight": "bold"});
 

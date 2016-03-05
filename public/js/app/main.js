@@ -113,9 +113,10 @@ function getTable() {
             });
             $("button.match-buttons").click(function () {
                 var amnt = parseInt($(this).attr("aria-point-val")),
-                    team = $(this).prop("id").split("-")[0];
+                    team = $(this).prop("id").split("-")[0],
+                    self = $(this);
                 
-                if ($(this).prop("id").split("-")[2] == "foul") {
+                if ($(this).prop("id").split("-")[1] == "foul") {
                     switch (team) {
                         case "red":
                             team = "blue";
@@ -126,12 +127,34 @@ function getTable() {
                     }
                 }
                 
-                if (!Number.isNaN(parseInt($("div#match-" + team + " > span").attr("aria-extra-score")))) {
-                    amnt += parseInt($("div#match-" + team + " > span").attr("aria-extra-score"));
+                if ($("div#manager").is(":visible")) {
+                    if (!Number.isNaN(parseInt($("div#match-" + team + " > span").attr("aria-extra-score")))) {
+                        amnt += parseInt($("div#match-" + team + " > span").attr("aria-extra-score"));
+                    }
+                    
+                    $("div#match-" + team + " > span").attr("aria-extra-score", amnt);
+                    calculateTopScore(team);
+                } else {
+                    var $data = {
+                            team_id: $("div#team-options").attr("data-team-id"),
+                            thing: $(this).prop("id").split("-")[1],
+                            match: $("div#manager").attr("data-match-id")
+                        },
+                        $action = $("div#team-options").attr("data-button-set-url");
+
+                    $data[$("span.csrf_token").attr("data-name")] = $("span.csrf_token").prop("id");
+
+                    doPost(
+                        $action,
+                        $data,
+                        "POST",
+                        "json",
+                        function (e) {
+                            console.log(e);
+                            self.text(self.attr("aria-display") + " " + e);
+                        }
+                    );
                 }
-                
-                $("div#match-" + team + " > span").attr("aria-extra-score", amnt);
-                calculateTopScore(team);
             });
             $(".container-main").fadeOut("slow", function () {
                 success(e);
@@ -152,8 +175,31 @@ function success(e) {
     $("div#body-container").addClass("container-fluid");
     $(".container-main").remove();
     $("div#replaceDiv").append(e);
+    $("select#filter").change(function () {
+        switch($(this).children("option:selected").val()) {
+            case "all":
+                $("table#match-table > tbody > tr").show();
+                break;
+            case "up":
+                $("table#match-table > tbody > tr").show();
+                $("table#match-table > tbody > tr").each(function () {
+                    if (!($(this).children("td#bluescore").text() === "") && !($(this).children("td#redscore").text() === "")) {
+                        $(this).hide();
+                    }
+                });
+                break;
+            case "old":
+                $("table#match-table > tbody > tr").show();
+                $("table#match-table > tbody > tr").each(function () {
+                    if (($(this).children("td#bluescore").text() === "") && ($(this).children("td#redscore").text() === "")) {
+                        $(this).hide();
+                    }
+                });
+                break;
+        }
+    });
     $("div#replaceDiv").fadeIn(500);
-    if (!detectMobile()) { // Not Yet Available on mobile
+    if (!detectMobile()) { // Not Available on mobile
         $("#match-table").tablesorter({
             theme: "bootstrap",
             headerTemplate: "{content} {icon}",
@@ -235,11 +281,11 @@ function doSet(e) {
 
 function doDBLClick(x) {
         $("div.team-num").click(function (e) {
+            $("div#team-options").attr("data-team-id", $(this).attr("data-team-num"));
             e.stopImmediatePropagation();
             e.stopPropagation();
             var color = $(this).prop("id").split("-")[1],
                 num = $(this).prop("id").split("-")[2];
-            
             $("button.toggle-defense").off("click");
             $("button#view-photo").off("click");
             $("ul#file-list > li.file-list").each(function () {
@@ -303,7 +349,7 @@ function doDBLClick(x) {
                                         }
                                     });
                                 }
-                                if (!x.runOnce) {
+                                /*if (!x.runOnce) {
                                     $("button.toggle-defense").each(function () {
                                         $(this).attr("data-count", 0);
                                         var tf = x["defences"][$(this).prop("id").split("-")[1]];
@@ -317,7 +363,7 @@ function doDBLClick(x) {
                                     $("button.toggle-defense").each(function () {
                                         $(this).alterClass("btn-info btn-success btn-danger", "btn-info");
                                     });
-                                }
+                                }*/
                                 if (x.hasOwnProperty("comments")) {
                                     $.each(x.comments, function (e) {
                                        $("ul#team-comments").append("<li>" + x.comments[e] + "</li>")
@@ -345,7 +391,7 @@ function doDBLClick(x) {
                         console.log(e);
                     }
                 );
-                dart["item"] = $(this).prop("id").split("-")[1]
+                /*dart["item"] = $(this).prop("id").split("-")[1]
                 if ($(this).hasClass("btn-info")) {
                     dart["val"] = true
                     $(this).alterClass("btn-info btn-success btn-danger", "btn-success");
@@ -381,7 +427,7 @@ function doDBLClick(x) {
                     function () {
                         $(".loader").fadeIn(500);
                     }
-                );
+                );*/
             });
             $("select[name='hprank']").change(function () {
                 //console.log($(this).find("option:selected").val());
@@ -618,7 +664,7 @@ function doDBLClick(x) {
     });
 }
 
-function clickHandler (e, doOptions) {
+function clickHandler(e, doOptions) {
     doOptions = doOptions || false;
     if (!doOptions) {
         var row = e.currentTarget.getAttribute("data-row-number");
@@ -633,17 +679,22 @@ function clickHandler (e, doOptions) {
             doSet(e);
             doDBLClick(e);
             if (detectMobile()) {
-                $("nav.navbar").addClass("nav-close");
-                $("body#body-frame").addClass("nav-body-close");
+                //$("nav.navbar").addClass("nav-close");
+                //$("body#body-frame").addClass("nav-body-close");
                 $("div#manager").removeAttr("style");
                 $("div#manager").css("padding-left", "0px");
             }
             $("div#replaceDiv").fadeOut(500, function () {
                 $(this).addClass("nodisplay");
-                $("div#manager").alterClass("col-lg-6", "col-lg-9").on("transitionend", function (e) {
+                $("button.match-buttons").each(function () {
+                    $(this).text($(this).attr("aria-display"));
+                });
+                $("div#manager").alterClass("col-lg-6", "col-lg-8").on("transitionend", function (e) {
                     $("button#reshow-table").off("click");
                     $("div#manager").off("transitionend");
-                    $("div#match-buttons").fadeIn(300).removeClass("nodisplay");
+                    //console.log($("div#match-buttons").attr("style"));
+                    $("div#match-buttons").show().removeClass("nodisplay");
+                    console.log($("div#match-buttons").attr("style"));
                     if (!detectMobile()) {
                         $("button.btn-sc").removeClass("nodisplay").fadeIn(300);
                     }
@@ -661,17 +712,12 @@ function clickHandler (e, doOptions) {
                                 if (!detectMobile()) {
                                     $("button.btn-sc").fadeOut(300).addClass("nodisplay");
                                 }
-                                $("div#manager").alterClass("col-lg-9", "col-lg-6").on("transitionend", function () {
-                                    if ($(this).hasClass("col-lg-6")) {
-                                        $("div#replaceDiv").removeClass("nodisplay").fadeIn(500);
-                                    }
-                                });
-                                if (detectMobile()) {
-                                    $("div#manager").trigger("transitionend").addClass("nodisplay");
-                                    $("div.bottom-values").addClass("nodisplay");
-                                    $("nav.navbar").removeClass("nav-close");
-                                    $("body#body-frame").removeClass("nav-body-close");
-                                }
+                                $("div#manager").hide();
+                                $("div#manager").alterClass("col-lg-8", "col-lg-6");
+                                $("div#bottom-values").hide();
+                                $("div#team-options").hide();
+                                $("div#replaceDiv").alterClass("col-lg-6", "col-lg-12")
+                                $("div#replaceDiv").show().removeClass("nodisplay");
                                 if (!detectMobile()) {
                                     $("#match-table").tablesorter({
                                         theme: "bootstrap",
