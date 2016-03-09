@@ -10,6 +10,7 @@ Notes:
 3. Adequate documentation must be made available.
 4. Use JWTs for authentication.
 5. Should be completely stateless.
+6. Adequate API Tests would be provided.
 
 License:
 This program is license under the MIT License. See [License](https://raw.githubusercontent.com/frc4646/asap-scouting/v4-idea/LICENSE) for more information.
