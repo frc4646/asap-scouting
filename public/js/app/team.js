@@ -5,14 +5,36 @@ if (!String.prototype.capitalize) {
 };
 
 $(document).ready(function () {
-	$("div#search").click(function () {
+	$("select#select-filter").change(function () {
 		doPost(
-			"/data/sort",
+			$("div#search-options").attr("data-search") + "?" + $.param({sort: $(this).children("option:selected").val()}),
 			null,
 			"GET",
 			"json",
 			function (e) {
 				console.log(e);
+				var x = $("button.team-select:first").clone();
+				$("button.team-select").remove();
+
+				$.each(e, function () {
+					var z = x.clone();
+						//t = $("<li>");
+
+					/*t.addClass("select")
+
+					z.attr("data-team", this.team_id).text("Team " + this.team_id + " | " + this.details.name);
+					z.appendTo(t);*/
+					//console.log(t);
+					console.log(z);
+					console.log(this);
+					//t.appendTo("ul.row.form-control");
+					$("ul[style='list-style: none;']").append(
+						$("<li></li>").addClass("select").append(
+							z.attr("data-team", this.team_id).text("Team " + this.team_id + " | " + this.details.name)
+						)
+					);
+				});
+				$("li.select:not(:has( > button))").remove();
 			}
 		);
 	});
@@ -72,6 +94,8 @@ $(document).ready(function () {
 						container.children("td.blue3").text(this[0]["blue3"]);
 						container.children("td.redscore").text(this[0]["redscore"]);
 						container.children("td.bluescore").text(this[0]["bluescore"]);
+
+						//for()
 
 						container.children("td.teamscore").text(this[0][this[1]]);
 

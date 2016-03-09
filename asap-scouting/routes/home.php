@@ -179,12 +179,52 @@ $app->get("/data/sort", function () use ($app) {
     $app->response->headers->set("Pragma", "no-cache");
     $app->expires("-1 week");
     $app->lastModified(strtotime("-1 week"));
-    return $app->response->write(json_encode($app->teams->orderBy("tele_high")->get()));
-});
 
-$app->get("/hash", function () use ($app) {
+    $sortBy = $app->request->get("sort");
+    $dir = $app->request->get("dir");
+    $teams = $app->teams->get();
+    $h = [];
+    $notfilterable = ["details", "created_at", "updated_at", "nonce"];
+
+    //die(var_dump($dir));
+
+    foreach ($teams as $team) {
+        $team = $team->toArray();
+        $z = [];
+        foreach($team as $key => $item) {
+            $y = json_decode($item, true);
+            if (!in_array($key, $notfilterable) && is_array($y)) {
+                $z[$key] = array_sum($y);
+            } else {
+                $z[$key] = $y;
+            }
+            
+            //$z[$key] = json_decode($item, true);
+            //die(var_dump($y[$key]));
+        }
+        $h[] = $z;
+    }
+
+    $j = new Illuminate\Support\Collection($h);
+
+    $k = $j->except(["id", "created_at", "updated_at", "nonce"]);
+
+    switch($dir) {
+        case "desc":
+            $w = $k->sortByDesc($sortBy);
+            break;
+        default:
+            $w = $k->sortBy($sortBy);
+            break;
+    }
+    //$w = $k->sortBy($sortBy);
+
+    return $app->response->write(json_encode($w->values()->all()));
+})->name("data.sort");
+
+/*$app->get("/hash", function () use ($app) {
     return $app->response->write(json_encode(base64_encode($app->randomlib->generateString(32))));
-});
+});*/
 
 $app->post("/xor", function () use ($app) {
     /*$app->response->headers->set("Content-Type", "application/json");

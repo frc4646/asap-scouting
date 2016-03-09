@@ -21,10 +21,10 @@
 			<span class="glyphicon glyphicon-search"></span>
 			<span style="font-size: 18pt;">Filter</span>
 		</div>
-		<div id="search-options">
+		<div id="search-options" data-search="{{ urlFor('data.sort') }}">
 			<p>
 				Sort by
-				<select class="form-control">
+				<select class="form-control" id="select-filter">
 					{% for i in fields %}
 						<option value="{{ i }}">
 							{% for x in i|split("_") %}
@@ -126,5 +126,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="js/app/team.js"></script>
+<script type="text/javascript" src="/js/app/team.js"></script>
 {% endblock %}
