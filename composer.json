@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "app\\": "app/Handlers"
+            "api\\": "api/Handlers"
         }
     },
     "require": {
@@ -15,7 +15,8 @@
         "slim/http-cache": "^0.3.0",
         "aura/filter": "^2.0",
         "guzzlehttp/guzzle": "~6.0",
-        "ircmaxell/random-lib": "~1.1"
+        "ircmaxell/random-lib": "~1.1",
+        "tuupola/slim-jwt-auth": "^2.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
