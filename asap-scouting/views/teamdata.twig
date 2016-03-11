@@ -24,7 +24,7 @@
 		<div id="search-options" data-search="{{ urlFor('data.sort') }}">
 			<p>
 				Sort by
-				<select class="form-control" id="select-filter">
+				<select class="form-control filter-select" id="select-filter">
 					{% for i in fields %}
 						<option value="{{ i }}">
 							{% for x in i|split("_") %}
@@ -32,6 +32,11 @@
 							{% endfor %}
 						</option>
 					{% endfor %}
+				</select>
+				Direction
+				<select class="form-control filter-select" id="select-filter-dir">
+                    <option value="acs">Acsending</option>
+                    <option value="desc">Descending</option>
 				</select>
 			</p>
 		</div>

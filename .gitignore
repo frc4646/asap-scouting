@@ -6,6 +6,7 @@
 
 # Composer Vendor Files
 vendor
+composer.lock
 
 # Build Files
 .metadata
@@ -17,6 +18,7 @@ build.xml
 cache.properties
 jenkins-cli.jar
 dist
+scouting.*
 
 # Local Config Files
 asap-scouting/config/*.json

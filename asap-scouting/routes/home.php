@@ -205,9 +205,11 @@ $app->get("/data/sort", function () use ($app) {
         $h[] = $z;
     }
 
-    $j = new Illuminate\Support\Collection($h);
+    $j = new \Illuminate\Support\Collection($h);
 
     $k = $j->except(["id", "created_at", "updated_at", "nonce"]);
+
+    //$app->response->write(json_encode($k->values()->all()) . "<br>");
 
     switch($dir) {
         case "desc":

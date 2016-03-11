@@ -694,10 +694,11 @@ function clickHandler(e, doOptions) {
                     $("div#manager").off("transitionend");
                     //console.log($("div#match-buttons").attr("style"));
                     $("div#match-buttons").show().removeClass("nodisplay");
-                    console.log($("div#match-buttons").attr("style"));
-                    if (!detectMobile()) {
-                        $("button.btn-sc").removeClass("nodisplay").fadeIn(300);
+                    //console.log($("div#match-buttons").attr("style"));
+                    if (detectMobile()) {
+                        $("button.btn-sc").removeClass("btn-sm").addClass("btn-xs").css("margin-top", "2px");
                     }
+                    $("button.btn-sc").removeClass("nodisplay").fadeIn(300);
                     $("button#reshow-table").click(function () {
                         doPost(
                             $("div#body-holder").attr("data-content-url"),
