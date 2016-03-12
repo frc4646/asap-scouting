@@ -4,6 +4,16 @@ if (!String.prototype.capitalize) {
     };
 };
 
+var defenceChart = null;
+
+function makeRandomColor() {
+    var color = "#";
+    for (k = 0; k < 3; k++) {
+        color += ("0" + (Math.random()*256|0).toString(16)).substr(-2);
+    }
+    return color;
+}
+
 function insertButtons(e) {
     //console.log(e);
     var x = $("button.team-select:first").clone();
@@ -21,6 +31,43 @@ function insertButtons(e) {
     });
     $("li.select:not(:has( > button))").remove();
     bindClick();
+}
+
+function genCharts(e) {
+    console.log(e);
+    if (!$("div#charts").is(":hidden")) {
+        if (defenceChart != null) {
+            defenceChart.destroy();
+        }
+        var defenceData = [];
+        $.each(e, function (ez) {
+            var k = makeRandomColor(),
+                title = ez.split("_");
+
+            $.each(title, function (t) {
+                title[t] = title[t].capitalize();
+            });
+
+            //console.log(title);
+
+            title = title.join(" ");
+
+            //console.log(title);
+
+            defenceData.push({
+                value: e[ez],
+                color: k,
+                hightlight: warna.lighten(k, 0.1).hex,
+                label: title,
+            });
+        });
+        var defence2d = $("canvas#primary-defence")[0].getContext("2d");
+        defenceChart = new Chart(defence2d).Pie(defenceData, {
+            animateScale: true,
+            animationEasing: "linear",
+            animationSteps: 20,
+        });
+    }   
 }
 
 function bindClick() {
@@ -56,6 +103,7 @@ function bindClick() {
                 });
 
                 $("div.team-info").removeClass("nodisplay");
+                //genCharts(e);
             }
         );
         doPost(
@@ -67,8 +115,8 @@ function bindClick() {
                 if (e) {
                     $("table#matches-played > tbody > tr").not("tr#copy-id").remove();
                     $.each(e.matches, function (v) {
-                        console.log(this);
-                        console.log(e);
+                        //console.log(this);
+                        //console.log(e);
                         var container = $("tr#copy-id").clone(),
                             match = this["match"],
                             score = 0;
@@ -87,27 +135,37 @@ function bindClick() {
                         var total = 0;
                         for(q = 0; q <= 2; q++) {
                             var char = String.fromCharCode(97+q);
-                            console.log(char);
+                            //console.log(char);
                             if (!Number.isNaN(parseInt(this[0][this[1] + "score" + char]))) {
                                 total += parseInt(this[0][this[1] + "score" + char]);
                             }
 
                             //console.log(parseInt(this[0][this[1] + "score" + char]));
                         }
-                        console.log(total);
-                        console.log(this[0]);
-                        console.log(this[1]);
+                        //console.log(total);
+                        ///console.log(this[0]);
+                        //console.log(this[1]);
                         container.children("td.teamscore").text(total);
 
                         container.children("td." + this[1]).css({"text-decoration": "underline", "font-weight": "bold"});
 
                         $("table#matches-played > tbody").append(container);
+                        
                     });
 
                     $("span#avg_score").text(e.scores.avg);
                     $("span#min_score").text(e.scores.min);
                     $("span#max_score").text(e.scores.max);
                 }
+            }
+        );
+        doPost(
+            $("div#body-holder").attr("data-defence-url").split(":team").join($(this).attr("data-team")),
+            null,
+            "GET",
+            "json",
+            function (e) {
+                genCharts(e);
             }
         );
     });

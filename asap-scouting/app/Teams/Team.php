@@ -20,9 +20,7 @@ class Team extends Eloquent
 
     protected $fillable = [
         "team_id",
-        "details",
-        "high_goal", 
-        "low_goal", 
+        "details",  
         "fouls", 
         "auto_breach", 
         "auto_cross", 
@@ -40,6 +38,24 @@ class Team extends Eloquent
         "tele_rough_terrain", 
         "tele_low_bar",
         "nonce",
+    ];
+
+    public static $defences = [
+        "auto_breach", 
+        "auto_cross", 
+        "auto_high", 
+        "auto_low", 
+        "tele_high", 
+        "tele_low", 
+        "tele_portcullis", 
+        "tele_cheval_de_frise", 
+        "tele_moat", 
+        "tele_ramparts", 
+        "tele_drawbridge", 
+        "tele_sally_port", 
+        "tele_rock_wall", 
+        "tele_rough_terrain", 
+        "tele_low_bar",
     ];
 
     public static $defaults = [
@@ -68,5 +84,10 @@ class Team extends Eloquent
         array_pop($this->fillable);
         $this->fillable = array_values($this->fillable);
         return $this->fillable;
+    }
+
+    public function getDefences()
+    {
+        return self::$defences;
     }
 }

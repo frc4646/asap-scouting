@@ -239,6 +239,7 @@ $app->post("/xor", function () use ($app) {
     $team = $app->teams->where("team_id", "=", $app->request->post()["team_id"])->first();
     $val = json_decode($team->{"tele_" . $app->request->post()["button_id"]}, true);
     if (empty($val[intval($app->request->post()["match_id"])])) {
+        //return $app->response->write(json_encode($val));
         $val[intval($app->request->post()["match_id"])] = 0;
     }
     $val[intval($app->request->post()["match_id"])]++;

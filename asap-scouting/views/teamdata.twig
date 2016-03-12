@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="body-holder" data-get-url="{{ urlFor('team.get') }}" data-match-url="{{ urlFor('team.matches') }}">
+<div id="body-holder" data-get-url="{{ urlFor('team.get') }}" data-match-url="{{ urlFor('team.matches') }}" data-defence-url="{{ urlFor('team.defences') }}">
 	<div class="col-lg-3 col-sm-3 col-xs-3 row">
 		<h3>Teams</h3>
 		<ul class="form-control row" style="list-style: none;">
@@ -125,6 +125,12 @@
 					<span id="min_score"></span>
 				</div>
 			</div>
+			<div id="charts" class="col-lg-6 col-sm-6 col-xs-6" style="margin-top: 15px;">
+				<div id="primary-defence-holder">
+					<p class="lead">Defences</p>
+					<canvas width="150" height="150" id="primary-defence"></canvas>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -132,4 +138,6 @@
 
 {% block scripts %}
 <script type="text/javascript" src="/js/app/team.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/fians/warna/master/warna.min.js"></script>
 {% endblock %}

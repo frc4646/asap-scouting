@@ -253,4 +253,26 @@ $app->group("/teams", function () use ($app) {
         }
         return $app->response->write(json_encode(["error" => $v->errors()->all()]));
     })->name("team.pre");
+
+    $app->get("/:team/defences", function ($team) use ($app) {
+        $app->response->headers->set("Content-Type", "application/json");
+        header("Cache-Control: no-cache, no-store, must-revalidate post-check=0, pre-check=0");
+        $app->response->headers->set("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
+        $app->response->headers->set("Pragma", "no-cache");
+        $app->expires("-1 week");
+        $app->lastModified(strtotime("-1 week"));
+        $a = $app->teams->where("team_id", "=", $team)->first()->toArray();
+
+        $a = array_intersect_key($a, array_flip(Team::$defences));
+
+        foreach ($a as $z => $s) {
+            $s = json_decode($s, true);
+            if (is_array($s)) {
+                $a[$z] = array_sum($s);
+            }
+            $a[$z] = (int) $a[$z];
+        }
+
+        return $app->response->write(json_encode($a));
+    })->name("team.defences");
 });
