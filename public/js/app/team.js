@@ -5,6 +5,15 @@ if (!String.prototype.capitalize) {
 };
 
 var defenceChart = null;
+var defenceChartTeam4Tele = null;
+var defenceChartTeam3Tele = null;
+var defenceChartTeam2Tele = null;
+var defenceChartTeam1Tele = null;
+var defenceChartTeam4Auto = null;
+var defenceChartTeam3Auto = null;
+var defenceChartTeam2Auto = null;
+var defenceChartTeam1Auto = null;
+var toggled = false;
 
 function makeRandomColor() {
     var color = "#";
@@ -57,7 +66,7 @@ function genCharts(e) {
             defenceData.push({
                 value: e[ez],
                 color: k,
-                hightlight: warna.lighten(k, 0.1).hex,
+                hightlight: warna.lighten(k, 0.4).hex,
                 label: title,
             });
         });
@@ -74,6 +83,7 @@ function bindClick() {
     $("button.team-select").off("click");
     $("button.team-select").click(function () {
         var self = $(this);
+
         $("button.team-select.selected").removeClass("selected btn-info");
         $(this).addClass("selected btn-info");
 
@@ -188,5 +198,105 @@ $(document).ready(function () {
 			}
 		);
 	});
+    $("button#compare").click(function () {
+        if (!toggled) {
+            $("div#team-info-hold").hide();
+            $("div#team-compare").show();
+            $(this).text("Exit Compare");
+            toggled = true;
+        } else {
+            $("div#team-compare").hide();
+            $("div#team-info-hold").show();
+            $(this).text("Compare Teams");
+            toggled = false;
+        }
+    });
+    $("select.compare-teams-select").change(function () {
+        var self = $(this);
+        doPost(
+            $("div#body-holder").attr("data-defence-url").split(":team").join(self.children("option:selected").val()) + "?" + $.param({
+                type: "tele"
+            }),
+            null,
+            "GET",
+            "json",
+            function (e) {
+                if (!self.next("div.team-graph-holder").is(":hidden")) {
+                    var tchart = "defenceChartTeam" + self.attr("id").split("-")[2] + "Tele";
+                    if (window[tchart] != null) {
+                        window[tchart].destroy();
+                    }
+                    var teamData = [];
+                    $.each(e, function (ez) {
+                        var k = makeRandomColor(),
+                            title = ez.split("_");
+
+                        $.each(title, function (t) {
+                            title[t] = title[t].capitalize();
+                        });
+
+                        title = title.join(" ");
+
+                        teamData.push({
+                            value: e[ez],
+                            color: k,
+                            hightlight: warna.lighten(k, 0.4).hex,
+                            label: title,
+                        });
+                    });
+                    //self.next("div.team-graph-holder").children("div.tele-legend").empty();
+                    var team2d = self.next("div.team-graph-holder").children("canvas.tele")[0].getContext("2d");
+                    window[tchart] = new Chart(team2d).Pie(teamData, {
+                        animateScale: true,
+                        animationEasing: "linear",
+                        animationSteps: 20,
+                    });
+                    //self.next("div.team-graph-holder").children("div.tele-legend").append(window[tchart].generateLegend());
+                }  
+            }
+        );
+        doPost(
+            $("div#body-holder").attr("data-defence-url").split(":team").join(self.children("option:selected").val()) + "?" +$.param({
+                type: "auto"
+            }),
+            null,
+            "GET",
+            "json",
+            function (e) {
+                if (!self.next("div.team-graph-holder").is(":hidden")) {
+                    var tchart = "defenceChartTeam" + self.attr("id").split("-")[2] + "Auto";
+                    if (window[tchart] != null) {
+                        window[tchart].destroy();
+                    }
+                    var teamData = [];
+                    $.each(e, function (ez) {
+                        var k = makeRandomColor(),
+                            title = ez.split("_");
+
+                        $.each(title, function (t) {
+                            title[t] = title[t].capitalize();
+                        });
+
+                        title = title.join(" ");
+
+                        teamData.push({
+                            value: e[ez],
+                            color: k,
+                            hightlight: warna.lighten(k, 0.4).hex,
+                            label: title,
+                        });
+                    });
+                    //self.next("div.team-graph-holder").children("div.auto-legend").empty();
+                    var team2d = self.next("div.team-graph-holder").children("canvas.auto")[0].getContext("2d");
+                    window[tchart] = new Chart(team2d).Pie(teamData, {
+                        animateScale: true,
+                        animationEasing: "linear",
+                        animationSteps: 20,
+                    });
+                    //self.next("div.team-graph-holder").children("div.auto-legend").append(window[tchart].generateLegend());
+                }  
+            }
+        );
+    });
     bindClick();
 });

@@ -261,9 +261,20 @@ $app->group("/teams", function () use ($app) {
         $app->response->headers->set("Pragma", "no-cache");
         $app->expires("-1 week");
         $app->lastModified(strtotime("-1 week"));
+        $type = $app->request->get("type");
         $a = $app->teams->where("team_id", "=", $team)->first()->toArray();
 
-        $a = array_intersect_key($a, array_flip(Team::$defences));
+        switch($type) {
+            case "auto":
+                $a = array_intersect_key($a, array_flip(Team::$auto));
+                break;
+            case "tele":
+                $a = array_intersect_key($a, array_flip(Team::$tele));
+                break;
+            default:
+                $a = array_intersect_key($a, array_flip(Team::$defences));
+                break;
+        }
 
         foreach ($a as $z => $s) {
             $s = json_decode($s, true);

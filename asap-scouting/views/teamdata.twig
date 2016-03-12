@@ -40,8 +40,9 @@
 				</select>
 			</p>
 		</div>
+		<button class="btn btn-default btn-sm" id="compare" style="margin-top: 20px;">Compare Teams</button>
 	</div>
-	<div class="col-lg-9 col-sm-9 col-xs-9">
+	<div class="col-lg-9 col-sm-9 col-xs-9" id="team-info-hold">
 		<h3 class="team-name">Please select a team</h3>
 		<div class="team-info nodisplay">
 			<div class="col-lg-8 col-sm-8 col-xs-8 nopadlt" style="margin-bottom: 25px;">
@@ -130,6 +131,67 @@
 					<p class="lead">Defences</p>
 					<canvas width="150" height="150" id="primary-defence"></canvas>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-9 col-sm-9 col-xs-9" id="team-compare" style="display: none;">
+		<h3 class="team-name">Compare Teams</h3>
+		<div class="col-lg-3 col-sm-3 col-xs-3">
+			<select id="compare-teams-1" class="compare-teams-select form-control">
+				<option value="" disabled="disabled" selected="selected">Select a Team</option>
+				{% for i in teams %}
+					<option value="{{ i.team_id }} ">{{ i.team_id }}</option>
+				{% endfor %}
+			</select>
+			<div class="team-graph-holder">
+				<p class="lead">Auto</p>
+				<canvas class="auto"></canvas>
+				<p class="lead">Tele</p>
+				<canvas class="tele"></canvas>
+			</div>
+		</div>
+		<div class="col-lg-3 col-sm-3 col-xs-3">
+			<select id="compare-teams-2" class="compare-teams-select form-control">
+				<option value="" disabled="disabled" selected="selected">Select a Team</option>
+				{% for i in teams %}
+					<option value="{{ i.team_id }} ">{{ i.team_id }}</option>
+				{% endfor %}
+			</select>
+			<div class="team-graph-holder">
+				<p class="lead">Auto</p>
+				<canvas class="auto"></canvas>
+				<p class="lead">Tele</p>
+				<canvas class="tele"></canvas>
+			</div>
+		</div>
+		<div class="col-lg-3 col-sm-3 col-xs-3">
+			<select id="compare-teams-3" class="compare-teams-select form-control">
+				<option value="" disabled="disabled" selected="selected">Select a Team</option>
+				{% for i in teams %}
+					<option value="{{ i.team_id }} ">{{ i.team_id }}</option>
+				{% endfor %}
+			</select>
+			<div class="team-graph-holder">
+				<p class="lead">Auto</p>
+				<canvas class="auto"></canvas>
+				<p class="lead">Tele</p>
+				<canvas class="tele"></canvas>
+			</div>
+		</div>
+		<div class="col-lg-3 col-sm-3 col-xs-3">
+			<select id="compare-teams-4" class="compare-teams-select form-control">
+				<option value="" disabled="disabled" selected="selected">Select a Team</option>
+				{% for i in teams %}
+					<option value="{{ i.team_id }} ">{{ i.team_id }}</option>
+				{% endfor %}
+			</select>
+			<div class="team-graph-holder">
+				<p class="lead">Auto</p>
+				<canvas class="auto"></canvas>
+				<div class="auto-legend"></div>
+				<p class="lead">Tele</p>
+				<canvas class="tele"></canvas>
+				<div class="tele-legend"></div>
 			</div>
 		</div>
 	</div>

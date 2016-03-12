@@ -58,6 +58,27 @@ class Team extends Eloquent
         "tele_low_bar",
     ];
 
+    public static $auto = [
+        "auto_breach", 
+        "auto_cross", 
+        "auto_high", 
+        "auto_low",
+    ];
+
+    public static $tele = [
+        "tele_high", 
+        "tele_low", 
+        "tele_portcullis", 
+        "tele_cheval_de_frise", 
+        "tele_moat", 
+        "tele_ramparts", 
+        "tele_drawbridge", 
+        "tele_sally_port", 
+        "tele_rock_wall", 
+        "tele_rough_terrain", 
+        "tele_low_bar",
+    ];
+
     public static $defaults = [
         "name" => "Untitled Team",
         "defences" => [
