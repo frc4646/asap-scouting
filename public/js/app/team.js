@@ -250,6 +250,7 @@ $(document).ready(function () {
                         animateScale: true,
                         animationEasing: "linear",
                         animationSteps: 20,
+                        tooltipCaretSize: 0,
                     });
                     //self.next("div.team-graph-holder").children("div.tele-legend").append(window[tchart].generateLegend());
                 }  
@@ -292,6 +293,7 @@ $(document).ready(function () {
                         animateScale: true,
                         animationEasing: "linear",
                         animationSteps: 20,
+                        tooltipCaretSize: 0,
                     });
                     //self.next("div.team-graph-holder").children("div.auto-legend").append(window[tchart].generateLegend());
                 }  
