@@ -3,11 +3,10 @@
 {% block title %}Administration{% endblock %}
 
 {% block content %}
-{{ dump(tables) }}
-{% for i in tables %}
-	{{ dump(i) }}
-	{% for x in i %}
-		{{ dump(x) }}
+	Regionals in DB:
+	{% for i in tables %}
+		{% set name = i|split("_")[1] %}
+		{% set regional, year = name|split("", 4)[1], name|split("", 4)[0] %}
+		<span style="color: red;">{{ regional|upper }} {{ year }}{% if not loop.last %},{% endif %}</span>
 	{% endfor %}
-{% endfor %}
 {% endblock %}

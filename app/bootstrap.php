@@ -83,7 +83,10 @@ $container["view"] = function ($c) {
         $c["config"]
     ));
 
-    $view->addExtension(new AssetTwigExtension([]));
+    $view->addExtension(new AssetTwigExtension([], [
+        "absolute" => true,
+        "host" => $c["config"]->get("url"),
+    ]));
 
     $view->addExtension(new Twig_Extension_Debug());
 

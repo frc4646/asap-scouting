@@ -7,16 +7,17 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 $app->group("/admin", function () {
 	$this->get("/", function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
-		$query = Capsule::select(Capsule::raw("SELECT TABLE_NAME AS a FROM information_schema.tables WHERE table_schema = DATABASE()"));		
+		$query = Capsule::select(Capsule::raw("SELECT TABLE_NAME AS name FROM information_schema.TABLES WHERE TABLE_SCHEMA = SCHEMA()"));		
+		$results = [];
 
-		foreach($query as $x) {
-			if (0 === strpos($x->a, "matches_")) {
-				var_dump($x->a);
+		foreach($query as $result) {
+			if (0 === strpos($result->name, "matches_")) {
+				$results[] = $result->name;
 			}
 		}
 
 		return $this->view->render($response, "admin/home.twig", [
-			"tables" => /*json_decode(json_encode(*/$query/*)/*, true*/,
+			"tables" => $results,
 		]);
 	});
 

@@ -18,7 +18,7 @@ class AssetTwigExtension extends \Twig_Extension
 		"host" => "https://localhost"
 	];
 
-	public function __construct($structure = null, $settings = null)
+	public function __construct($structure = [], $settings = null)
 	{
 		if (is_array($structure)) {
 			$this->structureMode = "array";
