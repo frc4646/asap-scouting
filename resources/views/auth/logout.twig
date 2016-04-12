@@ -1,0 +1,15 @@
+{% extends "templates/default.twig" %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<form action="{{ path_for('auth.logout.post') }}" method="post">
+	<div class="row">
+		<div class="text-center">
+			<p>Are you sure you wish to logout?</p>
+			<a class="button alert" href="{{ path_for('home') }}">No</a>
+			<button class="button success" type="submit">Yes</button>
+		</div>
+	</div>
+</form>
+{% endblock %}

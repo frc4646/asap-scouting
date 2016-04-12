@@ -1,0 +1,26 @@
+{% extends "templates/default.twig" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<form method="post" action="{{ path_for('auth.login.post') }}" autocomplete="off">
+	<div class="row">
+		{% if error == true %}
+			<div class="callout alert">
+				<p>There was an error logging you in. Could you please try again.</p>
+			</div>
+		{% endif %}
+		<div class="medium-6 columns">
+			<label>Username:
+				<input type="text" placeholder="Username" autocomplete="off" name="user">
+			</label>
+		</div>
+		<div class="medium-6 columns">
+			<label>Password:
+				<input type="password" placeholder="Password" autocomplete="off" name="password">
+			</label>
+			<button type="submit" class="button small float-right">Submit</button>
+		</div>
+	</div>
+</form>
+{% endblock %}

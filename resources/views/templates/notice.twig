@@ -1,0 +1,3 @@
+{% if flash.messages.alert is not empty %}
+	<div class="callout primary" style="background-color: #5db4ee; border: 0px;">{% for i in flash.messages.alert %}{{ flash.messages.alert[i] }}{{ i }}{% endfor %}</div>
+{% endif %}

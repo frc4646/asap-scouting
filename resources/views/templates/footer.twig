@@ -1,0 +1,35 @@
+{% if time.hour < 12 %}
+	{% set greeting = "morning" %}
+{% elseif time.hour > 12 and time.hour < 5 %}
+	{% set greeting = "afternoon" %}
+{% else %}
+	{% set greeting = "evening" %}
+{% endif %}
+
+<footer class="footer callout primary">
+    <div class="footer-wrapper">
+        <div class="footer-left float-left">
+            <p>
+            	Good {{ greeting }}, 
+            	{% if auth.username is not empty %}
+					{{ auth.username }}
+            	{% elseif auth.email is not empty %}
+					{{ auth.email }}
+            	{% else %}
+					user
+            	{% endif %}
+            </p>
+        </div>
+        <div class="footer-right float-right">
+        	{% if not auth %}
+	        	<a href="{{ path_for('auth.login.get') }}" class="button small footer-button {% if "login" in url.current %}active{% endif %}" id="login-button">Login</a>
+	        	<a href="" class="button small footer-button {% if "register" in url.current %}active{% endif %}" id="register-button">Register</a>
+        	{% else %}
+				<a href="{{ path_for('auth.logout.get') }}" class="button small footer-button {% if "logout" in url.current %}active{% endif %}" id="logout-button">Logout</a>
+				{% if auth.isAdmin() %}
+					<a href="" class="button small footer-button">Administrate</a>
+				{% endif %}
+        	{% endif %}
+        </div>
+    </div>
+</footer>

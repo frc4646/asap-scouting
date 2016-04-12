@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <meta content="ASAP Scouting App Version-{{ app.version.app }}" name="description">
+        <meta content="Slim-{{ app.version.slim }}" name="x-framework">
+        <meta content="Alexander Young" name="author">
+        
+        <link href="/favicon.ico" rel="icon">
+        
+        <title>Home | {% block title %}{% endblock %}</title>
+      
+
+        <!-- Foundation and Hamburger CSS  -->
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.0/foundation.min.css" integrity="sha256-dIaHWUg/Lu3PeHMeMlCcrF7ZQ35n+pMpiKyhV7v0kTg= sha512-AGlTnkNvfTBO11YGVSBlmmTiw29ZCoo1EsnZZTMCkbjXQsPNz4iRKetX4+shj2+SD/uV4oucSlybQ0zWPqJGZg==" crossorigin="anonymous">
+            <link rel="stylesheet" type="text/css" href="https://npmcdn.com/hamburgers/dist/hamburgers.min.css" integrity="sha256-FCvXE4vT8eLEZ9Oxxdx2oP6Pd5BtYgHUxWyuu9U7YV8= sha512-9+dMyso/By+Ewv9Qq/8dOzxyy2tuHbKR5XyMbYqrUw61OR5E+Sh9b/xNSWxiH+aQbWO8YW0BiEMyMt/P+Uz/LQ==" crossorigin="anonymous">
+        <!-- Application Specific CSS -->
+            <link href="{{ path_for('home') }}/objects/css/custom.css" rel="stylesheet">
+
+            {% block styles %}{% endblock %}
+    </head>
+    <body class="wrap">
+        {% if "admin" not in url.current %}{% include "templates/navigation.twig" %}{% endif %}
+        {% include "templates/notice.twig" %}
+        <div class="wrapper">
+            {% block content %}{% endblock %}
+        </div>
+        {% include "templates/footer.twig" %}
+        
+        <script src="https://code.jquery.com/jquery-2.2.2.js" type="text/javascript" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE= sha512-Jv40bbkvmOAhsXlBVsMMSndM4kdsgQ8CHeJMIaIVmv22VjQmIa+ktIHlnOBH85XDyY1AqojnpnkGyl9+NCs+gg==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.0/foundation.min.js" type="text/javascript" integrity="sha256-o0y723WXPYZg0BU8bFWAoZxik0vXx0oEX1xT63lFOBM= sha512-7REsg26pmEetxKBhgqwtOLQ4astAxm4Vc9sva6ERdNK+veZsTTquSRCTYkPnqgeYL5vpCxcVmZ/JLcjXeQVA4g==" crossorigin="anonymous"></script>
+        <script src="https://npmcdn.com/what-input@2.0.1/what-input.js" type="text/javascript" integrity="sha256-lLU5vS8TJ3zWHzS/E16OirUwYLtSaJyCVJlIT0jkhnA= sha512-3QM5+F86ciBopf+vTTpV7NajWIkfXsDFJS45aigNvIKCDF6oybFYJFrpE3fly6dy3otIAFPVQyua8AfPKcH6mw==" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).foundation();
+        </script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

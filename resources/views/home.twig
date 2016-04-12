@@ -1,0 +1,22 @@
+{% extends "templates/default.twig" %}
+
+{% block content %}
+{% include "templates/partial/matchestable.twig" %}
+{% include "templates/partial/scoutingform.twig" %}
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    // Placeholder JavaScript
+    
+    $(document).ready(function () {
+        $("td[data-class='team']").click(function () {
+            //var team = (Number.isNaN(parseInt($(this).text())) ? parseInt($(this).text() : 0));
+
+            $('html, body').animate({
+                scrollTop: $("section.row").offset().top
+            }, 800);
+        });
+    });
+</script>
+{% endblock %}

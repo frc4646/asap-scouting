@@ -1,0 +1,80 @@
+<table class="{#stack #}hover text-center">
+	<thead>
+		<tr>
+			<th>Match</th>
+			<th>Match Time</th>
+			<th>Red Team Score</th>
+			<th>Blue Team Score</th>
+			<th>Red Team 1</th>
+			<th>Red Team 2</th>
+			<th>Red Team 3</th>
+			<th>Blue Team 1</th>
+			<th>Blue Team 2</th>
+			<th>Blue Team 3</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for i in matches %}
+			<tr>
+				<td data-class="id">{{ i.match_id }}</td>
+				<td data-class="time">{{ i.time }}</td>
+				<td class="red-team"data-class="score">{{ i.redscore }}</td>
+				<td class="blue-team"data-class="score">{{ i.bluescore }}</td>
+				<td class="red-team" data-class="team">{{ i.red1 }}</td>
+				<td class="red-team" data-class="team">{{ i.red2 }}</td>
+				<td class="red-team" data-class="team">{{ i.red3 }}</td>
+				<td class="blue-team" data-class="team">{{ i.blue1 }}</td>
+				<td class="blue-team" data-class="team">{{ i.blue2 }}</td>
+				<td class="blue-team" data-class="team">{{ i.blue3 }}</td>
+			</tr>
+		{% endfor %}
+		{#<tr>
+			<td>1</td>
+			<td>17:00</td>
+			<td>17</td>
+			<td>1762</td>
+			<td>1156</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>17:00</td>
+			<td>17</td>
+			<td>1762</td>
+			<td>1156</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>17:00</td>
+			<td>17</td>
+			<td>1762</td>
+			<td>1156</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>17:00</td>
+			<td>17</td>
+			<td>1762</td>
+			<td>1156</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+			<td>133</td>
+		</tr>#}
+	</tbody>
+</table>

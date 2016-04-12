@@ -1,0 +1,30 @@
+<nav id="main-nav">
+	<div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+		<button class="menu-icon" type="button" data-toggle></button>
+		<div class="title-bar-title">Scouting App</div>
+	</div>
+
+	<div class="top-bar asap-color">
+		<div class="top-bar-left">
+			<ul class="dropdown menu" data-dropdown-menu>
+				<li class="menu-text">Scouting App</li>
+				<li {% if url.current == "/" %}class="active"{% endif %}><a href="#">Match</a></li>
+				<li><a href="#">Two</a></li>
+				<li><a href="#">Three</a></li>
+			</ul>
+		</div>
+		<div class="top-bar-right">
+			<ul class="dropdown menu" data-dropdown-menu>
+				<li class="menu-text" style="padding-right: 0px;">Current Regional:</li>
+				<li class="no-menu-discolor">
+					<a href="#" id="regional-selector">Cedar Falls</a>
+					<ul class="menu vertical">
+						<li class="active"><a href="{{ path_for('set.regional', {'regional': 'cedar'}) }}">Cedar Falls</a></li>
+						<li><a href="{{ path_for('set.regional', {'regional': 'illinios'}) }}">Illinois</a></li>
+						<li><a href="{{ path_for('set.regional', {'regional': 'champs'}) }}">Championship</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

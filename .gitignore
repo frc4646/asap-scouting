@@ -1,0 +1,8 @@
+#Log Files
+logs/*
+
+#Vendor Files
+vendor
+
+#Config Files
+config/app.php

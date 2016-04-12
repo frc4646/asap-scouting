@@ -1,0 +1,85 @@
+.wrapper {
+	margin: 20px;
+	flex: 1;
+}
+
+body, html {
+	height: inherit;
+}
+
+.asap-color, .top-bar, .top-bar ul {
+	background-color: rgb(153, 195, 167);
+}
+
+.menu > li:not(.active):not(.no-menu-discolor) > a:hover {
+	background-color: #91a1a1;
+}
+
+.menu > li.active > a:hover {
+	background-color: #1685d0;
+}
+
+table.text-center tfoot td, table.text-center tfoot th, table.text-center thead td, table.text-center thead th {
+	text-align: center;
+}
+
+a#regional-selector {
+	padding-left: .5rem;
+}
+
+.red-team {
+	background-color: #ffcccc;
+}
+
+.blue-team {
+	background-color: #ccccff;
+}
+
+tbody > tr:nth-child(2n) > .blue-team {
+	background-color: #9999ff;
+}
+
+tbody > tr:nth-child(2n) > .red-team {
+	background-color: #ff9999;
+}
+
+table.hover > tbody > tr:hover > .blue-team  {
+	background-color: #6666ff;
+}
+
+table.hover > tbody > tr:hover > .red-team {
+	background-color: #ff6666;
+}
+
+.footer {
+	margin: 0px;
+	width: 100%;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.footer-wrapper {
+	margin: 0px 20px;
+}
+
+.footer-wrapper > div > p {
+	margin-bottom: 0px;
+}
+
+.footer-button {
+	margin: -1rem 0px;
+	/*font-size: .55em;*/
+	padding: .60em 1em;
+}
+
+.button.active {
+	background-color: #1583cc;
+}
+
+/*https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/*/
+.wrap {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+

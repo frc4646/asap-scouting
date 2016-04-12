@@ -1,0 +1,824 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"padd",
+				"padding-right"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"M",
+				"Matches"
+			],
+			[
+				"mat",
+				"match"
+			],
+			[
+				"E",
+				"Eloquent"
+			],
+			[
+				"team",
+				"teamColumns"
+			],
+			[
+				"matc",
+				"matches"
+			],
+			[
+				"r",
+				"request"
+			],
+			[
+				"ar",
+				"args"
+			],
+			[
+				"exi",
+				"exists"
+			],
+			[
+				"Valid",
+				"Validator"
+			],
+			[
+				"b",
+				"background"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"rq",
+				"request"
+			],
+			[
+				"Model",
+				"Models"
+			],
+			[
+				"th",
+				"th	Tag"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"is_s",
+				"is_string"
+			],
+			[
+				"h",
+				"height	Attr"
+			],
+			[
+				"al",
+				"alt	Attr"
+			],
+			[
+				"c",
+				"class	Attr"
+			],
+			[
+				"g",
+				"rgba()"
+			],
+			[
+				"Lo",
+				"LoggerInterface"
+			],
+			[
+				"rul",
+				"rulez"
+			],
+			[
+				"Val",
+				"Validator"
+			],
+			[
+				"arr",
+				"array_merge"
+			],
+			[
+				"base",
+				"base64_encode"
+			],
+			[
+				"bas",
+				"base64_encode"
+			],
+			[
+				"tea",
+				"teamnumbers"
+			],
+			[
+				"val",
+				"validate"
+			],
+			[
+				"int",
+				"intval"
+			],
+			[
+				"G",
+				"GoogleAPI"
+			],
+			[
+				"v",
+				"val"
+			],
+			[
+				"p",
+				"pointer"
+			],
+			[
+				"list",
+				"listEntries"
+			],
+			[
+				"wor",
+				"worksheet"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"e",
+				"extends	Twig : Extends"
+			],
+			[
+				"pass",
+				"passes"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"a",
+				"action	Attr"
+			],
+			[
+				"form",
+				"form	Tag"
+			],
+			[
+				"op",
+				"option	Tag"
+			],
+			[
+				"d",
+				"disabled	Attr"
+			],
+			[
+				"s",
+				"style	Attr"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"pa",
+				"padding-left"
+			],
+			[
+				"con",
+				"container"
+			],
+			[
+				"ap",
+				"append"
+			],
+			[
+				"co",
+				"colspan	Attr"
+			],
+			[
+				"sp",
+				"span	Tag"
+			],
+			[
+				"search",
+				"search"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"array_key",
+				"array_key_exists"
+			],
+			[
+				"ma",
+				"margin-bottom"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"data",
+				"data-team-id"
+			],
+			[
+				"cli",
+				"clickable"
+			],
+			[
+				"tri",
+				"triggerOnClick"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"append",
+				"appendTo"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"html",
+				"htmlEncode"
+			],
+			[
+				"pad",
+				"padding-right"
+			],
+			[
+				"click",
+				"clickHandler"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"get",
+				"getTable"
+			],
+			[
+				"ty",
+				"type"
+			],
+			[
+				"has",
+				"has-feedback"
+			],
+			[
+				"rem",
+				"removeClass"
+			],
+			[
+				"ad",
+				"addClass"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"l",
+				"link	Tag"
+			],
+			[
+				"i",
+				"id	Attr"
+			],
+			[
+				"m",
+				"minlength	Attr"
+			],
+			[
+				"requir",
+				"require_once"
+			],
+			[
+				"require",
+				"requireDefaultContainer"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"conf",
+				"config"
+			],
+			[
+				"confi",
+				"configDefaults"
+			],
+			[
+				"pu",
+				"public"
+			],
+			[
+				"is_n",
+				"is_null"
+			],
+			[
+				"Request",
+				"RequestBody"
+			],
+			[
+				"array_m",
+				"array_merge"
+			],
+			[
+				"dis",
+				"dispatch"
+			],
+			[
+				"ses",
+				"session_start"
+			],
+			[
+				"va",
+				"var_dump"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"check",
+				"checked"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"margin-",
+				"margin-right"
+			],
+			[
+				"t",
+				"type	Attr"
+			],
+			[
+				"R",
+				"ResponseInterface"
+			],
+			[
+				"mt",
+				"mt_rand"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"S",
+				"ServerRequestInterface"
+			],
+			[
+				"App",
+				"AppView	class"
+			],
+			[
+				"cons",
+				"constructor	keyword"
+			],
+			[
+				"di",
+				"div	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 381.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Build With: TypeScript"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Colo",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"Pac",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/wamp/www/asap-scouting-new/vendor/slim/slim/Slim/App.php",
+		"/C/wamp/www/slim-cashier/app/bootstrap.php",
+		"/C/wamp/www/asap-scouting-new/composer.json",
+		"/C/wamp/www/slim-cashier/composer.json",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/teamdata.twig",
+		"/C/wamp/www/asap-scouting-new/vendor/illuminate/database/Eloquent/Relations/HasMany.php",
+		"/C/wamp/www/asap-scouting-new/vendor/illuminate/database/Eloquent/Model.php",
+		"/C/wamp/www/asap-scouting-new/vendor/illuminate/database/Eloquent/Relations/HasManyThrough.php",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/partials/tableOut.twig",
+		"/C/wamp/www/asap-scouting-new/logs/2016-03-22.log",
+		"/C/wamp/www/asap-scouting-new/config/app.php",
+		"/C/wamp/www/asap-scouting-new/vendor/illuminate/database/Capsule/Manager.php",
+		"/C/wamp/www/asap-scouting-new/vendor/illuminate/database/Connection.php",
+		"/C/wamp/www/asap-scouting-new/resources/views/templates/default.twig",
+		"/C/wamp/www/asap-scouting-new/resources/views/notice.twig",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Authentication/Roles/Authenticated.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Authentication/Filter.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Middleware/CSRF.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Middleware/Before.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Authentication/Auth.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Models/User.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Models/Matches.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Models/UserPermission.php",
+		"/C/wamp/www/asap-scouting-new/resources/routes/main.php",
+		"/C/wamp/www/asap-scouting-new/app/Exceptions/NoTableException.php",
+		"/C/wamp/www/asap-scouting-new/resources/routes/auth/passcode.php",
+		"/C/wamp/www/asap-scouting-new/resources/views/default.twig",
+		"/C/wamp/www/asap-scouting-new/bak/app/bootstrap.php",
+		"/C/wamp/www/asap-scouting-new/resources/routes/index.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Validation/Validator.php",
+		"/C/wamp/www/asap-scouting-new/app/bootstrap.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Middleware/NoCache.php",
+		"/C/wamp/www/asap-scouting-new/app/Handlers/Authentication/Roles/Admin.php",
+		"/C/wamp/www/asap-scouting-new/app/database.php",
+		"/C/wamp/www/asap-scouting-new/public/.htaccess",
+		"/C/wamp/www/asap-scouting-new/public/index.php",
+		"/C/wamp/www/asap-scouting-new/vendor/zeuxisoo/slim-whoops/src/Zeuxisoo/Whoops/Provider/Slim/WhoopsMiddleware.php",
+		"/C/wamp/www/asap-scouting-new/vendor/composer/autoload_classmap.php",
+		"/C/wamp/www/asap-scouting/public/js/app/pit.js",
+		"/C/wamp/www/asap-scouting/public/js/app/main.js",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/pit.twig",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/partials/pitOut.twig",
+		"/C/wamp/www/asap-scouting/public/js/app/pre.js",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/home.twig",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/templates/partials/navigation.twig",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/pre.twig",
+		"/C/wamp/www/asap-scouting/asap-scouting/routes/home.php",
+		"/C/wamp/www/asap-scouting/asap-scouting/routes/team.php",
+		"/C/wamp/www/asap-scouting/asap-scouting/app/Helpers/GoogleAPI.php",
+		"/C/wamp/www/asap-scouting/asap-scouting/routes/submit.php",
+		"/C/wamp/www/asap-scouting/asap-scouting/start.php",
+		"/C/wamp/www/asap-scouting/asap-scouting/app/Teams/Team.php",
+		"/C/wamp/www/asap-scouting/public/js/app/team.js",
+		"/C/wamp/www/asap-scouting/vendor/alexgarrett/violin/src/Violin.php",
+		"/C/wamp/www/asap-scouting/public/css/data.css",
+		"/C/wamp/www/asap-scouting/public/css/desktop.css",
+		"/C/wamp/www/asap-scouting/public/css/mobile.css",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/templates/default.twig",
+		"/C/wamp/www/asap-scouting/public/css/template.css",
+		"/C/wamp/www/asap-scouting/public/css/pitPage.css",
+		"/C/wamp/www/asap-scouting/asap-scouting/views/photoModal.twig",
+		"/C/wamp/www/asap-scouting/asap-scouting/app/MiddleWare/BeforeMiddleWare.php",
+		"/C/wamp/www/asap-scouting/public/img/teams/.htaccess",
+		"/C/wamp/www/asap-scouting/asap-scouting/app/Validation/Validator.php",
+		"/C/wamp/www/asap-scouting/scouting.main.sublime-project",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/admin/new.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/admin/overview.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/vendor/slim/slim/Slim/Http/Environment.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/vendor/slim/slim/Slim/Http/Request.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/vendor/slim/slim/Slim/Http/Response.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/routes/admin/admin.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/tests/bootstrap.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/tests/Route/RouteTest.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/tests/TestSetUp.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/tests/TestDBSetUp.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/testlog.log",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/bootstrap.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/container.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/postContainer.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/composer.json",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/templates/footer.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/components/admin/_form.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/tests/testlog.log",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/logs/2016-02-02.log",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/Handlers/Authentication/Filter.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/routes/auth/login.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/templates/nav.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/Handlers/Middleware/Before.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/templates/admin/sidebar.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/auth/login.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/framework/admin/_layout.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/sass.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/templates/default.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/sass.sass",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/Handlers/Tent/Tent.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/config/app.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/components/general/_footer.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/components/admin/_sidebar.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/components/admin/_body.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/Handlers/User/User.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/views/home.twig",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/resources/routes/main.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/components/general/_html.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/components/general/_body.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/assets/styles/framework/general/_layout.scss",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/app/Handlers/Validation/Violin.php",
+		"/C/wamp/www/lsa/TypeScriptHTMLApp1/tsconfig.json",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/resources/views/templates/default.twig",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/app/Handlers/Authentication/Auth.php",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/composer.json",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/resources/routes/main.php",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/resources/routes/auth/login.php",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/resources/views/home.twig",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/resources/views/templates/footer.twig",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/resources/routes/admin/admin.php",
+		"/C/Users/meun5/Documents/Visual Studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/login.php.bak",
+		"/C/Users/meun5/Documents/visual studio 2015/Projects/TypeScriptHTMLApp1/TypeScriptHTMLApp1/3/sublime_text.exe",
+		"/C/wamp/www/ts/backbone/typings.json",
+		"/C/wamp/www/ts/backbone/tsconfig.json",
+		"/C/Users/meun5/AppData/Roaming/Sublime Text 3/Packages/User/TypeScript.sublime-settings",
+		"/C/Users/meun5/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/meun5/AppData/Roaming/Sublime Text 3/Packages/TypeScript/TypeScriptReact.sublime-settings",
+		"/C/Users/meun5/AppData/Roaming/Sublime Text 3/Packages/TypeScript/TypeScript.sublime-settings",
+		"/C/Users/meun5/AppData/Roaming/Sublime Text 3/Packages/TypeScript/Preferences.sublime-settings",
+		"/C/Users/meun5/Desktop/7zip/Far/Decomplie/sprites/clean.php",
+		"/C/Users/meun5/AppData/Local/Temp/Rar$DIa0.734/readme.md",
+		"/C/Users/meun5/AppData/Roaming/Brackets/extensions/user/zaggino.brackets-snippets/default_snippets/bootstrap/bs-container",
+		"/C/Users/meun5/AppData/Local/Temp/Rar$DIa0.465/README.md"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\wamp\\www\\asap-scouting-new\\vendor\\slim\\slim",
+			"C:\\wamp\\www\\asap-scouting-new\\app",
+			"C:\\wamp\\www\\asap-scouting-new",
+			"C:\\wamp\\www\\asap-scouting\\asap-scouting",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"cache",
+			"chache",
+			"belongsTo",
+			"			);",
+			"replace",
+			"hasMan",
+			"hasOne",
+			"`",
+			"` ,",
+			"text COLLATE utf8_unicode_ci NOT NULL",
+			"Exceptions",
+			"slim",
+			";\n",
+			"getRaw",
+			"()));\n",
+			"$app->get(\"/\", function (ServerRequestInterface $request, ResponseInterface $response, $args) {\n	return $response->write($this->router->pathFor(\"lol\"));\n});",
+			"\\",
+			"action-score-change",
+			"console.log",
+			"team-name",
+			"htmlE",
+			"$app->teams->create",
+			"Team::$defaults",
+			"{",
+			"get",
+			"comment",
+			"team_id",
+			"bot_type",
+			"last",
+			";\n",
+			"setValue",
+			"Go",
+			"recursive_array_search",
+			"$keys",
+			":",
+			"\"]);\n",
+			"<h4>",
+			"input",
+			"\"\"",
+			"comment",
+			"\"]);\n",
+			">\n",
+			";\n",
+			".row",
+			"btn-*",
+			"\");\n",
+			"getT",
+			"//",
+			"]);\n",
+			"());\n",
+			"type",
+			");\n",
+			"save",
+			"function fill",
+			"fill",
+			"update",
+			");\n",
+			"));\n",
+			"errors",
+			"\"];\n",
+			"bot_type",
+			"\"],\n",
+			"xs",
+			"Offensive",
+			"code",
+			"Environment",
+			";\n",
+			"creat",
+			" \n",
+			"  ",
+			"[]",
+			"serverParams",
+			"h4",
+			"admin",
+			"home",
+			"\";",
+			">\n",
+			"\"\",\n",
+			"script",
+			"\"></",
+			"PIDFILE"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"\"",
+			"`,",
+			"",
+			"<h4 class=\"border\">",
+			"",
+			" ",
+			"",
+			"h5",
+			"h4"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/TypeScript/TypeScript.sublime-build",
+	"project": "ConfigTwigExtension.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\wamp\\www\\shoutcast-control\\shoutcast-control.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 231.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
