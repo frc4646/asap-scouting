@@ -6,3 +6,6 @@ vendor
 
 #Config Files
 config/app.php
+
+#Sublime Text Files
+*.sublime-*
